@@ -1,6 +1,8 @@
 import sqlite3
 import datetime as dt
 
+# all the code needs for entrying data is in this block
+
 
 class WindowEntryIn():
     def __init__(self, windowTitle, timeStarted, timeFinished):
@@ -34,6 +36,8 @@ class WindowEntryIn():
         timeElapsed = f"{hours}, {minutes}, {seconds}"
         return timeElapsed
 
+# all the code need for querying processing and showing the data in this block
+
 
 class WindowRecord():
     def __init__(self, entry):
@@ -45,17 +49,21 @@ class WindowRecord():
 
         self.windowShortName: str = splitWindowName[-1]
         self.windowFullName: str = windowName
-        self.windowTimeElapsed = WindowTimeElapsed(timeElapsed)
+        self.windowTimeElapsed = WindowTime(timeElapsed)
         self.windowDateEntried = dateEntried
 
 
-class WindowTimeElapsed():
+class WindowTime():
     def __init__(self, timeElapsed: str) -> None:
         splitTimeElapsed = timeElapsed.split(", ")
 
-        self.hoursElapsed = splitTimeElapsed[0]
-        self.minutesElapsed = splitTimeElapsed[1]
-        self.secondsElapsed = splitTimeElapsed[2]
+        self.hours: float = float(splitTimeElapsed[0])
+        self.minutes: float = float(splitTimeElapsed[1])
+        self.seconds: float = float(splitTimeElapsed[2])
+
+    def get_time(self) -> tuple:
+        time = (self.hours, self.minutes, self.seconds)
+        return time
 
 
 # format raw entry list output is a list of Class WindowRecord
@@ -83,10 +91,36 @@ def retrieve_raw_entries(q=None):
     return rawEntries
 
 
+def get_total_time_elapsed(formattedEntries: list[WindowRecord]) -> WindowTime:
+    hours = 0
+    minutes = 0
+    seconds = 0
+
+    for entry in formattedEntries:
+        hours += entry.windowTimeElapsed.hours
+        minutes += entry.windowTimeElapsed.minutes
+
+        if minutes >= 61:
+            minutes -= 60
+            hours += 1
+        seconds += entry.windowTimeElapsed.seconds
+        if seconds >= 61:
+            seconds -= 60
+            minutes += 1
+
+    time = WindowTime(f"{hours}, {minutes}, {seconds}")
+    return time
+
+
+def get_time_of_each_window(formattedEntris: list[WindowRecord]):
+    pass
+
+
 if __name__ == "__main__":
     retrieveEntries = retrieve_raw_entries()
     formattedEntries = format_raw_entries(retrieveEntries)
-    print(formattedEntries[1].windowTimeElapsed.secondsElapsed)
+    totalTimeElapsed = get_total_time_elapsed(formattedEntries)
+    print(totalTimeElapsed.get_time())
 
 
 # calculate how the time is being used
