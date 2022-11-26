@@ -4,42 +4,46 @@ import datetime as dt
 import entry
 
 
-# this is the main loop
-def main():
-    lastActiveWindow = None
-    timeStarted = None
-    timeFinished = None
+class app():
+    def __init__(self) -> None:
+        self.main()
 
-    while True:
-        # get the active window
-        newActiveWindow = gw.getActiveWindow()
-        time.sleep(5)
+    # this is the main loop
+    def main(self):
+        lastActiveWindow = None
+        timeStarted = None
+        timeFinished = None
 
-        dtNow = dt.datetime.now()
-        timeFinished = (dtNow.hour, dtNow.minute, dtNow.second)
+        while True:
+            # get the active window
+            newActiveWindow = gw.getActiveWindow()
+            time.sleep(5)
 
-        # if the window changed
-        if newActiveWindow != lastActiveWindow:
-            # if there is both time started and finished this means that we changed from another window
-            # to another in this case we will record it on the database
-            if timeFinished is not None and timeStarted is not None and lastActiveWindow is not None:
-                windowEntry = entry.WindowEntry(lastActiveWindow.title,
-                                                timeStarted, timeFinished)
-                windowEntry.record_in_database()
+            dtNow = dt.datetime.now()
+            timeFinished = (dtNow.hour, dtNow.minute, dtNow.second)
 
-            # set the last active window to the current window
-            lastActiveWindow = newActiveWindow
+            # if the window changed
+            if newActiveWindow != lastActiveWindow:
+                # if there is both time started and finished this means that we changed from another window
+                # to another in this case we will record it on the database
+                if timeFinished is not None and timeStarted is not None and lastActiveWindow is not None:
+                    windowEntry = entry.WindowEntryIn(lastActiveWindow.title,
+                                                      timeStarted, timeFinished)
+                    windowEntry.record_in_database()
 
-            timeStarted = (dtNow.hour, dtNow.minute, dtNow.second)
+                # set the last active window to the current window
+                lastActiveWindow = newActiveWindow
 
-        # check if the windo/app is productive or not
-        if lastActiveWindow is not None:
-            appType = check_app_type(lastActiveWindow)
-            elapsedTime = getElapsedTime(timeStarted, timeFinished)
-            print(elapsedTime)
+                timeStarted = (dtNow.hour, dtNow.minute, dtNow.second)
 
-        else:
-            pass
+            # check if the windo/app is productive or not
+            if lastActiveWindow is not None:
+                appType = check_app_type(lastActiveWindow)
+                elapsedTime = getElapsedTime(timeStarted, timeFinished)
+                print(elapsedTime)
+
+            else:
+                pass
 
 
 def check_app_type(lastActiveWindow) -> str:
@@ -61,12 +65,17 @@ def check_app_type(lastActiveWindow) -> str:
 
 
 def getElapsedTime(timeStarted, timeFinished) -> tuple:
-    hours = timeFinished[0] - timeStarted[0]
-    minutes = timeFinished[1] - timeStarted[1]
-    seconds = timeFinished[2] - timeStarted[2]
+    hours: float = timeFinished[0] - timeStarted[0]
+    minutes: float = timeFinished[1] - timeStarted[1]
+    seconds: float = timeFinished[2] - timeStarted[2]
+
+    if seconds < 0:
+        minutes -= 1
+        seconds += 60
+
     timeSpent = (hours, minutes, seconds)
     return timeSpent
 
 
 if __name__ == "__main__":
-    main()
+    app1 = app()
