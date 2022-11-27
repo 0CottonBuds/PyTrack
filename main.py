@@ -72,6 +72,9 @@ def getElapsedTime(timeStarted, timeFinished) -> tuple:
     if seconds < 0:
         minutes -= 1
         seconds += 60
+    if minutes < 0:
+        hours -= 1
+        minutes += 60
 
     timeSpent = (hours, minutes, seconds)
     return timeSpent
