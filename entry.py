@@ -36,9 +36,8 @@ class WindowEntryIn():
         timeElapsed = f"{hours}, {minutes}, {seconds}"
         return timeElapsed
 
+
 # all the code need for querying processing and showing the data in this block
-
-
 class WindowRecord():
     def __init__(self, entry):
         windowName: str = entry[0]
@@ -54,6 +53,8 @@ class WindowRecord():
 
 
 class WindowTime():
+    name: str
+
     def __init__(self, timeElapsed: str) -> None:
         splitTimeElapsed = timeElapsed.split(", ")
 
@@ -64,6 +65,18 @@ class WindowTime():
     def get_time(self) -> tuple:
         time = (self.hours, self.minutes, self.seconds)
         return time
+
+    def add_time(self, hours=0, minutes=0, seconds=0):
+        self.hours += hours
+        self.minutes += seconds
+        self.seconds += minutes
+
+        if self.seconds >= 61:
+            self.seconds -= 60
+            self.minutes += 1
+        if self.minutes >= 61:
+            self.minutes -= 60
+            self.hours += 1
 
 
 # format raw entry list output is a list of Class WindowRecord
@@ -91,11 +104,13 @@ def retrieve_raw_entries(q=None):
     return rawEntries
 
 
+# get total time elapsed
 def get_total_time_elapsed(formattedEntries: list[WindowRecord]) -> WindowTime:
     hours = 0
     minutes = 0
     seconds = 0
 
+    # cycle through the formatted entries and format the time
     for entry in formattedEntries:
         hours += entry.windowTimeElapsed.hours
         minutes += entry.windowTimeElapsed.minutes
@@ -108,20 +123,44 @@ def get_total_time_elapsed(formattedEntries: list[WindowRecord]) -> WindowTime:
             seconds -= 60
             minutes += 1
 
+    # format and return time
     time = WindowTime(f"{hours}, {minutes}, {seconds}")
     return time
 
 
-def get_time_of_each_window(formattedEntris: list[WindowRecord]):
-    pass
+# get time elapsed on each windoww
+def get_time_of_each_window(formattedEntries: list[WindowRecord]) -> list[WindowTime]:
+    uniqueWindows: list[WindowTime] = []
+
+    # loop through the entries
+    for entry in formattedEntries:
+
+        # loop through the unique window list find if there is a match or not
+        isUnique: bool = True
+        for window in uniqueWindows:
+            # if unique add time elapsed to the object that it matched
+            if window.name == entry.windowShortName:
+                isUnique = False
+                timeToAdd = entry.windowTimeElapsed.get_time()
+                window.add_time(timeToAdd[0], timeToAdd[1], timeToAdd[2])
+            else:
+                pass
+
+        # if unique then add a new item in the list
+        if isUnique:
+            uniqueWindow = entry.windowTimeElapsed
+            uniqueWindow.name = entry.windowShortName
+
+            uniqueWindows.append(uniqueWindow)
+    return uniqueWindows
 
 
 if __name__ == "__main__":
     retrieveEntries = retrieve_raw_entries()
     formattedEntries = format_raw_entries(retrieveEntries)
     totalTimeElapsed = get_total_time_elapsed(formattedEntries)
-    print(totalTimeElapsed.get_time())
+    totalTimeOfEachWindow = get_time_of_each_window(formattedEntries)
+    print(totalTimeElapsed.get_time)
 
-
-# calculate how the time is being used
-# next is to read all the data used in the data base
+    for time in totalTimeOfEachWindow:
+        print(f"name:{time.name} time:{time.get_time()}")
