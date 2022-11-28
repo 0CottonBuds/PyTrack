@@ -6,12 +6,14 @@ import entry
 
 class app():
     def __init__(self) -> None:
-        self.main()
+        self.run()
 
     # this is the main loop
-    def main(self):
+    def run(self):
         lastActiveWindow = None
-        timeStarted = None
+        dtNow = dt.datetime.now()
+        timeStarted = (dtNow.hour, dtNow.minute, dtNow.second)
+
         timeFinished = None
 
         while True:
@@ -39,11 +41,12 @@ class app():
             # check if the windo/app is productive or not
             if lastActiveWindow is not None:
                 appType = check_app_type(lastActiveWindow)
-                elapsedTime = getElapsedTime(timeStarted, timeFinished)
-                print(elapsedTime)
+                if timeFinished is not None and timeStarted is not None:
+                    elapsedTime = getElapsedTime(timeStarted, timeFinished)
+                    print(elapsedTime)
 
             else:
-                pass
+                lastActiveWindow = newActiveWindow
 
 
 def check_app_type(lastActiveWindow) -> str:
@@ -54,21 +57,23 @@ def check_app_type(lastActiveWindow) -> str:
     seperatedTitle: list = lastActiveWindow.title.split("- ")
     for app in productiveApps:
         if seperatedTitle[-1].upper() == app.upper():
-            print(f"this is an productive app {app}")
+            print(f"this is an productive app {str(seperatedTitle)}")
             appType = "good"
     for app in badApps:
         if seperatedTitle[-1].upper() == app.upper():
-            print(f"this is a bad app {app}")
+            print(f"this is a bad app {str(seperatedTitle)}")
             appType = "bad"
 
     return appType
 
 
+# get time elapsed from time staarted and time finished
 def getElapsedTime(timeStarted, timeFinished) -> tuple:
     hours: float = timeFinished[0] - timeStarted[0]
     minutes: float = timeFinished[1] - timeStarted[1]
     seconds: float = timeFinished[2] - timeStarted[2]
 
+    # check if the time became negative and compensate
     if seconds < 0:
         minutes -= 1
         seconds += 60
