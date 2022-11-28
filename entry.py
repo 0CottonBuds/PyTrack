@@ -11,7 +11,7 @@ class WindowEntryIn():
         self.timeFinished = timeFinished
         self.timeElapsed = self.convert_time_format()
 
-    def record_in_database(self):
+    def recordInDatabase(self):
 
         conn = sqlite3.connect("pyTrack.db")
 
@@ -38,6 +38,8 @@ class WindowEntryIn():
 
 
 # all the code need for querying processing and showing the data in this block
+
+# clss window record to handle and store data that is retrieved from the database
 class WindowRecord():
     def __init__(self, entry):
         windowName: str = entry[0]
@@ -52,6 +54,7 @@ class WindowRecord():
         self.windowDateEntried = dateEntried
 
 
+# class window time for keeping data(time)
 class WindowTime():
     name: str
 

@@ -11,9 +11,9 @@ class app():
     # this is the main loop
     def run(self):
         lastActiveWindow = None
+
         dtNow = dt.datetime.now()
         timeStarted = (dtNow.hour, dtNow.minute, dtNow.second)
-
         timeFinished = None
 
         while True:
@@ -31,7 +31,7 @@ class app():
                 if timeFinished is not None and timeStarted is not None and lastActiveWindow is not None:
                     windowEntry = entry.WindowEntryIn(lastActiveWindow.title,
                                                       timeStarted, timeFinished)
-                    windowEntry.record_in_database()
+                    windowEntry.recordInDatabase()
 
                 # set the last active window to the current window
                 lastActiveWindow = newActiveWindow
