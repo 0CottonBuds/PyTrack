@@ -1,15 +1,16 @@
 import sqlite3
 import datetime as dt
 
-# all the code needs for entrying data is in this block
+
+# all the code needs for entering data is in this block
 
 
-class WindowEntryIn():
+class WindowEntryIn:
     def __init__(self, windowTitle, timeStarted, timeFinished):
         self.windowTitle = windowTitle
         self.timeStarted = timeStarted
         self.timeFinished = timeFinished
-        self.timeElapsed = self.convert_time_format()
+        self.timeElapsed = self.convertTimeFormat()
 
     def recordInDatabase(self):
 
@@ -17,10 +18,13 @@ class WindowEntryIn():
 
         c = conn.cursor()
 
-        c.execute("""
+        c.execute(
+            """
                     INSERT INTO windowTimeEntries VALUES(?,?,?)
 
-        """, (self.windowTitle, self.timeElapsed, str(dt.date.today())))
+        """,
+            (self.windowTitle, self.timeElapsed, str(dt.date.today())),
+        )
 
         conn.commit()
 
@@ -28,7 +32,7 @@ class WindowEntryIn():
 
         print("successfully added to database")
 
-    def convert_time_format(self):
+    def convertTimeFormat(self):
         # minus the time started to time finished and convert it to a more readable format
         hours = self.timeFinished[0] - self.timeStarted[0]
         minutes = self.timeFinished[1] - self.timeStarted[1]
@@ -39,23 +43,23 @@ class WindowEntryIn():
 
 # all the code need for querying processing and showing the data in this block
 
-# clss window record to handle and store data that is retrieved from the database
-class WindowRecord():
+# class window record to handle and store data that is retrieved from the database
+class WindowRecord:
     def __init__(self, entry):
         windowName: str = entry[0]
         timeElapsed: str = entry[1]
-        dateEntried: str = entry[2]
+        dateEntered: str = entry[2]
 
         splitWindowName = windowName.split("- ")
 
         self.windowShortName: str = splitWindowName[-1]
         self.windowFullName: str = windowName
         self.windowTimeElapsed = WindowTime(timeElapsed)
-        self.windowDateEntried = dateEntried
+        self.windowDateEntered = dateEntered
 
 
 # class window time for keeping data(time)
-class WindowTime():
+class WindowTime:
     name: str
 
     def __init__(self, timeElapsed: str) -> None:
@@ -83,7 +87,7 @@ class WindowTime():
 
 
 # format raw entry list output is a list of Class WindowRecord
-def format_raw_entries(rawEntries: list) -> list[WindowRecord]:
+def formatRawEntries(rawEntries: list) -> list[WindowRecord]:
     formattedEntries = []
     for entry in rawEntries:
         record = WindowRecord(entry)
@@ -92,7 +96,7 @@ def format_raw_entries(rawEntries: list) -> list[WindowRecord]:
 
 
 # get all entries as raw list
-def retrieve_raw_entries(q=None):
+def retrieveRawEntries(q=None):
     conn = sqlite3.connect("pyTrack.db")
 
     c = conn.cursor()
@@ -108,7 +112,7 @@ def retrieve_raw_entries(q=None):
 
 
 # get total time elapsed
-def get_total_time_elapsed(formattedEntries: list[WindowRecord]) -> WindowTime:
+def getTotalTimeElapsed(formattedEntries: list[WindowRecord]) -> WindowTime:
     hours = 0
     minutes = 0
     seconds = 0
@@ -131,8 +135,8 @@ def get_total_time_elapsed(formattedEntries: list[WindowRecord]) -> WindowTime:
     return time
 
 
-# get time elapsed on each windoww
-def get_time_of_each_window(formattedEntries: list[WindowRecord]) -> list[WindowTime]:
+# get time elapsed on each window
+def getTimeOfEachWindow(formattedEntries: list[WindowRecord]) -> list[WindowTime]:
     uniqueWindows: list[WindowTime] = []
 
     # loop through the entries
@@ -159,10 +163,10 @@ def get_time_of_each_window(formattedEntries: list[WindowRecord]) -> list[Window
 
 
 if __name__ == "__main__":
-    retrieveEntries = retrieve_raw_entries()
-    formattedEntries = format_raw_entries(retrieveEntries)
-    totalTimeElapsed = get_total_time_elapsed(formattedEntries)
-    totalTimeOfEachWindow = get_time_of_each_window(formattedEntries)
+    retrieveEntries = retrieveRawEntries()
+    formattedEntries = formatRawEntries(retrieveEntries)
+    totalTimeElapsed = getTotalTimeElapsed(formattedEntries)
+    totalTimeOfEachWindow = getTimeOfEachWindow(formattedEntries)
     print(totalTimeElapsed.get_time)
 
     for time in totalTimeOfEachWindow:

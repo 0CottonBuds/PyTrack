@@ -6,7 +6,9 @@ import entry
 
 class app():
     def __init__(self) -> None:
+        print("helloWorld")
         self.run()
+
 
     # this is the main loop
     def run(self):
@@ -38,9 +40,9 @@ class app():
 
                 timeStarted = (dtNow.hour, dtNow.minute, dtNow.second)
 
-            # check if the windo/app is productive or not
+            # check if the window app is productive or not
             if lastActiveWindow is not None:
-                appType = check_app_type(lastActiveWindow)
+                appType = checkAppType(lastActiveWindow)
                 if timeFinished is not None and timeStarted is not None:
                     elapsedTime = getElapsedTime(timeStarted, timeFinished)
                     print(elapsedTime)
@@ -49,25 +51,25 @@ class app():
                 lastActiveWindow = newActiveWindow
 
 
-def check_app_type(lastActiveWindow) -> str:
+def checkAppType(lastActiveWindow) -> str:
     productiveApps = ["Visual Studio Code"]
     badApps = ["Opera"]
     appType = ""
 
-    seperatedTitle: list = lastActiveWindow.title.split("- ")
+    separatedTitle: list = lastActiveWindow.title.split("- ")
     for app in productiveApps:
-        if seperatedTitle[-1].upper() == app.upper():
-            print(f"this is an productive app {str(seperatedTitle)}")
+        if separatedTitle[-1].upper() == app.upper():
+            print(f"this is an productive app {str(separatedTitle)}")
             appType = "good"
     for app in badApps:
-        if seperatedTitle[-1].upper() == app.upper():
-            print(f"this is a bad app {str(seperatedTitle)}")
+        if separatedTitle[-1].upper() == app.upper():
+            print(f"this is a bad app {str(separatedTitle)}")
             appType = "bad"
 
     return appType
 
 
-# get time elapsed from time staarted and time finished
+# get time elapsed from time started and time finished
 def getElapsedTime(timeStarted, timeFinished) -> tuple:
     hours: float = timeFinished[0] - timeStarted[0]
     minutes: float = timeFinished[1] - timeStarted[1]
