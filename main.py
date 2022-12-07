@@ -4,11 +4,10 @@ import datetime as dt
 import entry
 
 
-class app():
+class app:
     def __init__(self) -> None:
         print("helloWorld")
         self.run()
-
 
     # this is the main loop
     def run(self):
@@ -30,9 +29,14 @@ class app():
             if newActiveWindow != lastActiveWindow:
                 # if there is both time started and finished this means that we changed from another window
                 # to another in this case we will record it on the database
-                if timeFinished is not None and timeStarted is not None and lastActiveWindow is not None:
-                    windowEntry = entry.WindowEntryIn(lastActiveWindow.title,
-                                                      timeStarted, timeFinished)
+                if (
+                    timeFinished is not None
+                    and timeStarted is not None
+                    and lastActiveWindow is not None
+                ):
+                    windowEntry = entry.WindowEntryIn(
+                        lastActiveWindow.title, timeStarted, timeFinished
+                    )
                     windowEntry.recordInDatabase()
 
                 # set the last active window to the current window
