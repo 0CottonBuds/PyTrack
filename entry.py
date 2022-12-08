@@ -83,8 +83,8 @@ class WindowTime:
         self.formatTime()
 
         self.hours += hours
-        self.minutes += seconds
-        self.seconds += minutes
+        self.minutes += minutes
+        self.seconds += seconds
 
         self.formatTime()
 
@@ -97,12 +97,19 @@ class WindowTime:
             self.minutes += 1
         if self.seconds < 0:
             self.seconds += 60
+        if self.minutes < 0:
+            self.minutes += 60
 
 
 # all in one class for window record needs
 class WindowRecordUtils:
+    formattedRecords = []
+
+    def __init__(self) -> None:
+        self.fetchEntries()
+
     def fetchEntries(self):
-        return self.formatRawEntries(self.retrieveRawEntries())
+        self.formattedRecords = self.formatRawEntries(self.retrieveRawEntries())
 
     # format raw entry list output is a list of Class WindowRecord
     def formatRawEntries(self, rawEntries: list) -> list[WindowRecord]:
@@ -128,11 +135,11 @@ class WindowRecordUtils:
         return rawEntries
 
     # get total time elapsed
-    def getTotalTimeElapsed(self, formattedEntries: list[WindowRecord]) -> WindowTime:
+    def getTotalTimeElapsed(self) -> WindowTime:
         time = WindowTime(f"0, 0, 0")
 
         # cycle through the formatted entries and format the time
-        for entry in formattedEntries:
+        for entry in self.formattedRecords:
             time.hours += entry.windowTimeElapsed.hours
             time.minutes += entry.windowTimeElapsed.minutes
             time.seconds += entry.windowTimeElapsed.seconds
@@ -143,13 +150,11 @@ class WindowRecordUtils:
         return time
 
     # get time elapsed on each window
-    def getTimeOfEachWindow(
-        self, formattedEntries: list[WindowRecord]
-    ) -> list[WindowTime]:
+    def getTimeOfEachWindow(self):
         uniqueWindows: list[WindowTime] = []
 
         # loop through the entries
-        for entry in formattedEntries:
+        for entry in self.formattedRecords:
 
             # loop through the unique window list find if there is a match or not
             isUnique: bool = True
@@ -172,17 +177,14 @@ class WindowRecordUtils:
 
 
 if __name__ == "__main__":
-    windowUtil = WindowRecordUtils()
+    # windowUtil = WindowRecordUtils()
 
-    formattedRecords = windowUtil.fetchEntries()
-
-    # for records in formattedRecords:
-    #     print(records.windowTimeElapsed.get_time())
-
-    totalTimeElapsed = windowUtil.getTotalTimeElapsed(formattedRecords)
-    totalTimeOfEachWindow = windowUtil.getTimeOfEachWindow(formattedRecords)
+    # totalTimeElapsed = windowUtil.getTotalTimeElapsed()
     # print(totalTimeElapsed.getTime())
+    # print()
 
-    for window in totalTimeOfEachWindow:
-        print(window.name)
-        print(window.getTime())
+    # totalTimeOfEachWindow = windowUtil.getTimeOfEachWindow()
+    # for window in totalTimeOfEachWindow:
+    #     print(window.name)
+    #     print(window.getTime())
+    pass
