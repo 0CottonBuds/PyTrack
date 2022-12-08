@@ -26,10 +26,37 @@ def example():
     pyplot.show()
 
 
-def plotBarGraph(timeOfEachWindow: list[WindowTime]):
-    pass
+class PlotBarGraph:
+    def __init__(self, timeOfEachWindow: list[WindowTime]) -> None:
+        self.timeOfEachWindow = timeOfEachWindow
+
+    def plotBarGraph(self):
+        barNames = self.getBarName()
+        xCoordinates = [i for i in range(len(self.timeOfEachWindow))]
+        heights = [40 for i in range(len(self.timeOfEachWindow))]
+
+        pyplot.bar(
+            xCoordinates,
+            heights,
+            tick_label=barNames,
+            width=0.3,
+            color=["blue", "black"],
+        )
+        pyplot.xlabel("time")
+        pyplot.ylabel("Windows")
+        pyplot.title("Window Times")
+        pyplot.show()
+
+    def getBarName(self):
+        barNames = []
+        for window in self.timeOfEachWindow:
+            barNames.append(window.name)
+        return barNames
 
 
 if __name__ == "__main__":
     windowUtil = WindowRecordUtils()
     timeOfEachWindow = windowUtil.getTimeOfEachWindow()
+
+    barGraph = PlotBarGraph(timeOfEachWindow)
+    barGraph.plotBarGraph()
