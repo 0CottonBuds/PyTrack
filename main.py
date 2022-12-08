@@ -5,7 +5,7 @@ import entry
 
 
 class app:
-    def __init__(self) -> None:
+    def __init__(self):
         print("helloWorld")
         self.run()
 
