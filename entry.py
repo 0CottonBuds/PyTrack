@@ -1,8 +1,6 @@
 import sqlite3
 import datetime as dt
 
-import graphs
-
 """
 all the code needs for entering data is in this block
 """
@@ -64,6 +62,7 @@ class WindowRecord:
 # class window time for keeping data(time)
 class WindowTime:
     name: str
+    fullName: str
 
     def __init__(self, timeElapsed: str) -> None:
         splitTimeElapsed = timeElapsed.split(", ")
@@ -170,21 +169,42 @@ class WindowRecordUtils:
             # if unique then add a new item in the list
             if isUnique:
                 uniqueWindow = entry.windowTimeElapsed
+                uniqueWindow.fullName = entry.windowFullName
                 uniqueWindow.name = entry.windowShortName
                 uniqueWindows.append(uniqueWindow)
 
         return uniqueWindows
 
+    def getPercentageOfTimeOfEachWindow(self):
+        totalTime = self.getTotalTimeElapsed()
+        timeOfEachWindow = self.getTimeOfEachWindow()
+
+        percentages: list[list] = []
+
+        for window in timeOfEachWindow:
+            percentage = window.seconds / totalTime.seconds
+            percentage = percentage + window.minutes
+            percentage = percentage / totalTime.minutes
+            percentage = percentage + window.hours
+            percentage = percentage / totalTime.hours
+            percentage = percentage * 100
+
+            percentages.append([window, round(percentage, 2)])
+
+        return percentages
+
 
 if __name__ == "__main__":
-    # windowUtil = WindowRecordUtils()
+    windowUtil = WindowRecordUtils()
 
-    # totalTimeElapsed = windowUtil.getTotalTimeElapsed()
-    # print(totalTimeElapsed.getTime())
-    # print()
+    totalTimeElapsed = windowUtil.getTotalTimeElapsed()
+    print(totalTimeElapsed.getTime())
+    print()
 
-    # totalTimeOfEachWindow = windowUtil.getTimeOfEachWindow()
-    # for window in totalTimeOfEachWindow:
-    #     print(window.name)
-    #     print(window.getTime())
-    pass
+    totalTimeOfEachWindow = windowUtil.getTimeOfEachWindow()
+
+    percentageTimeOfEachWindow = windowUtil.getPercentageOfTimeOfEachWindow()
+
+    for window in percentageTimeOfEachWindow:
+        print(f"name: {window[0].fullName}")
+        print(f"percentage: {window[1]}")
