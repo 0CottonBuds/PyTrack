@@ -1,19 +1,22 @@
 import sqlite3
 import datetime as dt
 
-"""
-all the code needs for entering data is in this block
-"""
-# class for window entry that wil handle the data structure and entry of the data to the database
+from typing import Protocol
+
+# all the code needs for entering data is in this block
 class WindowEntryIn:
-    def __init__(self, windowTitle, timeStarted, timeFinished):
-        self.windowTitle = windowTitle
-        self.timeStarted = timeStarted
-        self.timeFinished = timeFinished
-        self.timeElapsed = self.convertTimeFormat()
+    """Takes Window Title, Time Started, Time Finished \n
+    class for window entry that wil handle the data structure and entry of the data to the database
+    """
 
-    def recordInDatabase(self):
+    def __init__(self, window_title, time_started, time_finished):
+        self.window_title = window_title
+        self.time_started = time_started
+        self.time_finished = time_finished
+        self.time_elapsed = self.convertTimeFormat()
 
+    def record_in_database(self):
+        """enter the data to data base"""
         conn = sqlite3.connect("pyTrack.db")
 
         c = conn.cursor()
@@ -23,7 +26,7 @@ class WindowEntryIn:
                     INSERT INTO windowTimeEntries VALUES(?,?,?)
 
         """,
-            (self.windowTitle, self.timeElapsed, str(dt.date.today())),
+            (self.window_title, self.time_elapsed, str(dt.date.today())),
         )
 
         conn.commit()
@@ -33,10 +36,10 @@ class WindowEntryIn:
         print("successfully added to database")
 
     def convertTimeFormat(self):
-        # minus the time started to time finished and convert it to a more readable format
-        hours = self.timeFinished[0] - self.timeStarted[0]
-        minutes = self.timeFinished[1] - self.timeStarted[1]
-        seconds = self.timeFinished[2] - self.timeStarted[2]
+        """subtracts the time started and time finished to get time elapsed"""
+        hours = self.time_finished[0] - self.time_started[0]
+        minutes = self.time_finished[1] - self.time_started[1]
+        seconds = self.time_finished[2] - self.time_started[2]
         timeElapsed = f"{hours}, {minutes}, {seconds}"
         return timeElapsed
 
