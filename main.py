@@ -72,6 +72,12 @@ class app:
         if minutes < 0:
             hours -= 1
             minutes += 60
+        if seconds > 60:
+            seconds -= 60
+            minutes += 1
+        if minutes > 60:
+            minutes -= 60
+            hours += 1
 
         time_spent = (hours, minutes, seconds)
         return time_spent
