@@ -13,7 +13,7 @@ class WindowEntryIn:
         self.window_title = window_title
         self.time_started = time_started
         self.time_finished = time_finished
-        self.time_elapsed = self.convertTimeFormat()
+        self.time_elapsed = self.convert_time_format()
 
     def record_in_database(self):
         """enter the data to data base"""
@@ -35,62 +35,65 @@ class WindowEntryIn:
 
         print("successfully added to database")
 
-    def convertTimeFormat(self):
+    def convert_time_format(self):
         """subtracts the time started and time finished to get time elapsed"""
         hours = self.time_finished[0] - self.time_started[0]
         minutes = self.time_finished[1] - self.time_started[1]
         seconds = self.time_finished[2] - self.time_started[2]
-        timeElapsed = f"{hours}, {minutes}, {seconds}"
-        return timeElapsed
+        time_elapsed = f"{hours}, {minutes}, {seconds}"
+        return time_elapsed
 
 
-"""
-all the code need for querying processing and showing the data in this block
-"""
-# class window record to handle and store data that is retrieved from the database
+# all the code need for querying processing and showing the data in this block
+
+
 class WindowRecord:
+    """class to handle and store data that is retrieved from the database"""
+
     def __init__(self, entry):
-        windowName: str = entry[0]
-        timeElapsed: str = entry[1]
-        dateEntered: str = entry[2]
+        window_name: str = entry[0]
+        time_elapsed: str = entry[1]
+        date_entered: str = entry[2]
 
-        splitWindowName = windowName.split("- ")
+        split_window_name = window_name.split("- ")
 
-        self.windowShortName: str = splitWindowName[-1]
-        self.windowFullName: str = windowName
-        self.windowTimeElapsed = WindowTime(timeElapsed)
-        self.windowDateEntered = dateEntered
+        self.window_short_name: str = split_window_name[-1]
+        self.window_full_name: str = window_name
+        self.window_time_elapsed = WindowTime(time_elapsed)
+        self.window_date_entered = date_entered
 
 
-# class window time for keeping data(time)
 class WindowTime:
+    """class window time for keeping data(time)"""
+
     name: str
-    fullName: str
+    full_name: str
 
-    def __init__(self, timeElapsed: str) -> None:
-        splitTimeElapsed = timeElapsed.split(", ")
+    def __init__(self, time_elapsed: str) -> None:
+        split_time_elapsed = time_elapsed.split(", ")
 
-        self.hours: float = float(splitTimeElapsed[0])
-        self.minutes: float = float(splitTimeElapsed[1])
-        self.seconds: float = float(splitTimeElapsed[2])
+        self.hours: float = float(split_time_elapsed[0])
+        self.minutes: float = float(split_time_elapsed[1])
+        self.seconds: float = float(split_time_elapsed[2])
 
-        self.formatTime()
+        self.format_time()
 
-    def getTime(self) -> tuple:
-        self.formatTime()
+    def get_time(self) -> tuple:
+        """returns tuple of time"""
+        self.format_time()
         time = (self.hours, self.minutes, self.seconds)
         return time
 
     def add_time(self, hours=0, minutes=0, seconds=0):
-        self.formatTime()
-
+        """adds time"""
         self.hours += hours
         self.minutes += minutes
         self.seconds += seconds
 
-        self.formatTime()
+        self.format_time()
 
-    def formatTime(self):
+    def format_time(self):
+        """formats the time to avoid the negatives and time going above 60 \n use this when changing the time value"""
         if self.minutes > 60:
             self.minutes -= 60
             self.hours += 1
@@ -105,91 +108,89 @@ class WindowTime:
 
 # all in one class for window record needs
 class WindowRecordUtils:
-    formattedRecords = []
+    """all in one class for window record needs"""
+
+    formatted_records = []
 
     def __init__(self) -> None:
-        self.fetchEntries()
+        self.fetch_entries()
 
-    def fetchEntries(self):
-        self.formattedRecords = self.formatRawEntries(self.retrieveRawEntries())
+    def fetch_entries(self):
+        """combination of format_raw_entries and retrieve_raw_entries as one function"""
+        self.formatted_records = self.format_raw_entries(self.retrieve_raw_entries())
 
-    # format raw entry list output is a list of Class WindowRecord
-    def formatRawEntries(self, rawEntries: list) -> list[WindowRecord]:
-        formattedEntries = []
-        for entry in rawEntries:
+    def format_raw_entries(self, raw_records: list) -> list[WindowRecord]:
+        """format raw entry list\n output: list of Class WindowRecord"""
+        formatted_records = []
+        for entry in raw_records:
             record = WindowRecord(entry)
-            formattedEntries.append(record)
-        return formattedEntries
+            formatted_records.append(record)
+        return formatted_records
 
-    # get all entries as raw list
-    def retrieveRawEntries(self, q=None) -> list:
+    def retrieve_raw_entries(self, q=None) -> list:
+        """connects to the database and gets all entries as raw list of string"""
         conn = sqlite3.connect("pyTrack.db")
-
         c = conn.cursor()
-
         c.execute("SELECT * FROM windowTimeEntries")
-
-        rawEntries = c.fetchall()
-
+        raw_records = c.fetchall()
         conn.commit()
         conn.close
+        return raw_records
 
-        return rawEntries
-
-    # get total time elapsed
-    def getTotalTimeElapsed(self) -> WindowTime:
+    def get_total_time_elapsed(self) -> WindowTime:
+        """get total time elapsed\n Returns window time"""
         time = WindowTime(f"0, 0, 0")
 
         # cycle through the formatted entries and format the time
-        for entry in self.formattedRecords:
-            time.hours += entry.windowTimeElapsed.hours
-            time.minutes += entry.windowTimeElapsed.minutes
-            time.seconds += entry.windowTimeElapsed.seconds
+        for entry in self.formatted_records:
+            time.hours += entry.window_time_elapsed.hours
+            time.minutes += entry.window_time_elapsed.minutes
+            time.seconds += entry.window_time_elapsed.seconds
 
-            time.formatTime()
+            time.format_time()
 
         # format and return time
         return time
 
-    # get time elapsed on each window
-    def getTimeOfEachWindow(self):
-        uniqueWindows: list[WindowTime] = []
+    def get_time_of_each_window(self):
+        """get time elapsed on each window"""
+        unique_windows: list[WindowTime] = []
 
         # loop through the entries
-        for entry in self.formattedRecords:
+        for entry in self.formatted_records:
 
             # loop through the unique window list find if there is a match or not
-            isUnique: bool = True
-            for window in uniqueWindows:
+            is_unique: bool = True
+            for window in unique_windows:
                 # if unique add time elapsed to the object that it matched
-                if window.name == entry.windowShortName:
-                    isUnique = False
-                    timeToAdd = entry.windowTimeElapsed.getTime()
-                    window.add_time(timeToAdd[0], timeToAdd[1], timeToAdd[2])
+                if window.name == entry.window_short_name:
+                    is_unique = False
+                    time_to_add = entry.window_time_elapsed.get_time()
+                    window.add_time(time_to_add[0], time_to_add[1], time_to_add[2])
                 else:
                     pass
 
             # if unique then add a new item in the list
-            if isUnique:
-                uniqueWindow = entry.windowTimeElapsed
-                uniqueWindow.fullName = entry.windowFullName
-                uniqueWindow.name = entry.windowShortName
-                uniqueWindows.append(uniqueWindow)
+            if is_unique:
+                unique_window = entry.window_time_elapsed
+                unique_window.full_name = entry.window_full_name
+                unique_window.name = entry.window_short_name
+                unique_windows.append(unique_window)
 
-        return uniqueWindows
+        return unique_windows
 
-    def getPercentageOfTimeOfEachWindow(self):
-        totalTime = self.getTotalTimeElapsed()
-        timeOfEachWindow = self.getTimeOfEachWindow()
+    def get_percentage_of_time_of_each_window(self):
+        total_time = self.get_total_time_elapsed()
+        time_of_each_window = self.get_time_of_each_window()
 
         percentages: list[list] = []
 
-        for window in timeOfEachWindow:
-            percentage = window.seconds / totalTime.seconds
+        for window in time_of_each_window:
+            percentage = window.seconds / total_time.seconds
             percentage = percentage + window.minutes
-            percentage = percentage / totalTime.minutes
+            percentage = percentage / total_time.minutes
             percentage = percentage + window.hours
-            percentage = percentage / totalTime.hours
+            percentage = percentage / total_time.hours
             percentage = percentage * 100
 
             percentages.append([window, round(percentage, 2)])
@@ -198,16 +199,16 @@ class WindowRecordUtils:
 
 
 if __name__ == "__main__":
-    windowUtil = WindowRecordUtils()
+    window_util = WindowRecordUtils()
 
-    totalTimeElapsed = windowUtil.getTotalTimeElapsed()
-    print(totalTimeElapsed.getTime())
+    total_time_elapsed = window_util.get_total_time_elapsed()
+    print(total_time_elapsed.get_time())
     print()
 
-    totalTimeOfEachWindow = windowUtil.getTimeOfEachWindow()
+    total_time_of_each_window = window_util.get_time_of_each_window()
 
-    percentageTimeOfEachWindow = windowUtil.getPercentageOfTimeOfEachWindow()
+    percentage_time_of_each_window = window_util.get_percentage_of_time_of_each_window()
 
-    for window in percentageTimeOfEachWindow:
-        print(f"name: {window[0].fullName}")
+    for window in percentage_time_of_each_window:
+        print(f"name: {window[0].full_name}")
         print(f"percentage: {window[1]}")
