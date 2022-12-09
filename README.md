@@ -5,3 +5,4 @@ Window tracking software with graphs, break reminder, slack reminder
 pygetwindow
 kivy
 kivymd
+sqlite3
