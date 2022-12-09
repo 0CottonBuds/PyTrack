@@ -2,6 +2,7 @@ import pygetwindow as gw
 import time
 import datetime as dt
 import entry
+from window_type import check_app_type
 
 
 class app:
@@ -10,10 +11,9 @@ class app:
 
     def __init__(self):
         print("helloWorld")
-        self.run()
+        self.main()
 
-    # this is the main loop
-    def run(self):
+    def main(self):
         last_active_window = None
 
         dt_now = dt.datetime.now()
@@ -39,7 +39,7 @@ class app:
                 ):
 
                     window_entry = entry.WindowEntryIn(
-                        last_active_window.title, self.time_started, self.time_finished
+                        last_active_window.title, self.get_elapsed_time()
                     )
                     window_entry.record_in_database()
 
@@ -58,9 +58,13 @@ class app:
             else:
                 last_active_window = new_active_window
 
-        # get time elapsed from time started and time finished
-
     def get_elapsed_time(self) -> tuple:
+        """function to subtract two time(hours, minutes, seconds)\n
+        returns tuple(Hours, Minutes, Seconds)\n
+        check TODO to see bugs"""
+
+        # TODO: fix bug that make this function act weird when we are subtracting from another 12 hour cycle i.e.: 11pm - 12am(00:00) which results this function to make large numbers i.e.: -23,-58,-30
+
         hours: float = self.time_finished[0] - self.time_started[0]
         minutes: float = self.time_finished[1] - self.time_started[1]
         seconds: float = self.time_finished[2] - self.time_started[2]
@@ -72,33 +76,9 @@ class app:
         if minutes < 0:
             hours -= 1
             minutes += 60
-        if seconds > 60:
-            seconds -= 60
-            minutes += 1
-        if minutes > 60:
-            minutes -= 60
-            hours += 1
 
         time_spent = (hours, minutes, seconds)
         return time_spent
-
-
-def check_app_type(last_active_window) -> str:
-    productive_apps = ["Visual Studio Code"]
-    bad_apps = ["Opera"]
-    app_type = ""
-
-    separated_title: list[str] = last_active_window.title.split("- ")
-    for app in productive_apps:
-        if separated_title[-1].upper() == app.upper():
-            print(f"this is an productive app {str(separated_title)}")
-            app_type = "good"
-    for app in bad_apps:
-        if separated_title[-1].upper() == app.upper():
-            print(f"this is a bad app {str(separated_title)}")
-            app_type = "bad"
-
-    return app_type
 
 
 if __name__ == "__main__":
