@@ -4,6 +4,8 @@ import datetime as dt
 import entry
 from window_type import check_app_type
 
+# from window_type import check_app_type
+
 
 class app:
     time_started: tuple
@@ -77,8 +79,8 @@ class app:
             hours -= 1
             minutes += 60
 
-        time_spent = (hours, minutes, seconds)
-        return time_spent
+        time_elapsed = (hours, minutes, seconds)
+        return time_elapsed
 
 
 if __name__ == "__main__":

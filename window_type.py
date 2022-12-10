@@ -1,6 +1,3 @@
-import sqlite3
-
-
 def check_app_type(last_active_window) -> str:
     productive_apps = ["Visual Studio Code"]
     bad_apps = ["Opera"]
