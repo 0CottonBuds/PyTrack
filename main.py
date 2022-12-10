@@ -34,50 +34,46 @@ class app:
                 self.dt_now.second,
             )
 
-            self.__check_if_window_changed()
+            if self.new_active_window != self.last_active_window:
+                """checks if window changed if it changes it records the data to the database if all prerequisite parameters exists \n \n
+                time_finished and time_started\n
+                last_active_window and new_active_window"""
 
-            self.__check_if_last_window_exists()
+                # app_type = check_app_type(self.new_active_window)
 
-    def __check_if_window_changed(self):
-        """checks if window changed if it changes it records the data to the database if all prerequisite parameters exists \n \n
-        time_finished and time_started\n
-        last_active_window and new_active_window"""
-
-        if self.new_active_window != self.last_active_window:
-
-            """if there is both time started and finished this means that we changed from another window
-            to another in this case we will record it on the database"""
-            is_parameters_complete = (
-                self.time_finished is not None
-                and self.time_started is not None
-                and self.last_active_window is not None
-                and self.new_active_window is not None
-            )
-            if is_parameters_complete:
-
-                window_entry = entry.WindowEntryIn(
-                    self.last_active_window.title,
-                    self.get_elapsed_time(),
+                is_parameters_complete = (
+                    self.time_finished is not None
+                    and self.time_started is not None
+                    and self.last_active_window is not None
+                    and self.new_active_window is not None
                 )
-                window_entry.record_in_database()
+                if is_parameters_complete:
 
-            # set the last active window to the current window
-            self.last_active_window = self.new_active_window
+                    window_entry = entry.WindowEntryIn(
+                        self.last_active_window.title,
+                        self.get_elapsed_time(),
+                    )
+                    window_entry.record_in_database()
 
-            self.time_started = (
-                self.dt_now.hour,
-                self.dt_now.minute,
-                self.dt_now.second,
-            )
+                # set the last active window to the current window
+                self.last_active_window = self.new_active_window
 
-    def __check_if_last_window_exists(self):
+                self.time_started = (
+                    self.dt_now.hour,
+                    self.dt_now.minute,
+                    self.dt_now.second,
+                )
+
+            self.check_if_last_window_exists()
+
+            self.printer()
+
+    def check_if_last_window_exists(self):
         """checks if last window is none if yes then set it to the new active window"""
         if self.last_active_window is None:
             self.last_active_window = self.new_active_window
-        else:
-            self.__printer()
 
-    def __printer(self):
+    def printer(self):
         """placeholder function to print some data in the terminal"""
         if self.time_finished is not None and self.time_started is not None:
             app_type = check_app_type(self.last_active_window)
