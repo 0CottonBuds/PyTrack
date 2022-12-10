@@ -12,7 +12,7 @@ class WindowEntryIn:
 
     def __init__(self, window_title, time_elapsed):
         self.window_title = window_title
-        self.time_elapsed = f"{time_elapsed[0], time_elapsed[1], time_elapsed[2]}"
+        self.time_elapsed = f"{time_elapsed[0]}, {time_elapsed[1]}, {time_elapsed[2]}"
 
     def record_in_database(self):
         """enter the data to data base"""
@@ -21,10 +21,7 @@ class WindowEntryIn:
         c = conn.cursor()
 
         c.execute(
-            """
-                    INSERT INTO windowTimeEntries VALUES(?,?,?)
-
-        """,
+            """INSERT INTO windowTimeEntries VALUES(?,?,?)""",
             (self.window_title, str(self.time_elapsed), str(dt.date.today())),
         )
 
@@ -151,7 +148,7 @@ def get_total_time_elapsed(formatted_records: list[WindowRecord]) -> WindowTime:
     return time
 
 
-def get_time_of_each_window(formatted_records: list[WindowRecord]):
+def get_time_of_each_window(formatted_records: list[WindowRecord]) -> list[WindowTime]:
     """get time elapsed on each window"""
     unique_windows: list[WindowTime] = []
 
@@ -201,16 +198,20 @@ def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord])
 
 if __name__ == "__main__":
     records = WindowRecordFetcher().formatted_records
-    print(records)
+    # print(records)
 
     total_time_elapsed = get_total_time_elapsed(records)
     print(total_time_elapsed.get_time())
     print()
 
-    # total_time_of_each_window = get_time_of_each_window(records)
+    # time_of_each_window = get_time_of_each_window(records)
 
-    # percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
+    # for window in time_of_each_window:
+    #     print(window.full_name)
+    #     print(window.get_time())
 
-    # for window in percentage_time_of_each_window:
-    #     print(f"name: {window[0].full_name}")
-    #     print(f"percentage: {window[1]}")
+    percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
+
+    for window in percentage_time_of_each_window:
+        print(f"name: {window[0].full_name}")
+        print(f"percentage: {window[1]}")
