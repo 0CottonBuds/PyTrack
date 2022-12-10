@@ -4,17 +4,15 @@ import datetime as dt
 from dataclasses import dataclass
 from typing import Protocol
 
-# all the code needs for entering data is in this block
+
 class WindowEntryIn:
     """Takes Window Title, Time Started, Time Finished \n
     class for window entry that wil handle the data structure and entry of the data to the database
     """
 
-    def __init__(self, window_title, time_started, time_finished):
+    def __init__(self, window_title, time_elapsed):
         self.window_title = window_title
-        self.time_started = time_started
-        self.time_finished = time_finished
-        self.time_elapsed = self.convert_time_format()
+        self.time_elapsed = f"{time_elapsed[0], time_elapsed[1], time_elapsed[2]}"
 
     def record_in_database(self):
         """enter the data to data base"""
@@ -27,7 +25,7 @@ class WindowEntryIn:
                     INSERT INTO windowTimeEntries VALUES(?,?,?)
 
         """,
-            (self.window_title, self.time_elapsed, str(dt.date.today())),
+            (self.window_title, str(self.time_elapsed), str(dt.date.today())),
         )
 
         conn.commit()
@@ -35,29 +33,6 @@ class WindowEntryIn:
         conn.close()
 
         print("successfully added to database")
-
-    def convert_time_format(self):
-        """subtracts the time started and time finished to get time elapsed"""
-        hours: float = self.time_finished[0] - self.time_started[0]
-        minutes: float = self.time_finished[1] - self.time_started[1]
-        seconds: float = self.time_finished[2] - self.time_started[2]
-
-        # check if the time became negative and compensate
-        if seconds < 0:
-            minutes -= 1
-            seconds += 60
-        if minutes < 0:
-            hours -= 1
-            minutes += 60
-        if seconds > 60:
-            seconds -= 60
-            minutes += 1
-        if minutes > 60:
-            minutes -= 60
-            hours += 1
-
-        time_elapsed = f"{hours}, {minutes}, {seconds}"
-        return time_elapsed
 
 
 # all the code need for querying processing and showing the data in this block
