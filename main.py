@@ -2,9 +2,8 @@ import pygetwindow as gw
 import time
 import datetime as dt
 import entry
-from window_type import *
-
-# from window_type import check_app_type
+import window_type
+import notification
 
 
 class app:
@@ -21,6 +20,8 @@ class app:
         self.dt_now = dt.datetime.now()
         self.time_started = (self.dt_now.hour, self.dt_now.minute, self.dt_now.second)
         self.time_finished = (0, 0, 0)
+        self.point_tracker = window_type.PointTracker()
+        self.notification_handler = notification.NotificationHandler()
 
         while True:
             # get the active window
@@ -34,12 +35,18 @@ class app:
                 self.dt_now.second,
             )
 
+            app_type = window_type.check_app_type(self.new_active_window)
+            self.change_points(app_type)
+
+            if self.point_tracker.points >= 15:
+                self.notification_handler.take_a_break()
+            if self.point_tracker.points <= -15:
+                self.notification_handler.get_back_to_work()
+
             if self.new_active_window != self.last_active_window:
                 """checks if window changed if it changes it records the data to the database if all prerequisite parameters exists \n \n
                 time_finished and time_started\n
                 last_active_window and new_active_window"""
-
-                # app_type = check_app_type(self.new_active_window)
 
                 is_parameters_complete = (
                     self.time_finished is not None
@@ -73,10 +80,23 @@ class app:
         if self.last_active_window is None:
             self.last_active_window = self.new_active_window
 
+    def change_points(self, app_type: str):
+        """add and subtracts points based on app type"""
+
+        if app_type == "good":
+            self.point_tracker.add_points(5)
+            print(f"added 5 points\ntotal points: {self.point_tracker.points}")
+        elif app_type == "bad":
+            self.point_tracker.subtract_points(5)
+            print(f"subtract 5 points\ntotal points: {self.point_tracker.points}")
+        else:
+            print(self.new_active_window.title)
+            print("this window does not have a label")
+
     def printer(self):
         """placeholder function to print some data in the terminal"""
         if self.time_finished is not None and self.time_started is not None:
-            app_type = check_app_type(self.last_active_window)
+            # app_type = check_app_type(self.last_active_window)
             elapsed_time = self.get_elapsed_time()
             print(elapsed_time)
 
