@@ -35,7 +35,7 @@ class WindowType:
         self.window_rating = int(window_rating)
 
     def name_chooser(self, window_full_name: str):
-        '''lets you pick what part of the full name do you want this window to use'''
+        """lets you pick what part of the full name do you want this window to use"""
         separated_window_name = window_full_name.split("- ")
         print(separated_window_name)
         index = input("What name would you like to put")
@@ -74,13 +74,6 @@ def find_window_on_database_by_name(query_name: str) -> WindowType:
     return window
 
 
-def collect_all_windows() -> list:
-    """retrieves all windows that is currently running"""
-
-    windows = pygetwindow.getAllWindows()
-    return windows
-
-
 def filter_windows(windows) -> list:
     """filters the windows that you want to ignore and returns a list of windows"""
     ignored_window_names = [
@@ -107,7 +100,7 @@ def filter_windows(windows) -> list:
 
 if __name__ == "__main__":
 
-    windows = collect_all_windows()
+    windows = pygetwindow.getAllWindows()
     filtered_windows = filter_windows(windows)
 
     for window in filtered_windows:

@@ -9,7 +9,3 @@ class PointTracker:
 
     def subtract_points(self, point_to_add: int):
         self.points -= point_to_add
-
-
-def pasas():
-    pass
