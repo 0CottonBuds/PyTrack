@@ -22,16 +22,23 @@ def check_app_type(title: str) -> str:
 
 
 class WindowType:
+    """Class window type use to store name type and rating of window"""
+
     window_name: str
     window_type: str
     window_rating: int
 
-
-class WindowTypeIn(WindowType):
-    def __init__(self, window_name, window_type, window_rating) -> None:
+    def __init__(self, window_name: str, window_type: str, window_rating: int) -> None:
         self.window_name = window_name
         self.window_type = window_type
-        self.window_rating = window_rating
+        self.window_rating = int(window_rating)
+
+    def __str__(self) -> str:
+        return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_rating}"
+
+
+class WindowTypeIn(WindowType):
+    """inherits from class window type have functions to enter data in database"""
 
     def record_in_database(self):
         """enter the data to data base"""
@@ -46,14 +53,16 @@ class WindowTypeIn(WindowType):
         print("successfully added to database")
 
 
-def find_window_on_database(query_name: str):
+def find_window_on_database_by_name(query_name: str) -> WindowType:
+    """find window on data base by name returns windowType object"""
     conn = sqlite3.connect("pyTrack.db")
     c = conn.cursor()
     c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
     results = c.fetchall()
+    window = WindowType(results[0][1], results[0][2], results[0][3])
     conn.commit()
     conn.close()
-    return results
+    return window
 
 
 class PointTracker:
@@ -70,8 +79,8 @@ class PointTracker:
 
 
 if __name__ == "__main__":
-    # window_type = WindowTypeIn("Visual Studio Code", "good", 5)
+    # window_type = WindowTypeIn("Discord", "bad", 5)
     # window_type.record_in_database()
 
-    results = find_window_on_database("Visual Studio Code")
+    results = find_window_on_database_by_name("Visual Studio Code")
     print(results)
