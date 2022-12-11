@@ -1,4 +1,5 @@
 import sqlite3
+import pygetwindow
 
 
 def check_app_type(title: str) -> str:
@@ -29,9 +30,17 @@ class WindowType:
     window_rating: int
 
     def __init__(self, window_name: str, window_type: str, window_rating: int) -> None:
-        self.window_name = window_name
+        self.window_name = self.name_chooser(window_name)
         self.window_type = window_type
         self.window_rating = int(window_rating)
+
+    def name_chooser(self, window_full_name: str):
+        '''lets you pick what part of the full name do you want this window to use'''
+        separated_window_name = window_full_name.split("- ")
+        print(separated_window_name)
+        index = input("What name would you like to put")
+        print("input ")
+        return separated_window_name[index]
 
     def __str__(self) -> str:
         return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_rating}"
@@ -65,22 +74,41 @@ def find_window_on_database_by_name(query_name: str) -> WindowType:
     return window
 
 
-class PointTracker:
-    points: int
+def collect_all_windows() -> list:
+    """retrieves all windows that is currently running"""
 
-    def __init__(self) -> None:
-        self.points = 0
-
-    def add_points(self, point_to_add: int):
-        self.points += point_to_add
-
-    def subtract_points(self, point_to_add: int):
-        self.points -= point_to_add
+    windows = pygetwindow.getAllWindows()
+    return windows
 
 
-# if __name__ == "__main__":
-#     # window_type = WindowTypeIn("Discord", "bad", 5)
-#     # window_type.record_in_database()
+def filter_windows(windows) -> list:
+    """filters the windows that you want to ignore and returns a list of windows"""
+    ignored_window_names = [
+        "",
+        "Settings",
+        "Microsoft Text Input Application",
+        "Program Manager",
+        "Clock",
+        "Scenes: Untitled",
+    ]
 
-#     results = find_window_on_database_by_name("Visual Studio Code")
-#     print(results)
+    filtered_windows = []
+
+    for window in windows:
+        splitted_title: list[str] = window.title.split("- ")
+        # print(window.title)
+        if splitted_title[-1] in ignored_window_names:
+            print(f"this window is ignored name: {window.title}")
+            pass
+        else:
+            filtered_windows.append(window)
+    return filtered_windows
+
+
+if __name__ == "__main__":
+
+    windows = collect_all_windows()
+    filtered_windows = filter_windows(windows)
+
+    for window in filtered_windows:
+        find_window_on_database_by_name()
