@@ -1,9 +1,7 @@
 import pygetwindow as gw
 import time
 import datetime as dt
-import entry
-import window_type
-import notification
+from Scripts import entry, notification, point_tracker, window_type
 
 
 class app:
@@ -20,7 +18,7 @@ class app:
         self.dt_now = dt.datetime.now()
         self.time_started = (self.dt_now.hour, self.dt_now.minute, self.dt_now.second)
         self.time_finished = (0, 0, 0)
-        self.point_tracker = window_type.PointTracker()
+        self.point_tracker = point_tracker.PointTracker()
         self.notification_handler = notification.NotificationHandler()
 
         while True:
@@ -35,7 +33,7 @@ class app:
                 self.dt_now.second,
             )
 
-            app_type = window_type.check_app_type(self.new_active_window)
+            app_type = window_type.check_app_type(self.new_active_window.title)
             self.change_points(app_type)
 
             if self.point_tracker.points >= 15:
