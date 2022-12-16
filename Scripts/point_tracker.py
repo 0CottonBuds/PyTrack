@@ -9,3 +9,6 @@ class PointTracker:
 
     def subtract_points(self, point_to_add: int):
         self.points -= point_to_add
+
+    def __str__(self) -> str:
+        return f"Points: {self.points}"
