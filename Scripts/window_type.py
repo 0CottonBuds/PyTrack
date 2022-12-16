@@ -1,5 +1,4 @@
 import sqlite3
-import pygetwindow
 
 
 class WindowType:
@@ -9,18 +8,29 @@ class WindowType:
     window_type: str
     window_rating: int
 
-    def __init__(self, window_name: str, window_type: str, window_rating: int) -> None:
-        self.window_name = window_name  # self.name_chooser(window_name)
-        self.window_type = window_type
-        self.window_rating = int(window_rating)
-
     def name_chooser(self, window_full_name: str):
         """lets you pick what part of the full name do you want this window to use"""
         separated_window_name = window_full_name.split("- ")
         print(separated_window_name)
-        index = input("What name would you like to put")
+        index = input("What name would you like to put (index): ")
         print("input ")
         return separated_window_name[int(index)]
+
+    def check_app_type(self):
+        '''Takes a window checks and returns string "bad" or "good"'''
+
+        separated_window_title = self.window_name.split("- ")
+
+        for part in separated_window_title:
+            window = find_window_on_database_by_name(part)
+
+            if window != None:
+                self.window_name = window.window_name
+                self.window_type = window.window_type
+                self.window_rating = window.window_rating
+                break
+            else:
+                pass
 
     def __str__(self) -> str:
         return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_rating}"
@@ -29,8 +39,10 @@ class WindowType:
 class WindowTypeIn(WindowType):
     """inherits from class window type have functions to enter data in database"""
 
-    def __init__(self, window_name: str, window_type: str, window_rating: int) -> None:
-        super().__init__(window_name, window_type, window_rating)
+    def __init__(self, window_name: str) -> None:
+        self.window_name = self.name_chooser(window_name)
+        self.window_type = input("What type of app is this (good, bad): ")
+        self.window_rating = int(input("Rating of application (1-100): "))
 
     def record_in_database(self):
         """enter the data to data base"""
@@ -80,6 +92,8 @@ class WindowFilter:
             "Microsoft Text Input Application",
             "Program Manager",
             "Clock",
+            "Setup",
+            "Calculator",
         ]
 
         for window in self.windows:
@@ -98,14 +112,17 @@ class WindowFilter:
         return f"{self.windows}"
 
 
-def find_window_on_database_by_name(query_name: str) -> WindowType | list:
+def find_window_on_database_by_name(query_name: str) -> WindowType | None:
     """find window on data base by name returns windowType object"""
     conn = sqlite3.connect("pyTrack.db")
     c = conn.cursor()
     c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
     results = c.fetchall()
     if results != []:
-        window = WindowType(results[0][1], results[0][2], results[0][3])
+        window = WindowType()
+        window.window_name = results[0][0]
+        window.window_type = results[0][1]
+        window.window_rating = results[0][2]
         conn.commit()
         conn.close()
         return window
@@ -113,35 +130,15 @@ def find_window_on_database_by_name(query_name: str) -> WindowType | list:
     else:
         conn.commit()
         conn.close()
-        return results
-
-
-def check_app_type(title: str) -> str:
-    '''Takes a window checks and returns string "bad" or "good"'''
-
-    productive_apps = ["Visual Studio Code"]
-    bad_apps = ["Opera"]
-    app_type = ""
-
-    separated_title: list[str] = title.split("- ")
-    for app in productive_apps:
-        if separated_title[-1].upper() == app.upper():
-            print(f"this is an productive app {str(separated_title)}")
-            app_type = "good"
-    for app in bad_apps:
-        if separated_title[-1].upper() == app.upper():
-            print(f"this is a bad app {str(separated_title)}")
-            app_type = "bad"
-
-    return app_type
+        return None
 
 
 if __name__ == "__main__":
-    windowType: WindowTypeIn = WindowTypeIn("discord", "bad", 50)
-
     # windows = pygetwindow.getAllWindows()
     # window_filter = WindowFilter(windows)
-    # window_filter.filter_ignored_windows()
+    # window_filter.full_filter()
 
     # for window in window_filter.windows:
-    #     print(window.title)
+    #     temp = WindowTypeIn(window.title)
+    #     temp.record_in_database()
+    pass
