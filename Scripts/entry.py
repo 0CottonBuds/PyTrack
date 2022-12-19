@@ -101,11 +101,19 @@ class WindowRecordFetcher:
     formatted_records = []
 
     def __init__(self) -> None:
-        self.fetch_entries()
+        self.fetch_all_entries()
 
-    def fetch_entries(self):
+    def fetch_all_entries(self):
         """combination of format_raw_entries and retrieve_raw_entries as one function"""
-        self.formatted_records = self.format_raw_entries(self.retrieve_raw_entries())
+        self.formatted_records = self.format_raw_entries(
+            self.retrieve_all_raw_entries()
+        )
+
+    def fetch_all_entries_by_date(self, date: str):
+        """combination of format_raw_entries and retrieve_raw_entries as one function"""
+        self.formatted_records = self.format_raw_entries(
+            self.retrieve_all_raw_entries_by_date(date)
+        )
 
     def format_raw_entries(self, raw_records: list) -> list[WindowRecord]:
         """format raw entry list\n output: list of Class WindowRecord"""
@@ -115,11 +123,21 @@ class WindowRecordFetcher:
             formatted_records.append(record)
         return formatted_records
 
-    def retrieve_raw_entries(self, q=None) -> list:
+    def retrieve_all_raw_entries(self) -> list:
         """connects to the database and gets all entries as raw list of string"""
         conn = sqlite3.connect("pyTrack.db")
         c = conn.cursor()
         c.execute("SELECT * FROM windowTimeEntries")
+        raw_records = c.fetchall()
+        conn.commit()
+        conn.close
+        return raw_records
+
+    def retrieve_all_raw_entries_by_date(self, date: str) -> list:
+        """connects to the database and gets all entries as raw list of string"""
+        conn = sqlite3.connect("pyTrack.db")
+        c = conn.cursor()
+        c.execute("SELECT * FROM windowTimeEntries WHERE date = ?", (date,))
         raw_records = c.fetchall()
         conn.commit()
         conn.close
@@ -223,4 +241,4 @@ if __name__ == "__main__":
         print(f"name: {window[0].full_name}")
         print(f"percentage: {window[1]}")
         full_percentage += window[1]
-    print(full_percentage)
+    # print(full_percentage)
