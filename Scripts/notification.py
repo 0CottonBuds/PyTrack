@@ -1,4 +1,4 @@
-class NotificationHandler:
+class NotificationManager:
     def take_a_break(self):
         for i in range(10):
             print("take a break")

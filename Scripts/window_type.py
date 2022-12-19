@@ -1,12 +1,13 @@
 import sqlite3
+import pygetwindow
 
 
 class WindowType:
     """Class window type use to store name type and rating of window"""
 
     window_name: str
-    window_type: str
-    window_rating: int
+    window_type: str = "bad"
+    window_rating: int = 0
 
     def name_chooser(self, window_full_name: str):
         """lets you pick what part of the full name do you want this window to use"""
@@ -134,11 +135,11 @@ def find_window_on_database_by_name(query_name: str) -> WindowType | None:
 
 
 if __name__ == "__main__":
-    # windows = pygetwindow.getAllWindows()
-    # window_filter = WindowFilter(windows)
-    # window_filter.full_filter()
+    windows = pygetwindow.getAllWindows()
+    window_filter = WindowFilter(windows)
+    window_filter.full_filter()
 
-    # for window in window_filter.windows:
-    #     temp = WindowTypeIn(window.title)
-    #     temp.record_in_database()
-    pass
+    for window in window_filter.windows:
+        temp = WindowTypeIn(window.title)
+        temp.record_in_database()
+    # pass

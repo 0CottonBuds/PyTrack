@@ -1,5 +1,6 @@
 import sqlite3
 import datetime as dt
+from Scripts import notification
 
 
 class WindowEntryIn:
@@ -156,13 +157,11 @@ def get_total_time_elapsed(formatted_records: list[WindowRecord]) -> WindowTime:
     Returns:
         The total time elapsed as a WindowTime object.
     """
-
     total_time = WindowTime(f"0, 0, 0")
 
-    # cycle through the formatted entries and format the time
+    # Iterate over the records and add the elapsed time for each record to the total time.
     for entry in formatted_records:
         total_time += entry.window_time_elapsed
-
     return total_time
 
 
@@ -225,7 +224,7 @@ if __name__ == "__main__":
 
     total_time_elapsed = get_total_time_elapsed(records)
     print(total_time_elapsed.get_time())
-    # print()
+    print()
 
     time_of_each_window = get_time_of_each_window(records)
 

@@ -9,7 +9,7 @@ class PointTracker:
         self.points = 450
 
     def change_points(self, window: WindowType):
-        """add and subtracts points based on app type"""
+        """add and subtracts points based on app type. \n"""
 
         if window.window_type == "good":
             self.add_points(window.window_rating)
@@ -30,7 +30,9 @@ class PointTracker:
         self.points -= point_to_add
 
     def check_point_threshold(self):
-        """check point threshold and notify to take a break or get back to work"""
+        """check point threshold. \n
+        calls the notification module to fire notification when threshold is reached."""
+
         POINT_THRESHOLD_TAKE_A_BREAK = 1650
         POINT_THRESHOLD_GET_BACK_TO_WORK = 0
 

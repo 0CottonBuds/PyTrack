@@ -23,7 +23,7 @@ class app:
         while True:
             time.sleep(5)
             # get the active windows
-            self.new_active_window = gw.getActiveWindow()
+            self.new_active_window: gw.Win32Window = gw.getActiveWindow()
 
             self.dt_now = dt.datetime.now()
             self.time_finished = (
