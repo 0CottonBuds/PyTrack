@@ -16,15 +16,15 @@ class app:
         self.time_started = (self.dt_now.hour, self.dt_now.minute, self.dt_now.second)
         self.time_finished = (0, 0, 0)
         self.point_tracker = point_tracker.PointTracker()
-        self.notification_handler = notification.NotificationHandler()
+        self.notification_manager = notification.NotificationManager()
 
         self.main()
 
     def main(self):
         while True:
-            # get the active window
-            self.new_active_window = gw.getActiveWindow()
             time.sleep(5)
+            # get the active windows
+            self.new_active_window = gw.getActiveWindow()
 
             self.dt_now = dt.datetime.now()
             self.time_finished = (
@@ -99,11 +99,15 @@ class app:
             print("this window does not have a label")
 
     def check_point_threshold(self):
+        """check point threshold and notify to take a break or get back to work"""
         # point thresholds re write this to the point tracker module
-        if self.point_tracker.points >= 150:
-            self.notification_handler.take_a_break()
-        if self.point_tracker.points <= -150:
-            self.notification_handler.get_back_to_work()
+        POINT_THRESHOLD_TAKE_A_BREAK = 1650
+        POINT_THRESHOLD_GET_BACK_TO_WORK = 0
+
+        if self.point_tracker.points >= POINT_THRESHOLD_TAKE_A_BREAK:
+            self.notification_manager.take_a_break()
+        if self.point_tracker.points <= POINT_THRESHOLD_GET_BACK_TO_WORK:
+            self.notification_manager.get_back_to_work()
 
     def printer(self):
         """placeholder function to print some data in the terminal"""
