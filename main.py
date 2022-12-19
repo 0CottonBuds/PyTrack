@@ -38,7 +38,7 @@ class app:
             window.window_name = self.new_active_window.title
             window.check_app_type()
             self.change_points(window.window_type, window.window_rating)
-            self.check_point_threshold()
+            self.point_tracker.check_point_threshold()
 
             print(f"Active Window: {window}")
             print(self.point_tracker)
@@ -81,41 +81,6 @@ class app:
         if self.last_active_window is None:
             self.last_active_window = self.new_active_window
 
-    def change_points(self, window_type: str, window_rating: int):
-        """add and subtracts points based on app type"""
-
-        if window_type == "good":
-            self.point_tracker.add_points(window_rating)
-            print(
-                f"added {window_rating} points\ntotal points: {self.point_tracker.points}"
-            )
-        elif window_type == "bad":
-            self.point_tracker.subtract_points(window_rating)
-            print(
-                f"subtract {window_rating} points\ntotal points: {self.point_tracker.points}"
-            )
-        else:
-            print(self.new_active_window.title)
-            print("this window does not have a label")
-
-    def check_point_threshold(self):
-        """check point threshold and notify to take a break or get back to work"""
-        # point thresholds re write this to the point tracker module
-        POINT_THRESHOLD_TAKE_A_BREAK = 1650
-        POINT_THRESHOLD_GET_BACK_TO_WORK = 0
-
-        if self.point_tracker.points >= POINT_THRESHOLD_TAKE_A_BREAK:
-            self.notification_manager.take_a_break()
-        if self.point_tracker.points <= POINT_THRESHOLD_GET_BACK_TO_WORK:
-            self.notification_manager.get_back_to_work()
-
-    def printer(self):
-        """placeholder function to print some data in the terminal"""
-        if self.time_finished is not None and self.time_started is not None:
-            # app_type = check_app_type(self.last_active_window)
-            elapsed_time = self.get_elapsed_time()
-            print(elapsed_time)
-
     def get_elapsed_time(self) -> tuple:
         """function to subtract two time(hours, minutes, seconds)\n
         returns tuple(Hours, Minutes, Seconds)\n
@@ -137,6 +102,30 @@ class app:
 
         time_elapsed = (hours, minutes, seconds)
         return time_elapsed
+
+    def change_points(self, window_type: str, window_rating: int):
+        """add and subtracts points based on app type"""
+
+        if window_type == "good":
+            self.point_tracker.add_points(window_rating)
+            print(
+                f"added {window_rating} points\ntotal points: {self.point_tracker.points}"
+            )
+        elif window_type == "bad":
+            self.point_tracker.subtract_points(window_rating)
+            print(
+                f"subtract {window_rating} points\ntotal points: {self.point_tracker.points}"
+            )
+        else:
+            print(self.new_active_window.title)
+            print("this window does not have a label")
+
+    def printer(self):
+        """placeholder function to print some data in the terminal"""
+        if self.time_finished is not None and self.time_started is not None:
+            # app_type = check_app_type(self.last_active_window)
+            elapsed_time = self.get_elapsed_time()
+            print(elapsed_time)
 
 
 if __name__ == "__main__":
