@@ -98,30 +98,28 @@ class WindowRecordFetcher:
     formatted_records = []
 
     def __init__(self) -> None:
-        self.fetch_all_entries()
+        self.fetch_all_records()
 
-    def fetch_all_entries(self):
+    def fetch_all_records(self):
         """combination of format_raw_entries and retrieve_raw_entries as one function"""
-        self.formatted_records = self.format_raw_entries(
-            self.retrieve_all_raw_entries()
+        self.formatted_records = self.format_records(self.retrieve_all_raw_records())
+
+    def fetch_records_by_date(self, date: str):
+        """combination of format_raw_entries and retrieve_raw_entries as one function but with dates"""
+        self.formatted_records = self.format_records(
+            self.retrieve_all_raw_records_by_date(date)
         )
 
-    def fetch_all_entries_by_date(self, date: str):
-        """combination of format_raw_entries and retrieve_raw_entries as one function"""
-        self.formatted_records = self.format_raw_entries(
-            self.retrieve_all_raw_entries_by_date(date)
-        )
-
-    def format_raw_entries(self, raw_records: list) -> list[WindowRecord]:
-        """format raw entry list\n output: list of Class WindowRecord"""
+    def format_records(self, raw_records: list) -> list[WindowRecord]:
+        """Method for formatting records as `WindowRecord` objects"""
         formatted_records = []
         for entry in raw_records:
             record = WindowRecord(entry)
             formatted_records.append(record)
         return formatted_records
 
-    def retrieve_all_raw_entries(self) -> list:
-        """connects to the database and gets all entries as raw list of string"""
+    def retrieve_all_raw_records(self) -> list:
+        """Method for retrieving all raw records from the database"""
         conn = sqlite3.connect("pyTrack.db")
         c = conn.cursor()
         c.execute("SELECT * FROM windowTimeEntries")
@@ -130,8 +128,8 @@ class WindowRecordFetcher:
         conn.close
         return raw_records
 
-    def retrieve_all_raw_entries_by_date(self, date: str) -> list:
-        """connects to the database and gets all entries as raw list of string"""
+    def retrieve_all_raw_records_by_date(self, date: str) -> list:
+        """Method for retrieving raw records from the database by date"""
         conn = sqlite3.connect("pyTrack.db")
         c = conn.cursor()
         c.execute("SELECT * FROM windowTimeEntries WHERE date = ?", (date,))
