@@ -1,4 +1,5 @@
-from notification import NotificationManager
+from .notification import NotificationManager
+from .window_type import WindowType
 
 
 class PointTracker:
@@ -6,6 +7,21 @@ class PointTracker:
 
     def __init__(self) -> None:
         self.points = 450
+
+    def change_points(self, window: WindowType):
+        """add and subtracts points based on app type"""
+
+        if window.window_type == "good":
+            self.add_points(window.window_rating)
+            print(f"added {window.window_rating} points\ntotal points: {self.points}")
+        elif window.window_type == "bad":
+            self.subtract_points(window.window_rating)
+            print(
+                f"subtract {window.window_rating} points\ntotal points: {self.points}"
+            )
+        else:
+            print(window.window_name)
+            print("this window does not have a label")
 
     def add_points(self, point_to_add: int):
         self.points += point_to_add
@@ -27,3 +43,9 @@ class PointTracker:
 
     def __str__(self) -> str:
         return f"Points: {self.points}"
+
+
+if __name__ == "__main__":
+    point = PointTracker()
+    point.points = 0
+    point.check_point_threshold()

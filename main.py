@@ -1,7 +1,7 @@
 import pygetwindow as gw
 import time
 import datetime as dt
-from Scripts import entry, notification, point_tracker, window_type
+from Scripts import entry, point_tracker, window_type
 
 
 class app:
@@ -16,7 +16,6 @@ class app:
         self.time_started = (self.dt_now.hour, self.dt_now.minute, self.dt_now.second)
         self.time_finished = (0, 0, 0)
         self.point_tracker = point_tracker.PointTracker()
-        self.notification_manager = notification.NotificationManager()
 
         self.main()
 
@@ -37,7 +36,7 @@ class app:
             window = window_type.WindowType()
             window.window_name = self.new_active_window.title
             window.check_app_type()
-            self.change_points(window.window_type, window.window_rating)
+            self.point_tracker.change_points(window)
             self.point_tracker.check_point_threshold()
 
             print(f"Active Window: {window}")
@@ -102,23 +101,6 @@ class app:
 
         time_elapsed = (hours, minutes, seconds)
         return time_elapsed
-
-    def change_points(self, window_type: str, window_rating: int):
-        """add and subtracts points based on app type"""
-
-        if window_type == "good":
-            self.point_tracker.add_points(window_rating)
-            print(
-                f"added {window_rating} points\ntotal points: {self.point_tracker.points}"
-            )
-        elif window_type == "bad":
-            self.point_tracker.subtract_points(window_rating)
-            print(
-                f"subtract {window_rating} points\ntotal points: {self.point_tracker.points}"
-            )
-        else:
-            print(self.new_active_window.title)
-            print("this window does not have a label")
 
     def printer(self):
         """placeholder function to print some data in the terminal"""
