@@ -10,17 +10,17 @@ class app:
 
     def __init__(self):
         print("helloWorld")
-        self.main()
 
-    def main(self):
         self.last_active_window = None
-
         self.dt_now = dt.datetime.now()
         self.time_started = (self.dt_now.hour, self.dt_now.minute, self.dt_now.second)
         self.time_finished = (0, 0, 0)
         self.point_tracker = point_tracker.PointTracker()
         self.notification_handler = notification.NotificationHandler()
 
+        self.main()
+
+    def main(self):
         while True:
             # get the active window
             self.new_active_window = gw.getActiveWindow()
@@ -33,17 +33,20 @@ class app:
                 self.dt_now.second,
             )
 
-            app_type = window_type.check_app_type(self.new_active_window.title)
-            self.change_points(app_type)
+            # check app type and change points
+            window = window_type.WindowType()
+            window.window_name = self.new_active_window.title
+            window.check_app_type()
+            self.change_points(window.window_type, window.window_rating)
+            self.check_point_threshold()
 
-            if self.point_tracker.points >= 15:
-                self.notification_handler.take_a_break()
-            if self.point_tracker.points <= -15:
-                self.notification_handler.get_back_to_work()
+            print(f"Active Window: {window}")
+            print(self.point_tracker)
 
             if self.new_active_window != self.last_active_window:
-                """checks if window changed if it changes it records the data to the database if all prerequisite parameters exists \n \n
-                time_finished and time_started\n
+                """checks if window changed if it changes it records the data to the
+                database if all prerequisite parameters exists
+                time_finished and time_started
                 last_active_window and new_active_window"""
 
                 is_parameters_complete = (
@@ -78,18 +81,29 @@ class app:
         if self.last_active_window is None:
             self.last_active_window = self.new_active_window
 
-    def change_points(self, app_type: str):
+    def change_points(self, window_type: str, window_rating: int):
         """add and subtracts points based on app type"""
 
-        if app_type == "good":
-            self.point_tracker.add_points(5)
-            print(f"added 5 points\ntotal points: {self.point_tracker.points}")
-        elif app_type == "bad":
-            self.point_tracker.subtract_points(5)
-            print(f"subtract 5 points\ntotal points: {self.point_tracker.points}")
+        if window_type == "good":
+            self.point_tracker.add_points(window_rating)
+            print(
+                f"added {window_rating} points\ntotal points: {self.point_tracker.points}"
+            )
+        elif window_type == "bad":
+            self.point_tracker.subtract_points(window_rating)
+            print(
+                f"subtract {window_rating} points\ntotal points: {self.point_tracker.points}"
+            )
         else:
             print(self.new_active_window.title)
             print("this window does not have a label")
+
+    def check_point_threshold(self):
+        # point thresholds re write this to the point tracker module
+        if self.point_tracker.points >= 150:
+            self.notification_handler.take_a_break()
+        if self.point_tracker.points <= -150:
+            self.notification_handler.get_back_to_work()
 
     def printer(self):
         """placeholder function to print some data in the terminal"""

@@ -1,9 +1,6 @@
 import sqlite3
 import datetime as dt
 
-from dataclasses import dataclass
-from typing import Protocol
-
 
 class WindowEntryIn:
     """Takes Window Title, Time Started, Time Finished \n
