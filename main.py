@@ -4,7 +4,7 @@ import datetime as dt
 from Scripts import entry, point_tracker, window_type
 
 
-class app:
+class PyTrack:
     time_started: tuple
     time_finished: tuple
 
@@ -17,13 +17,13 @@ class app:
         self.time_finished = (0, 0, 0)
         self.point_tracker = point_tracker.PointTracker()
 
-        self.main()
+        self.main_loop()
 
-    def main(self):
+    def main_loop(self):
         while True:
             time.sleep(5)
             # get the active windows
-            self.new_active_window: gw.Win32Window = gw.getActiveWindow()
+            self.new_active_window = gw.getActiveWindow()
 
             self.dt_now = dt.datetime.now()
             self.time_finished = (
@@ -34,7 +34,7 @@ class app:
 
             # check app type and change points
             window = window_type.WindowType()
-            window.window_name = self.new_active_window.title
+            window.window_name = self.new_active_window.title  # type: ignore
             window.check_app_type()
             self.point_tracker.change_points(window)
             self.point_tracker.check_point_threshold()
@@ -57,7 +57,7 @@ class app:
                 if is_parameters_complete:
 
                     window_entry = entry.WindowEntryIn(
-                        self.last_active_window.title,
+                        self.last_active_window.title,  # type: ignore
                         self.get_elapsed_time(),
                     )
                     window_entry.record_in_database()
@@ -111,4 +111,4 @@ class app:
 
 
 if __name__ == "__main__":
-    app1 = app()
+    app1 = PyTrack()
