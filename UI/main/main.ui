@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1059</width>
-    <height>709</height>
+    <width>1060</width>
+    <height>659</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -27,8 +27,12 @@
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-background-color: rgb(255, 255, 255);</string>
+    <string notr="true">background-color: rgb(255, 255, 255);
+QPushButton{
+	border: 2px solid gray
+	border-radius: 50px
+}
+</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
@@ -236,7 +240,7 @@ background-color: rgb(255, 255, 255);</string>
             <item>
              <widget class="QPushButton" name="button_minimize">
               <property name="styleSheet">
-               <string notr="true">border-radius : 50</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string/>
@@ -253,7 +257,7 @@ background-color: rgb(255, 255, 255);</string>
             <item>
              <widget class="QPushButton" name="button_maximize">
               <property name="styleSheet">
-               <string notr="true">border-radius : 50</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string/>
@@ -273,7 +277,7 @@ background-color: rgb(255, 255, 255);</string>
             <item>
              <widget class="QPushButton" name="button_exit">
               <property name="styleSheet">
-               <string notr="true">border-radius : 50</string>
+               <string notr="true"/>
               </property>
               <property name="icon">
                <iconset resource="icons.qrc">
@@ -746,15 +750,28 @@ background-color: rgb(255, 255, 255);</string>
                         <pointsize>14</pointsize>
                        </font>
                       </property>
+                      <property name="autoFillBackground">
+                       <bool>false</bool>
+                      </property>
                       <property name="styleSheet">
-                       <string notr="true">border-color: rgb(43, 43, 43);
-border-radius : 50</string>
+                       <string notr="true">QPushButton{
+	border: 2px solid gray;
+	border-radius: 20px;
+
+}</string>
                       </property>
                       <property name="text">
                        <string>Deactivate</string>
                       </property>
+                      <property name="icon">
+                       <iconset theme="applications-games">
+                        <normaloff>../../../../../../.designer/backup</normaloff>../../../../../../.designer/backup</iconset>
+                      </property>
+                      <property name="checkable">
+                       <bool>true</bool>
+                      </property>
                       <property name="flat">
-                       <bool>false</bool>
+                       <bool>true</bool>
                       </property>
                      </widget>
                     </widget>
@@ -777,36 +794,328 @@ border-radius : 50</string>
               <widget class="QWidget" name="page_analytics">
                <layout class="QHBoxLayout" name="horizontalLayout_12">
                 <item>
-                 <widget class="QFrame" name="frame_3">
+                 <widget class="QFrame" name="page_analytics_window_container">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>6</horstretch>
+                    <verstretch>1</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <widget class="QLabel" name="label_2">
-                   <property name="geometry">
-                    <rect>
-                     <x>50</x>
-                     <y>20</y>
-                     <width>47</width>
-                     <height>13</height>
-                    </rect>
+                  <layout class="QVBoxLayout" name="verticalLayout_6">
+                   <property name="spacing">
+                    <number>0</number>
                    </property>
-                   <property name="text">
-                    <string>page 2</string>
+                   <property name="leftMargin">
+                    <number>0</number>
                    </property>
-                  </widget>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QFrame" name="frame_3">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>120</height>
+                      </size>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_7">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <widget class="QFrame" name="frame_7">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>60</height>
+                         </size>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::NoFrame</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                        <widget class="QLabel" name="label_13">
+                         <property name="geometry">
+                          <rect>
+                           <x>10</x>
+                           <y>0</y>
+                           <width>221</width>
+                           <height>51</height>
+                          </rect>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">font: 22pt &quot;MS Sans Serif&quot;;</string>
+                         </property>
+                         <property name="text">
+                          <string>Windows</string>
+                         </property>
+                        </widget>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QFrame" name="frame_8">
+                        <property name="maximumSize">
+                         <size>
+                          <width>16777215</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::NoFrame</enum>
+                        </property>
+                        <property name="frameShadow">
+                         <enum>QFrame::Raised</enum>
+                        </property>
+                        <widget class="QFrame" name="frame_13">
+                         <property name="geometry">
+                          <rect>
+                           <x>10</x>
+                           <y>10</y>
+                           <width>146</width>
+                           <height>38</height>
+                          </rect>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_18">
+                          <item>
+                           <widget class="QLabel" name="label_15">
+                            <property name="text">
+                             <string>Date:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QComboBox" name="comboBox">
+                            <property name="currentText">
+                             <string/>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                        <widget class="QFrame" name="frame_14">
+                         <property name="geometry">
+                          <rect>
+                           <x>190</x>
+                           <y>10</y>
+                           <width>146</width>
+                           <height>38</height>
+                          </rect>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_19">
+                          <item>
+                           <widget class="QLabel" name="label_16">
+                            <property name="text">
+                             <string>Type</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QComboBox" name="comboBox_2">
+                            <property name="editable">
+                             <bool>false</bool>
+                            </property>
+                            <property name="currentText">
+                             <string/>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="frame_4">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>2</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_8">
+                      <item>
+                       <widget class="QScrollArea" name="scrollArea">
+                        <property name="minimumSize">
+                         <size>
+                          <width>420</width>
+                          <height>300</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>12321</width>
+                          <height>600</height>
+                         </size>
+                        </property>
+                        <property name="frameShape">
+                         <enum>QFrame::NoFrame</enum>
+                        </property>
+                        <property name="verticalScrollBarPolicy">
+                         <enum>Qt::ScrollBarAlwaysOn</enum>
+                        </property>
+                        <property name="horizontalScrollBarPolicy">
+                         <enum>Qt::ScrollBarAlwaysOff</enum>
+                        </property>
+                        <property name="widgetResizable">
+                         <bool>true</bool>
+                        </property>
+                        <widget class="QWidget" name="scrollAreaWidgetContents">
+                         <property name="geometry">
+                          <rect>
+                           <x>0</x>
+                           <y>0</y>
+                           <width>541</width>
+                           <height>469</height>
+                          </rect>
+                         </property>
+                        </widget>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QFrame" name="frame_4">
+                 <widget class="QFrame" name="page_analytic_points_container">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>4</horstretch>
+                    <verstretch>4</verstretch>
+                   </sizepolicy>
+                  </property>
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
                   </property>
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_14">
+                   <item>
+                    <widget class="QLabel" name="label_14">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>1</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">font: 22pt &quot;MS Sans Serif&quot;;</string>
+                     </property>
+                     <property name="text">
+                      <string>Points Graph</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="point_graph_container">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>9</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="frame_6">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>4</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Raised</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_15">
+                      <item>
+                       <widget class="QLabel" name="label_17">
+                        <property name="text">
+                         <string>Minimum Points</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_18">
+                        <property name="text">
+                         <string>Maximum Points</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
                  </widget>
                 </item>
                </layout>
@@ -817,13 +1126,13 @@ border-radius : 50</string>
                  <widget class="QFrame" name="page_settings_pages_container">
                   <property name="minimumSize">
                    <size>
-                    <width>260</width>
+                    <width>100</width>
                     <height>0</height>
                    </size>
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>260</width>
+                    <width>160</width>
                     <height>16777215</height>
                    </size>
                   </property>
@@ -843,11 +1152,11 @@ border-radius : 50</string>
                       <enum>QFrame::Raised</enum>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_5">
-                      <item alignment="Qt::AlignLeft">
+                      <item>
                        <widget class="QPushButton" name="button_settings_general">
                         <property name="minimumSize">
                          <size>
-                          <width>160</width>
+                          <width>100</width>
                           <height>40</height>
                          </size>
                         </property>
@@ -867,14 +1176,14 @@ border-radius : 50</string>
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignLeft">
+                      <item>
                        <widget class="QPushButton" name="button_settings_window">
                         <property name="enabled">
                          <bool>true</bool>
                         </property>
                         <property name="minimumSize">
                          <size>
-                          <width>160</width>
+                          <width>100</width>
                           <height>40</height>
                          </size>
                         </property>
@@ -910,11 +1219,11 @@ border-radius : 50</string>
                         </property>
                        </widget>
                       </item>
-                      <item alignment="Qt::AlignLeft">
+                      <item>
                        <widget class="QPushButton" name="button_settings_about">
                         <property name="minimumSize">
                          <size>
-                          <width>160</width>
+                          <width>100</width>
                           <height>40</height>
                          </size>
                         </property>
@@ -978,10 +1287,425 @@ border-radius : 50</string>
                    <item>
                     <widget class="QStackedWidget" name="page_settings_stacked_widget">
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>1</number>
                      </property>
-                     <widget class="QWidget" name="page"/>
-                     <widget class="QWidget" name="page_2"/>
+                     <widget class="QWidget" name="page_settings_stacked_widget_page_general">
+                      <layout class="QVBoxLayout" name="verticalLayout_9">
+                       <item>
+                        <widget class="QFrame" name="page_general_header">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <widget class="QLabel" name="label_2">
+                          <property name="geometry">
+                           <rect>
+                            <x>10</x>
+                            <y>-10</y>
+                            <width>221</width>
+                            <height>51</height>
+                           </rect>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">font: 22pt &quot;MS Sans Serif&quot;;</string>
+                          </property>
+                          <property name="text">
+                           <string>General</string>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="page_general_footer">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <widget class="QFrame" name="frame_9">
+                          <property name="geometry">
+                           <rect>
+                            <x>50</x>
+                            <y>10</y>
+                            <width>403</width>
+                            <height>146</height>
+                           </rect>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_12">
+                           <item>
+                            <widget class="QLabel" name="label_8">
+                             <property name="font">
+                              <font>
+                               <pointsize>10</pointsize>
+                               <weight>75</weight>
+                               <bold>true</bold>
+                              </font>
+                             </property>
+                             <property name="text">
+                              <string>App</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_11">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::NoFrame</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_16">
+                              <item>
+                               <widget class="QLabel" name="label_9">
+                                <property name="text">
+                                 <string>Point Treshold(Break)</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QTextEdit" name="textEdit">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>30</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>30</height>
+                                 </size>
+                                </property>
+                                <property name="inputMethodHints">
+                                 <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+                                </property>
+                                <property name="frameShape">
+                                 <enum>QFrame::Box</enum>
+                                </property>
+                                <property name="verticalScrollBarPolicy">
+                                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                                </property>
+                                <property name="horizontalScrollBarPolicy">
+                                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                                </property>
+                                <property name="tabChangesFocus">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="lineWrapMode">
+                                 <enum>QTextEdit::NoWrap</enum>
+                                </property>
+                                <property name="placeholderText">
+                                 <string>Points (int)</string>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QFrame" name="frame_12">
+                             <property name="sizePolicy">
+                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                               <horstretch>0</horstretch>
+                               <verstretch>0</verstretch>
+                              </sizepolicy>
+                             </property>
+                             <property name="frameShape">
+                              <enum>QFrame::NoFrame</enum>
+                             </property>
+                             <property name="frameShadow">
+                              <enum>QFrame::Raised</enum>
+                             </property>
+                             <layout class="QHBoxLayout" name="horizontalLayout_17">
+                              <item>
+                               <widget class="QLabel" name="label_10">
+                                <property name="text">
+                                 <string>Point Treshold(Break)</string>
+                                </property>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QTextEdit" name="textEdit_2">
+                                <property name="sizePolicy">
+                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                  <horstretch>0</horstretch>
+                                  <verstretch>0</verstretch>
+                                 </sizepolicy>
+                                </property>
+                                <property name="minimumSize">
+                                 <size>
+                                  <width>0</width>
+                                  <height>30</height>
+                                 </size>
+                                </property>
+                                <property name="maximumSize">
+                                 <size>
+                                  <width>16777215</width>
+                                  <height>30</height>
+                                 </size>
+                                </property>
+                                <property name="inputMethodHints">
+                                 <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
+                                </property>
+                                <property name="frameShape">
+                                 <enum>QFrame::Box</enum>
+                                </property>
+                                <property name="verticalScrollBarPolicy">
+                                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                                </property>
+                                <property name="horizontalScrollBarPolicy">
+                                 <enum>Qt::ScrollBarAlwaysOff</enum>
+                                </property>
+                                <property name="tabChangesFocus">
+                                 <bool>true</bool>
+                                </property>
+                                <property name="lineWrapMode">
+                                 <enum>QTextEdit::NoWrap</enum>
+                                </property>
+                                <property name="placeholderText">
+                                 <string>Points (int)</string>
+                                </property>
+                               </widget>
+                              </item>
+                             </layout>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="page_settings_stacked_widget_page_window">
+                      <layout class="QVBoxLayout" name="verticalLayout_10">
+                       <item>
+                        <widget class="QFrame" name="page_window_header_2">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <widget class="QLabel" name="label_6">
+                          <property name="geometry">
+                           <rect>
+                            <x>10</x>
+                            <y>-10</y>
+                            <width>221</width>
+                            <height>51</height>
+                           </rect>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">font: 22pt &quot;MS Sans Serif&quot;;</string>
+                          </property>
+                          <property name="text">
+                           <string>Window</string>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="page_window_footer_2">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                     <widget class="QWidget" name="page_settings_stacked_widget_page_about">
+                      <layout class="QVBoxLayout" name="verticalLayout_11">
+                       <item>
+                        <widget class="QFrame" name="page_about_header_3">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>16777215</width>
+                           <height>80</height>
+                          </size>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <widget class="QLabel" name="label_7">
+                          <property name="geometry">
+                           <rect>
+                            <x>10</x>
+                            <y>-10</y>
+                            <width>221</width>
+                            <height>51</height>
+                           </rect>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">font: 22pt &quot;MS Sans Serif&quot;;</string>
+                          </property>
+                          <property name="text">
+                           <string>About</string>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="page_about_footer_3">
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <widget class="QFrame" name="frame_10">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>30</y>
+                            <width>141</width>
+                            <height>101</height>
+                           </rect>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Raised</enum>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_13">
+                           <item>
+                            <widget class="QPushButton" name="pushButton_2">
+                             <property name="text">
+                              <string>Twitter</string>
+                             </property>
+                             <property name="flat">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="pushButton_3">
+                             <property name="text">
+                              <string>Github</string>
+                             </property>
+                             <property name="flat">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                         <widget class="QLabel" name="label_11">
+                          <property name="geometry">
+                           <rect>
+                            <x>10</x>
+                            <y>10</y>
+                            <width>151</width>
+                            <height>20</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>10</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="text">
+                           <string>Socials</string>
+                          </property>
+                         </widget>
+                         <widget class="QLabel" name="label_12">
+                          <property name="geometry">
+                           <rect>
+                            <x>50</x>
+                            <y>150</y>
+                            <width>351</width>
+                            <height>61</height>
+                           </rect>
+                          </property>
+                          <property name="text">
+                           <string>I made this application as my year end project and my goal is to make a video out of it and post to youtube. If you would want to watch the video the link will be below.</string>
+                          </property>
+                          <property name="wordWrap">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                         <widget class="QPushButton" name="pushButton_4">
+                          <property name="geometry">
+                           <rect>
+                            <x>50</x>
+                            <y>220</y>
+                            <width>121</width>
+                            <height>31</height>
+                           </rect>
+                          </property>
+                          <property name="text">
+                           <string>Youtube Video</string>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
                     </widget>
                    </item>
                   </layout>
@@ -1028,6 +1752,7 @@ border-radius : 50</string>
   </widget>
  </widget>
  <resources>
+  <include location="icons.qrc"/>
   <include location="icons.qrc"/>
  </resources>
  <connections/>

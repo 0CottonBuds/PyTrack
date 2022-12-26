@@ -1,6 +1,7 @@
 import sqlite3
 import datetime as dt
-from Scripts import notification
+
+# from .Scripts import notification
 
 
 class WindowEntryIn:
@@ -232,11 +233,11 @@ if __name__ == "__main__":
         print(window.full_name)
         print(window.get_time())
 
-    # percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
+    percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
 
-    # full_percentage = 0
-    # for window in percentage_time_of_each_window:
-    #     print(f"name: {window[0].full_name}")
-    #     print(f"percentage: {window[1]}")
-    #     full_percentage += window[1]
-    # # print(full_percentage)
+    full_percentage = 0
+    for window in percentage_time_of_each_window:
+        print(f"name: {window[0].full_name}")
+        print(f"percentage: {window[1]}")
+        full_percentage += window[1]
+    # print(full_percentage)

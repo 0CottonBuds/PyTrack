@@ -71,16 +71,21 @@ class WindowFilter:
     def filter_windows_that_are_on_database(self):
         """cycles to the list of windows(Input) and checks if there is an entry of that window"""
         filtered_windows = []
+
         for window in self.windows:
-            splitted_name = window.title.split()
-            result = None
+            splitted_name = window.title.split("- ")
+            is_unique = False
             for part in splitted_name:
                 result = find_window_on_database_by_name(part)
-                if result != []:
-                    break
-                else:
+                if result == None:
+                    is_unique = True
                     pass
-            filtered_windows.append(window)
+                else:
+                    is_unique = False
+                    break
+            if is_unique:
+                filtered_windows.append(window)
+
         self.windows = filtered_windows
         return filtered_windows
 
@@ -142,4 +147,3 @@ if __name__ == "__main__":
     for window in window_filter.windows:
         temp = WindowTypeIn(window.title)
         temp.record_in_database()
-    # pass
