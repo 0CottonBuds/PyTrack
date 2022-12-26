@@ -3,13 +3,18 @@ import time
 import datetime as dt
 from Scripts import entry, point_tracker, window_type
 
+from PySide6.QtCore import QObject
 
-class PyTrack:
+
+class PyTrackWorker(QObject):
     time_started: tuple
     time_finished: tuple
 
-    def __init__(self):
+    def __init__(self, main_window):
+        super().__init__()
         print("helloWorld")
+
+        self.main_window = main_window
 
         self.last_active_window = None
         self.dt_now = dt.datetime.now()
@@ -17,10 +22,10 @@ class PyTrack:
         self.time_finished = (0, 0, 0)
         self.point_tracker = point_tracker.PointTracker()
 
-        self.main_loop()
+        # self.main_loop()
 
     def main_loop(self):
-        while True:
+        while self.main_window.main_loop_active:
             time.sleep(5)
             # get the active windows
             self.new_active_window = gw.getActiveWindow()
@@ -41,6 +46,7 @@ class PyTrack:
 
             print(f"Active Window: {window}")
             print(self.point_tracker)
+            self.main_window.label_points_home.setText(str(self.point_tracker))
 
             if self.new_active_window != self.last_active_window:
                 """checks if window changed if it changes it records the data to the
@@ -110,5 +116,5 @@ class PyTrack:
             print(elapsed_time)
 
 
-if __name__ == "__main__":
-    app1 = PyTrack()
+# if __name__ == "__main__":
+#     app1 = PyTrack()
