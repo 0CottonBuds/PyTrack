@@ -1,12 +1,14 @@
 from .notification import NotificationManager
 from .window_type import WindowType
+import configparser
 
 
 class PointTracker:
     points: int
 
     def __init__(self) -> None:
-        self.points = 450
+        self.read_settings_config_file()
+        self.points = self.starting_points
 
     def change_points(self, window: WindowType):
         """add and subtracts points based on app type. \n"""
@@ -32,16 +34,24 @@ class PointTracker:
     def check_point_threshold(self):
         """check point threshold. \n
         calls the notification module to fire notification when threshold is reached."""
+        # self.read_settings_config_file()
 
-        POINT_THRESHOLD_TAKE_A_BREAK = 1650
-        POINT_THRESHOLD_GET_BACK_TO_WORK = 0
-
-        if self.points >= POINT_THRESHOLD_TAKE_A_BREAK:
+        if self.points >= self.POINT_THRESHOLD_TAKE_A_BREAK:
             notification_manager = NotificationManager()
             notification_manager.take_a_break()
-        if self.points <= POINT_THRESHOLD_GET_BACK_TO_WORK:
+        if self.points <= self.POINT_THRESHOLD_GET_BACK_TO_WORK:
             notification_manager = NotificationManager()
             notification_manager.get_back_to_work()
+
+    def read_settings_config_file(self):
+        config_parser = configparser.ConfigParser()
+        config_parser.read(r"settings/settingsConfig.ini")
+
+        self.starting_points = int(config_parser["App"]["starting_points"])
+        self.POINT_THRESHOLD_GET_BACK_TO_WORK = int(
+            config_parser["App"]["warning_threshold"]
+        )
+        self.POINT_THRESHOLD_TAKE_A_BREAK = int(config_parser["App"]["break_threshold"])
 
     def __str__(self) -> str:
         return f"Points: {self.points}"
