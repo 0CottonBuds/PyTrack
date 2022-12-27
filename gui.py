@@ -1,8 +1,12 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import QThread
 
+import configparser
+
 from UI.main import icons_rc
 from UI.main.ui_main import Ui_MainWindow
+
+from Scripts.config_helper import edit_config
 
 from PyTrackMain import PyTrackWorker
 
@@ -35,7 +39,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
-
         # setting the text edit signal to slots
         self.line_edit_point_threshold_break.editingFinished.connect(self.edit_point_threshold_break)  # type: ignore
         self.line_edit_point_threshold_warning.editingFinished.connect(self.edit_point_threshold_warning)  # type: ignore
@@ -79,25 +82,29 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
     def edit_point_threshold_break(self):
         """edit the point threshold of break"""
-        # TODO: add the functionality to change the config file. dont forget to update the point tracker's values to the updated config file
-        print(
-            f"changing point threshold for break to {self.line_edit_point_threshold_break.text()}"
+        value = self.line_edit_point_threshold_break.text()
+        print(f"changing point threshold for break to {value}")
+        edit_config(
+            "Scripts/settings/settingsConfig.ini", "App", "break_threshold", value
         )
-        self.line_edit_point_threshold_break.clear()
+        self.pytrack_worker.point_tracker.read_settings_config_file()
         self.line_edit_point_threshold_break.setPlaceholderText(
             str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
         )
+        self.line_edit_point_threshold_break.clear()
 
     def edit_point_threshold_warning(self):
         """edit the point threshold of warning"""
-        # TODO: add the functionality to change the config file. dont forget to update the point tracker's values to the updated config file
-        print(
-            f"changing point threshold for warning to {self.line_edit_point_threshold_warning.text()}"
+        value = self.line_edit_point_threshold_warning.text()
+        print(f"changing point threshold for warning to {value}")
+        edit_config(
+            "Scripts/settings/settingsConfig.ini", "App", "warning_threshold", value
         )
-        self.line_edit_point_threshold_break.clear()
+        self.pytrack_worker.point_tracker.read_settings_config_file()
         self.line_edit_point_threshold_warning.setPlaceholderText(
             str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
         )
+        self.line_edit_point_threshold_break.clear()
 
     def activate_deactivate_main_loop(self):
         if not self.main_loop_active:
