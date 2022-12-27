@@ -45,7 +45,7 @@ class PointTracker:
 
     def read_settings_config_file(self):
         config_parser = configparser.ConfigParser()
-        config_parser.read(r"settings/settingsConfig.ini")
+        config_parser.read("Scripts\settings\settingsConfig.ini")  # type: ignore
 
         self.starting_points = int(config_parser["App"]["starting_points"])
         self.POINT_THRESHOLD_GET_BACK_TO_WORK = int(
@@ -59,5 +59,5 @@ class PointTracker:
 
 if __name__ == "__main__":
     point = PointTracker()
-    point.points = 0
+    # point.points = 0
     point.check_point_threshold()
