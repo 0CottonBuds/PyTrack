@@ -36,7 +36,7 @@ class PyTrackWorker(QObject):
                 self.dt_now.minute,
                 self.dt_now.second,
             )
-            #Hello
+            #Hello betch
 
             # check app type and change points
             window = window_type.WindowType()
