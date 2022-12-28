@@ -34,7 +34,7 @@ QPushButton{
 }
 </string>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_16">
     <property name="spacing">
      <number>8</number>
     </property>
@@ -1064,6 +1064,17 @@ QPushButton{
                            <height>469</height>
                           </rect>
                          </property>
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <layout class="QVBoxLayout" name="verticalLayout_17">
+                          <item>
+                           <layout class="QVBoxLayout" name="scroll_area_contents_layout"/>
+                          </item>
+                         </layout>
                         </widget>
                        </widget>
                       </item>

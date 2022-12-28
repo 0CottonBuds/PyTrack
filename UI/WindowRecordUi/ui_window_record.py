@@ -22,7 +22,14 @@ class Ui_window_record(object):
     def setupUi(self, window_record):
         if not window_record.objectName():
             window_record.setObjectName(u"window_record")
-        window_record.resize(369, 103)
+        window_record.resize(672, 103)
+        sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(window_record.sizePolicy().hasHeightForWidth())
+        window_record.setSizePolicy(sizePolicy)
+        window_record.setMinimumSize(QSize(400, 100))
+        window_record.setMaximumSize(QSize(6000, 103))
         window_record.setStyleSheet(u"background-color: rgb(255, 255, 255);")
         self.verticalLayout_2 = QVBoxLayout(window_record)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -68,6 +75,8 @@ class Ui_window_record(object):
 
         self.progressBar = QProgressBar(window_record)
         self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setMinimumSize(QSize(400, 0))
+        self.progressBar.setMaximumSize(QSize(400, 16777215))
         self.progressBar.setStyleSheet(u"QProgressBar::chunk {\n"
 "    \n"
 "	\n"
