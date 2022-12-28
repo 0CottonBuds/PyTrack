@@ -1,10 +1,8 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import QThread
 
-import configparser
-
-from UI.main import icons_rc
 from UI.main.ui_main import Ui_MainWindow
+from UI.WindowRecordUi.ui_window_record import Ui_window_record
 
 from PytrackUtils.config_helper import edit_config
 
