@@ -18,15 +18,15 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
     QProgressBar, QSizePolicy, QVBoxLayout, QWidget)
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        if not Form.objectName():
-            Form.setObjectName(u"Form")
-        Form.resize(369, 103)
-        Form.setStyleSheet(u"background-color: rgb(255, 255, 255);")
-        self.verticalLayout_2 = QVBoxLayout(Form)
+class Ui_window_record(object):
+    def setupUi(self, window_record):
+        if not window_record.objectName():
+            window_record.setObjectName(u"window_record")
+        window_record.resize(369, 103)
+        window_record.setStyleSheet(u"background-color: rgb(255, 255, 255);")
+        self.verticalLayout_2 = QVBoxLayout(window_record)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.frame_3 = QFrame(Form)
+        self.frame_3 = QFrame(window_record)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setFrameShape(QFrame.NoFrame)
         self.frame_3.setFrameShadow(QFrame.Raised)
@@ -66,7 +66,7 @@ class Ui_Form(object):
 
         self.verticalLayout_2.addWidget(self.frame_3)
 
-        self.progressBar = QProgressBar(Form)
+        self.progressBar = QProgressBar(window_record)
         self.progressBar.setObjectName(u"progressBar")
         self.progressBar.setStyleSheet(u"QProgressBar::chunk {\n"
 "    \n"
@@ -88,14 +88,14 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.progressBar)
 
 
-        self.retranslateUi(Form)
+        self.retranslateUi(window_record)
 
-        QMetaObject.connectSlotsByName(Form)
+        QMetaObject.connectSlotsByName(window_record)
     # setupUi
 
-    def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label_name.setText(QCoreApplication.translate("Form", u"Name:", None))
-        self.label_total_time.setText(QCoreApplication.translate("Form", u"Total Time:", None))
+    def retranslateUi(self, window_record):
+        window_record.setWindowTitle(QCoreApplication.translate("window_record", u"Form", None))
+        self.label_name.setText(QCoreApplication.translate("window_record", u"Name:", None))
+        self.label_total_time.setText(QCoreApplication.translate("window_record", u"Total Time:", None))
     # retranslateUi
 

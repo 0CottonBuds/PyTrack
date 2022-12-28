@@ -16,11 +16,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QLabel, QMainWindow, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QStackedWidget, QTextEdit,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
     QVBoxLayout, QWidget)
-import icons_rc
-import icons_rc
+from .icons_rc import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -285,6 +284,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_11.addWidget(self.label_5, 0, Qt.AlignHCenter|Qt.AlignVCenter)
 
+        self.label_19 = QLabel(self.page_home_header_center)
+        self.label_19.setObjectName(u"label_19")
+        font1 = QFont()
+        font1.setFamilies([u"MS UI Gothic"])
+        font1.setPointSize(24)
+        self.label_19.setFont(font1)
+
+        self.horizontalLayout_11.addWidget(self.label_19)
+
 
         self.horizontalLayout_9.addWidget(self.page_home_header_center)
 
@@ -362,15 +370,15 @@ class Ui_MainWindow(object):
         self.page_home_footer_center.setObjectName(u"page_home_footer_center")
         self.page_home_footer_center.setFrameShape(QFrame.NoFrame)
         self.page_home_footer_center.setFrameShadow(QFrame.Raised)
-        self.pushButton = QPushButton(self.page_home_footer_center)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(80, 20, 151, 41))
-        font1 = QFont()
-        font1.setFamilies([u"Times New Roman"])
-        font1.setPointSize(14)
-        self.pushButton.setFont(font1)
-        self.pushButton.setAutoFillBackground(False)
-        self.pushButton.setStyleSheet(u"QPushButton{\n"
+        self.button_activate_deactivate_main_loop = QPushButton(self.page_home_footer_center)
+        self.button_activate_deactivate_main_loop.setObjectName(u"button_activate_deactivate_main_loop")
+        self.button_activate_deactivate_main_loop.setGeometry(QRect(80, 20, 151, 41))
+        font2 = QFont()
+        font2.setFamilies([u"Times New Roman"])
+        font2.setPointSize(14)
+        self.button_activate_deactivate_main_loop.setFont(font2)
+        self.button_activate_deactivate_main_loop.setAutoFillBackground(False)
+        self.button_activate_deactivate_main_loop.setStyleSheet(u"QPushButton{\n"
 "	border: 2px solid gray;\n"
 "	border-radius: 20px;\n"
 "\n"
@@ -382,9 +390,14 @@ class Ui_MainWindow(object):
         else:
             icon6.addFile(u"../../../../../../.designer/backup", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.pushButton.setIcon(icon6)
-        self.pushButton.setCheckable(True)
-        self.pushButton.setFlat(True)
+        self.button_activate_deactivate_main_loop.setIcon(icon6)
+        self.button_activate_deactivate_main_loop.setCheckable(True)
+        self.button_activate_deactivate_main_loop.setFlat(True)
+        self.label_points_home = QLabel(self.page_home_footer_center)
+        self.label_points_home.setObjectName(u"label_points_home")
+        self.label_points_home.setGeometry(QRect(130, 0, 81, 21))
+        self.label_points_home.raise_()
+        self.button_activate_deactivate_main_loop.raise_()
 
         self.horizontalLayout_10.addWidget(self.page_home_footer_center)
 
@@ -438,6 +451,12 @@ class Ui_MainWindow(object):
         self.label_13 = QLabel(self.frame_7)
         self.label_13.setObjectName(u"label_13")
         self.label_13.setGeometry(QRect(10, 0, 221, 51))
+        font3 = QFont()
+        font3.setFamilies([u"MS Sans Serif"])
+        font3.setPointSize(22)
+        font3.setBold(False)
+        font3.setItalic(False)
+        self.label_13.setFont(font3)
         self.label_13.setStyleSheet(u"font: 22pt \"MS Sans Serif\";")
 
         self.verticalLayout_7.addWidget(self.frame_7)
@@ -459,10 +478,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_18.addWidget(self.label_15)
 
-        self.comboBox = QComboBox(self.frame_13)
-        self.comboBox.setObjectName(u"comboBox")
+        self.comboBox_date = QComboBox(self.frame_13)
+        self.comboBox_date.setObjectName(u"comboBox_date")
 
-        self.horizontalLayout_18.addWidget(self.comboBox)
+        self.horizontalLayout_18.addWidget(self.comboBox_date)
 
         self.frame_14 = QFrame(self.frame_8)
         self.frame_14.setObjectName(u"frame_14")
@@ -476,11 +495,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_19.addWidget(self.label_16)
 
-        self.comboBox_2 = QComboBox(self.frame_14)
-        self.comboBox_2.setObjectName(u"comboBox_2")
-        self.comboBox_2.setEditable(False)
+        self.comboBox_type = QComboBox(self.frame_14)
+        self.comboBox_type.setObjectName(u"comboBox_type")
+        self.comboBox_type.setEditable(False)
 
-        self.horizontalLayout_19.addWidget(self.comboBox_2)
+        self.horizontalLayout_19.addWidget(self.comboBox_type)
 
 
         self.verticalLayout_7.addWidget(self.frame_8)
@@ -499,20 +518,20 @@ class Ui_MainWindow(object):
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.frame_4)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.scrollArea = QScrollArea(self.frame_4)
-        self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setMinimumSize(QSize(420, 300))
-        self.scrollArea.setMaximumSize(QSize(12321, 600))
-        self.scrollArea.setFrameShape(QFrame.NoFrame)
-        self.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea_window_records = QScrollArea(self.frame_4)
+        self.scrollArea_window_records.setObjectName(u"scrollArea_window_records")
+        self.scrollArea_window_records.setMinimumSize(QSize(420, 300))
+        self.scrollArea_window_records.setMaximumSize(QSize(12321, 600))
+        self.scrollArea_window_records.setFrameShape(QFrame.NoFrame)
+        self.scrollArea_window_records.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scrollArea_window_records.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollArea_window_records.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
         self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 541, 469))
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.scrollArea_window_records.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout_8.addWidget(self.scrollArea)
+        self.verticalLayout_8.addWidget(self.scrollArea_window_records)
 
 
         self.verticalLayout_6.addWidget(self.frame_4)
@@ -538,6 +557,7 @@ class Ui_MainWindow(object):
         sizePolicy6.setVerticalStretch(1)
         sizePolicy6.setHeightForWidth(self.label_14.sizePolicy().hasHeightForWidth())
         self.label_14.setSizePolicy(sizePolicy6)
+        self.label_14.setFont(font3)
         self.label_14.setStyleSheet(u"font: 22pt \"MS Sans Serif\";")
 
         self.verticalLayout_14.addWidget(self.label_14)
@@ -603,9 +623,9 @@ class Ui_MainWindow(object):
         self.button_settings_general = QPushButton(self.page_settings_pages_container_top)
         self.button_settings_general.setObjectName(u"button_settings_general")
         self.button_settings_general.setMinimumSize(QSize(100, 40))
-        font2 = QFont()
-        font2.setPointSize(10)
-        self.button_settings_general.setFont(font2)
+        font4 = QFont()
+        font4.setPointSize(10)
+        self.button_settings_general.setFont(font4)
         self.button_settings_general.setStyleSheet(u"border-radius : 50")
         self.button_settings_general.setFlat(True)
 
@@ -615,7 +635,7 @@ class Ui_MainWindow(object):
         self.button_settings_window.setObjectName(u"button_settings_window")
         self.button_settings_window.setEnabled(True)
         self.button_settings_window.setMinimumSize(QSize(100, 40))
-        self.button_settings_window.setFont(font2)
+        self.button_settings_window.setFont(font4)
         self.button_settings_window.setStyleSheet(u"border-radius : 50")
         self.button_settings_window.setFlat(True)
 
@@ -632,7 +652,7 @@ class Ui_MainWindow(object):
         self.button_settings_about = QPushButton(self.page_settings_pages_container_top)
         self.button_settings_about.setObjectName(u"button_settings_about")
         self.button_settings_about.setMinimumSize(QSize(100, 40))
-        self.button_settings_about.setFont(font2)
+        self.button_settings_about.setFont(font4)
         self.button_settings_about.setStyleSheet(u"border-radius : 50")
         self.button_settings_about.setFlat(True)
 
@@ -701,10 +721,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
         self.label_8 = QLabel(self.frame_9)
         self.label_8.setObjectName(u"label_8")
-        font3 = QFont()
-        font3.setPointSize(10)
-        font3.setBold(True)
-        self.label_8.setFont(font3)
+        font5 = QFont()
+        font5.setPointSize(10)
+        font5.setBold(True)
+        self.label_8.setFont(font5)
 
         self.verticalLayout_12.addWidget(self.label_8)
 
@@ -721,20 +741,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_16.addWidget(self.label_9)
 
-        self.textEdit = QTextEdit(self.frame_11)
-        self.textEdit.setObjectName(u"textEdit")
-        sizePolicy.setHeightForWidth(self.textEdit.sizePolicy().hasHeightForWidth())
-        self.textEdit.setSizePolicy(sizePolicy)
-        self.textEdit.setMinimumSize(QSize(0, 30))
-        self.textEdit.setMaximumSize(QSize(16777215, 30))
-        self.textEdit.setInputMethodHints(Qt.ImhDigitsOnly|Qt.ImhMultiLine)
-        self.textEdit.setFrameShape(QFrame.Box)
-        self.textEdit.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEdit.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEdit.setTabChangesFocus(True)
-        self.textEdit.setLineWrapMode(QTextEdit.NoWrap)
+        self.line_edit_point_threshold_break = QLineEdit(self.frame_11)
+        self.line_edit_point_threshold_break.setObjectName(u"line_edit_point_threshold_break")
+        self.line_edit_point_threshold_break.setInputMethodHints(Qt.ImhDigitsOnly|Qt.ImhPreferNumbers)
 
-        self.horizontalLayout_16.addWidget(self.textEdit)
+        self.horizontalLayout_16.addWidget(self.line_edit_point_threshold_break)
 
 
         self.verticalLayout_12.addWidget(self.frame_11)
@@ -752,20 +763,10 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_17.addWidget(self.label_10)
 
-        self.textEdit_2 = QTextEdit(self.frame_12)
-        self.textEdit_2.setObjectName(u"textEdit_2")
-        sizePolicy.setHeightForWidth(self.textEdit_2.sizePolicy().hasHeightForWidth())
-        self.textEdit_2.setSizePolicy(sizePolicy)
-        self.textEdit_2.setMinimumSize(QSize(0, 30))
-        self.textEdit_2.setMaximumSize(QSize(16777215, 30))
-        self.textEdit_2.setInputMethodHints(Qt.ImhDigitsOnly|Qt.ImhMultiLine)
-        self.textEdit_2.setFrameShape(QFrame.Box)
-        self.textEdit_2.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEdit_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.textEdit_2.setTabChangesFocus(True)
-        self.textEdit_2.setLineWrapMode(QTextEdit.NoWrap)
+        self.line_edit_point_threshold_warning = QLineEdit(self.frame_12)
+        self.line_edit_point_threshold_warning.setObjectName(u"line_edit_point_threshold_warning")
 
-        self.horizontalLayout_17.addWidget(self.textEdit_2)
+        self.horizontalLayout_17.addWidget(self.line_edit_point_threshold_warning)
 
 
         self.verticalLayout_12.addWidget(self.frame_12)
@@ -842,7 +843,7 @@ class Ui_MainWindow(object):
         self.label_11 = QLabel(self.page_about_footer_3)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setGeometry(QRect(10, 10, 151, 20))
-        self.label_11.setFont(font3)
+        self.label_11.setFont(font5)
         self.label_11.setFrameShape(QFrame.NoFrame)
         self.label_12 = QLabel(self.page_about_footer_3)
         self.label_12.setObjectName(u"label_12")
@@ -850,7 +851,7 @@ class Ui_MainWindow(object):
         self.label_12.setWordWrap(True)
         self.pushButton_4 = QPushButton(self.page_about_footer_3)
         self.pushButton_4.setObjectName(u"pushButton_4")
-        self.pushButton_4.setGeometry(QRect(50, 220, 121, 31))
+        self.pushButton_4.setGeometry(QRect(20, 220, 121, 31))
         self.pushButton_4.setFlat(True)
 
         self.verticalLayout_11.addWidget(self.page_about_footer_3)
@@ -890,8 +891,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.button_go_to_settings.setDefault(False)
-        self.stackedWidget.setCurrentIndex(2)
-        self.page_settings_stacked_widget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(1)
+        self.page_settings_stacked_widget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -906,14 +907,16 @@ class Ui_MainWindow(object):
         self.button_go_to_home.setText("")
         self.button_go_to_analytics.setText("")
         self.button_go_to_settings.setText("")
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"PyTrack Is Active", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"PyTrack", None))
+        self.label_19.setText(QCoreApplication.translate("MainWindow", u" Is Active", None))
         self.label.setText("")
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Deactivate", None))
+        self.button_activate_deactivate_main_loop.setText(QCoreApplication.translate("MainWindow", u"Deactivate", None))
+        self.label_points_home.setText(QCoreApplication.translate("MainWindow", u"Points: 450", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Windows", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"Date:", None))
-        self.comboBox.setCurrentText("")
+        self.comboBox_date.setCurrentText("")
         self.label_16.setText(QCoreApplication.translate("MainWindow", u"Type", None))
-        self.comboBox_2.setCurrentText("")
+        self.comboBox_type.setCurrentText("")
         self.label_14.setText(QCoreApplication.translate("MainWindow", u"Points Graph", None))
         self.label_17.setText(QCoreApplication.translate("MainWindow", u"Minimum Points", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"Maximum Points", None))
@@ -923,9 +926,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"General", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"App", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(Break)", None))
-        self.textEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Points (int)", None))
-        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(Break)", None))
-        self.textEdit_2.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Points (int)", None))
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(warning)", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Window", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"About", None))
         self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Twitter", None))

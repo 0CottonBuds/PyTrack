@@ -524,7 +524,7 @@ QPushButton{
             <item>
              <widget class="QStackedWidget" name="stackedWidget">
               <property name="currentIndex">
-               <number>2</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="page_home">
                <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -592,7 +592,20 @@ QPushButton{
                          </font>
                         </property>
                         <property name="text">
-                         <string>PyTrack Is Active</string>
+                         <string>PyTrack</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="label_19">
+                        <property name="font">
+                         <font>
+                          <family>MS UI Gothic</family>
+                          <pointsize>24</pointsize>
+                         </font>
+                        </property>
+                        <property name="text">
+                         <string> Is Active</string>
                         </property>
                        </widget>
                       </item>
@@ -735,7 +748,7 @@ QPushButton{
                      <property name="frameShadow">
                       <enum>QFrame::Raised</enum>
                      </property>
-                     <widget class="QPushButton" name="pushButton">
+                     <widget class="QPushButton" name="button_activate_deactivate_main_loop">
                       <property name="geometry">
                        <rect>
                         <x>80</x>
@@ -774,6 +787,21 @@ QPushButton{
                        <bool>true</bool>
                       </property>
                      </widget>
+                     <widget class="QLabel" name="label_points_home">
+                      <property name="geometry">
+                       <rect>
+                        <x>130</x>
+                        <y>0</y>
+                        <width>81</width>
+                        <height>21</height>
+                       </rect>
+                      </property>
+                      <property name="text">
+                       <string>Points: 450</string>
+                      </property>
+                     </widget>
+                     <zorder>label_points_home</zorder>
+                     <zorder>button_activate_deactivate_main_loop</zorder>
                     </widget>
                    </item>
                    <item>
@@ -882,6 +910,15 @@ QPushButton{
                            <height>51</height>
                           </rect>
                          </property>
+                         <property name="font">
+                          <font>
+                           <family>MS Sans Serif</family>
+                           <pointsize>22</pointsize>
+                           <weight>50</weight>
+                           <italic>false</italic>
+                           <bold>false</bold>
+                          </font>
+                         </property>
                          <property name="styleSheet">
                           <string notr="true">font: 22pt &quot;MS Sans Serif&quot;;</string>
                          </property>
@@ -929,7 +966,7 @@ QPushButton{
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="comboBox">
+                           <widget class="QComboBox" name="comboBox_date">
                             <property name="currentText">
                              <string/>
                             </property>
@@ -961,7 +998,7 @@ QPushButton{
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="comboBox_2">
+                           <widget class="QComboBox" name="comboBox_type">
                             <property name="editable">
                              <bool>false</bool>
                             </property>
@@ -993,7 +1030,7 @@ QPushButton{
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_8">
                       <item>
-                       <widget class="QScrollArea" name="scrollArea">
+                       <widget class="QScrollArea" name="scrollArea_window_records">
                         <property name="minimumSize">
                          <size>
                           <width>420</width>
@@ -1058,6 +1095,15 @@ QPushButton{
                        <horstretch>0</horstretch>
                        <verstretch>1</verstretch>
                       </sizepolicy>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <family>MS Sans Serif</family>
+                       <pointsize>22</pointsize>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">font: 22pt &quot;MS Sans Serif&quot;;</string>
@@ -1287,7 +1333,7 @@ QPushButton{
                    <item>
                     <widget class="QStackedWidget" name="page_settings_stacked_widget">
                      <property name="currentIndex">
-                      <number>1</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="page_settings_stacked_widget_page_general">
                       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1390,45 +1436,9 @@ QPushButton{
                                </widget>
                               </item>
                               <item>
-                               <widget class="QTextEdit" name="textEdit">
-                                <property name="sizePolicy">
-                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                  <horstretch>0</horstretch>
-                                  <verstretch>0</verstretch>
-                                 </sizepolicy>
-                                </property>
-                                <property name="minimumSize">
-                                 <size>
-                                  <width>0</width>
-                                  <height>30</height>
-                                 </size>
-                                </property>
-                                <property name="maximumSize">
-                                 <size>
-                                  <width>16777215</width>
-                                  <height>30</height>
-                                 </size>
-                                </property>
+                               <widget class="QLineEdit" name="line_edit_point_threshold_break">
                                 <property name="inputMethodHints">
-                                 <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="verticalScrollBarPolicy">
-                                 <enum>Qt::ScrollBarAlwaysOff</enum>
-                                </property>
-                                <property name="horizontalScrollBarPolicy">
-                                 <enum>Qt::ScrollBarAlwaysOff</enum>
-                                </property>
-                                <property name="tabChangesFocus">
-                                 <bool>true</bool>
-                                </property>
-                                <property name="lineWrapMode">
-                                 <enum>QTextEdit::NoWrap</enum>
-                                </property>
-                                <property name="placeholderText">
-                                 <string>Points (int)</string>
+                                 <set>Qt::ImhDigitsOnly|Qt::ImhPreferNumbers</set>
                                 </property>
                                </widget>
                               </item>
@@ -1453,52 +1463,12 @@ QPushButton{
                               <item>
                                <widget class="QLabel" name="label_10">
                                 <property name="text">
-                                 <string>Point Treshold(Break)</string>
+                                 <string>Point Treshold(warning)</string>
                                 </property>
                                </widget>
                               </item>
                               <item>
-                               <widget class="QTextEdit" name="textEdit_2">
-                                <property name="sizePolicy">
-                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                                  <horstretch>0</horstretch>
-                                  <verstretch>0</verstretch>
-                                 </sizepolicy>
-                                </property>
-                                <property name="minimumSize">
-                                 <size>
-                                  <width>0</width>
-                                  <height>30</height>
-                                 </size>
-                                </property>
-                                <property name="maximumSize">
-                                 <size>
-                                  <width>16777215</width>
-                                  <height>30</height>
-                                 </size>
-                                </property>
-                                <property name="inputMethodHints">
-                                 <set>Qt::ImhDigitsOnly|Qt::ImhMultiLine</set>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::Box</enum>
-                                </property>
-                                <property name="verticalScrollBarPolicy">
-                                 <enum>Qt::ScrollBarAlwaysOff</enum>
-                                </property>
-                                <property name="horizontalScrollBarPolicy">
-                                 <enum>Qt::ScrollBarAlwaysOff</enum>
-                                </property>
-                                <property name="tabChangesFocus">
-                                 <bool>true</bool>
-                                </property>
-                                <property name="lineWrapMode">
-                                 <enum>QTextEdit::NoWrap</enum>
-                                </property>
-                                <property name="placeholderText">
-                                 <string>Points (int)</string>
-                                </property>
-                               </widget>
+                               <widget class="QLineEdit" name="line_edit_point_threshold_warning"/>
                               </item>
                              </layout>
                             </widget>
@@ -1689,7 +1659,7 @@ QPushButton{
                          <widget class="QPushButton" name="pushButton_4">
                           <property name="geometry">
                            <rect>
-                            <x>50</x>
+                            <x>20</x>
                             <y>220</y>
                             <width>121</width>
                             <height>31</height>

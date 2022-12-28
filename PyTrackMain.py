@@ -1,7 +1,7 @@
 import pygetwindow as gw
 import time
 import datetime as dt
-from Scripts import entry, point_tracker, window_type
+from PytrackUtils import entry, point_tracker, window_type
 
 from PySide6.QtCore import QObject
 

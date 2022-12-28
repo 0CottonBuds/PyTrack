@@ -6,7 +6,7 @@ import configparser
 from UI.main import icons_rc
 from UI.main.ui_main import Ui_MainWindow
 
-from Scripts.config_helper import edit_config
+from PytrackUtils.config_helper import edit_config
 
 from PyTrackMain import PyTrackWorker
 
@@ -29,6 +29,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.line_edit_point_threshold_warning.setPlaceholderText(
             str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
         )
+
+        # set combo box items
+        combo_box_date_items = ["today", "yesterday", "last week", "last month", "all"]
+        self.comboBox_date.addItems(combo_box_date_items)
+        combo_box_type_items = ["good", "bad", "all"]
+        self.comboBox_type.addItems(combo_box_type_items)
 
         # setting the button signals to slots
         self.button_go_to_home.clicked.connect(self.go_to_home_page)  # type: ignore
