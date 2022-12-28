@@ -107,6 +107,13 @@ class WindowRecordFetcher:
         conn.close
         return raw_records
 
+    def retrieve_all_raw_records_by_many_dates(self, dates: list[str]) -> list:
+        # TODO: this function is untested test as soon as possible
+        raw_records = []
+        for date in dates:
+            raw_records.extend(self.retrieve_all_raw_records_by_date(date))
+        return raw_records
+
     def get_dates(self, query: str = "today") -> list:
         """
         Retrieves dates based on the given query.
@@ -158,7 +165,6 @@ class WindowRecordFetcher:
                 day_before = handle_negatives(day_before)
                 list_of_dates.append(list_to_strings(day_before))
                 latest_day = day_before
-
         elif query == "this month":
             latest_day = today
             list_of_dates.append(list_to_strings(latest_day))
@@ -280,7 +286,7 @@ if __name__ == "__main__":
     # print(full_percentage)
 
     ###############################################################################
-    #dates test
+    # dates test
 
     # fetcher = WindowRecordFetcher()
     # list_of_dates = fetcher.get_dates("this month")
