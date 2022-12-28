@@ -1,5 +1,6 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QSpacerItem
 from PySide6.QtCore import QThread
+from PySide6.QtGui import Qt
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
@@ -29,9 +30,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         )
 
         # set up scroll area
-        for i in range(1, 10):
+        for i in range(1, 4):
             obj = Ui_Window_Record()
             self.scroll_area_contents_layout.addWidget(obj)
+            self.scroll_area_contents_layout.setAlignment(
+                obj, Qt.AlignmentFlag.AlignTop
+            )
 
         # set combo box items
         combo_box_date_items = ["today", "yesterday", "last week", "last month", "all"]
