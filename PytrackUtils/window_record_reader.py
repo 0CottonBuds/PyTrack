@@ -23,6 +23,7 @@ class WindowTime:
 
     name: str
     full_name: str
+    percentage: float
 
     def __init__(self, time_elapsed: str) -> None:
         split_time_elapsed = time_elapsed.split(", ")
@@ -67,9 +68,6 @@ class WindowRecordFetcher:
     -> list[WindowRecords]"""
 
     formatted_records = []
-
-    def __init__(self) -> None:
-        self.fetch_all_records()
 
     def fetch_all_records(self):
         """combination of format_raw_entries and retrieve_raw_entries as one function"""
@@ -163,14 +161,14 @@ def get_time_of_each_window(formatted_records: list[WindowRecord]) -> list[Windo
 
 def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord]):
     """returns list of window and percentage"""
-    total_time = get_total_time_elapsed(formatted_records)
-    time_of_each_window = get_time_of_each_window(formatted_records)
+    total_time: WindowTime = get_total_time_elapsed(formatted_records)
+    time_of_each_window: list[WindowTime] = get_time_of_each_window(formatted_records)
 
     total_time_in_seconds = total_time.hours * 3600
     total_time_in_seconds += total_time.minutes * 60
     total_time_in_seconds += total_time.seconds
 
-    percentages: list[list] = []
+    percentages: list[WindowTime] = [] #this will be the returned list
 
     for window in time_of_each_window:
         percentage = 0
@@ -182,13 +180,17 @@ def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord])
         percentage = window_time_in_seconds / total_time_in_seconds
         percentage = percentage * 100
 
-        percentages.append([window, round(percentage, 2)])
+        window.percentage = percentage
+
+        percentages.append(window)
 
     return percentages
 
 
 if __name__ == "__main__":
-    records = WindowRecordFetcher().formatted_records
+    records = WindowRecordFetcher()
+    records.fetch_all_records()
+    records = records.formatted_records
     # print(records)
 
     total_time_elapsed = get_total_time_elapsed(records)
@@ -205,7 +207,7 @@ if __name__ == "__main__":
 
     full_percentage = 0
     for window in percentage_time_of_each_window:
-        print(f"name: {window[0].full_name}")
-        print(f"percentage: {window[1]}")
-        full_percentage += window[1]
+        print(f"name: {window.full_name}")
+        print(f"percentage: {window.percentage}")
+        full_percentage += window.percentage
     # print(full_percentage)
