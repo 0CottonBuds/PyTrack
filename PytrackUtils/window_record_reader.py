@@ -107,6 +107,73 @@ class WindowRecordFetcher:
         conn.close
         return raw_records
 
+    def get_dates(self, query: str = "today") -> list:
+        """
+        Retrieves dates based on the given query.
+
+        Parameters:
+            Query: (String) today, yesterday, this week, this month, etc
+
+        Returns:
+            list: A list of dates that match the given query (today, yesterday, this week, or this month).
+        """
+
+        def list_to_strings(date) -> str:
+            """turns date(tuple) to string"""
+            date_string = f"{date[0]}-{date[1]}-{date[2]}"
+            return date_string
+
+        def handle_negatives(date: list) -> list:
+            """handles the negative numbers that subtracting may cause"""
+            # TODO: this function has a bug, because this function dont know if it is supposed to add 30 or 31 to the day. we just assume it's 30.
+            date_revised = date
+            if date_revised[2] < 1:
+                date_revised[2] += 30
+                date_revised[1] -= 1
+            if date_revised[1] < 1:
+                date_revised[1] += 12
+                date_revised[0] -= 1
+            if date_revised[0] < 1:
+                print("man we exceeded the min limit of the year.")
+                pass
+            return date_revised
+
+        list_of_dates = []
+        today = dt.date.today()
+        today = [today.year, today.month, today.day]
+
+        if query == "today":
+            list_of_dates.append(list_to_strings(today))
+        elif query == "yesterday":
+            yesterday = [today[0], today[1], today[2] - 1]
+            yesterday = handle_negatives(yesterday)
+            list_of_dates.append(list_to_strings(yesterday))
+        elif query == "this week":
+            latest_day = today
+            list_of_dates.append(list_to_strings(latest_day))
+
+            for i in range(1, 8):
+                day_before = latest_day
+                day_before[2] -= 1
+                day_before = handle_negatives(day_before)
+                list_of_dates.append(list_to_strings(day_before))
+                latest_day = day_before
+
+        elif query == "this month":
+            latest_day = today
+            list_of_dates.append(list_to_strings(latest_day))
+
+            for i in range(1, 31):
+                day_before = latest_day
+                day_before[2] -= 1
+                day_before = handle_negatives(day_before)
+                list_of_dates.append(list_to_strings(day_before))
+                latest_day = day_before
+        else:
+            pass
+
+        return list_of_dates
+
     def __str__(self) -> str:
         message = ""
 
@@ -168,7 +235,7 @@ def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord])
     total_time_in_seconds += total_time.minutes * 60
     total_time_in_seconds += total_time.seconds
 
-    percentages: list[WindowTime] = [] #this will be the returned list
+    percentages: list[WindowTime] = []  # this will be the returned list
 
     for window in time_of_each_window:
         percentage = 0
@@ -188,26 +255,34 @@ def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord])
 
 
 if __name__ == "__main__":
-    records = WindowRecordFetcher()
-    records.fetch_all_records()
-    records = records.formatted_records
-    # print(records)
+    # records = WindowRecordFetcher()
+    # records.fetch_all_records()
+    # records = records.formatted_records
+    # # print(records)
 
-    total_time_elapsed = get_total_time_elapsed(records)
-    print(total_time_elapsed.get_time())
-    print()
+    # total_time_elapsed = get_total_time_elapsed(records)
+    # print(total_time_elapsed.get_time())
+    # print()
 
-    time_of_each_window = get_time_of_each_window(records)
+    # time_of_each_window = get_time_of_each_window(records)
 
-    for window in time_of_each_window:
-        print(window.full_name)
-        print(window.get_time())
+    # for window in time_of_each_window:
+    #     print(window.full_name)
+    #     print(window.get_time())
 
-    percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
+    # percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
 
-    full_percentage = 0
-    for window in percentage_time_of_each_window:
-        print(f"name: {window.full_name}")
-        print(f"percentage: {window.percentage}")
-        full_percentage += window.percentage
+    # full_percentage = 0
+    # for window in percentage_time_of_each_window:
+    #     print(f"name: {window.full_name}")
+    #     print(f"percentage: {window.percentage}")
+    #     full_percentage += window.percentage
     # print(full_percentage)
+
+    ###############################################################################
+    #dates test
+
+    # fetcher = WindowRecordFetcher()
+    # list_of_dates = fetcher.get_dates("this month")
+    # print(list_of_dates)
+    pass
