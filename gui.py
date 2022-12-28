@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import QThread
 
 from UI.main.ui_main import Ui_MainWindow
-from UI.WindowRecordUi.ui_window_record import Ui_window_record
+from UI.WindowRecordUi.window_record import Ui_Window_Record
 
 from PytrackUtils.config_helper import edit_config
 
@@ -27,6 +27,11 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.line_edit_point_threshold_warning.setPlaceholderText(
             str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
         )
+
+        # set up scroll area
+        for i in range(1, 10):
+            obj = Ui_Window_Record()
+            self.scroll_area_contents_layout.addWidget(obj)
 
         # set combo box items
         combo_box_date_items = ["today", "yesterday", "last week", "last month", "all"]
@@ -89,7 +94,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         value = self.line_edit_point_threshold_break.text()
         print(f"changing point threshold for break to {value}")
         edit_config(
-            "Scripts/settings/settingsConfig.ini", "App", "break_threshold", value
+            "PytrackUtils/settings/settingsConfig.ini", "App", "break_threshold", value
         )
         self.pytrack_worker.point_tracker.read_settings_config_file()
         self.line_edit_point_threshold_break.setPlaceholderText(
@@ -102,7 +107,10 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         value = self.line_edit_point_threshold_warning.text()
         print(f"changing point threshold for warning to {value}")
         edit_config(
-            "Scripts/settings/settingsConfig.ini", "App", "warning_threshold", value
+            "PytrackUtils/settings/settingsConfig.ini",
+            "App",
+            "warning_threshold",
+            value,
         )
         self.pytrack_worker.point_tracker.read_settings_config_file()
         self.line_edit_point_threshold_warning.setPlaceholderText(

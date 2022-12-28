@@ -1,5 +1,5 @@
-from .notification import NotificationManager
-from .window_type import WindowType
+from notification import NotificationManager
+from window_type import WindowType
 import configparser
 
 
@@ -45,7 +45,7 @@ class PointTracker:
 
     def read_settings_config_file(self):
         config_parser = configparser.ConfigParser()
-        config_parser.read("Scripts\settings\settingsConfig.ini")  # type: ignore
+        config_parser.read("PytrackUtils\settings\settingsConfig.ini")  # type: ignore
 
         self.starting_points = int(config_parser["App"]["starting_points"])
         self.POINT_THRESHOLD_GET_BACK_TO_WORK = int(
