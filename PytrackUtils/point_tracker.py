@@ -1,5 +1,5 @@
-from notification import NotificationManager
-from window_type import WindowType
+from .notification import NotificationManager
+from .window_type import WindowType
 import configparser
 
 
