@@ -40,7 +40,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         # set combo box items
         combo_box_date_items = ["today", "yesterday", "last week", "last month", "all"]
         self.comboBox_date.addItems(combo_box_date_items)
-        combo_box_type_items = ["good", "bad", "all"]
+        combo_box_type_items = ["all", "bad", "good"]
         self.comboBox_type.addItems(combo_box_type_items)
 
         # setting the button signals to slots
