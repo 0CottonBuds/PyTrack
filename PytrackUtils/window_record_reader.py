@@ -1,6 +1,6 @@
 import sqlite3
 import datetime as dt
-import window_type
+from .window_type import *
 
 
 class WindowRecord:
@@ -87,11 +87,12 @@ class WindowRecordFetcher:
         formatted_records = []
         for entry in raw_records:
             record = WindowRecord(entry)
-            record_type = window_type.WindowType()
+            record_type = WindowType()
             record_type.window_name = record.window_full_name
             record_type.check_app_type()
             record.window_type = record_type.window_type
             formatted_records.append(record)
+        self.formatted_records = formatted_records
         return formatted_records
 
     def filter_formatted_records_by_type(self, query_type: str) -> list[WindowRecord]:
@@ -114,6 +115,7 @@ class WindowRecordFetcher:
                     pass
         else:
             return self.formatted_records
+        self.formatted_records = filtered_formatted_records
         return filtered_formatted_records
 
     def retrieve_all_raw_records(self) -> list:
@@ -263,8 +265,18 @@ def get_time_of_each_window(
     return unique_windows
 
 
-def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord]):
-    """returns list of window and percentage"""
+def get_percentage_of_time_of_each_window(
+    formatted_records: list[WindowRecord],
+) -> list[WindowRecord]:
+    """
+    Calculates the percentage of time spent on each window and adds this information to the list of window records.
+
+    Parameters:
+        formatted_records (List[WindowRecord]): A list of window records containing information about the time spent on each window.
+
+    Returns:
+        List[WindowRecord]: A list of window records with the percentage of time spent on each window added.
+    """
     total_time: WindowTime = get_total_time_elapsed(formatted_records)
     time_of_each_window: list[WindowRecord] = get_time_of_each_window(formatted_records)
 
