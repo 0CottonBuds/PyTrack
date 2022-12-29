@@ -6,7 +6,7 @@ class WindowType:
     """Class window type use to store name type and rating of window"""
 
     window_name: str
-    window_type: str = "bad"
+    window_type: str = "good"
     window_rating: int = 0
 
     def name_chooser(self, window_full_name: str):

@@ -1,9 +1,12 @@
 import sqlite3
 import datetime as dt
+import window_type
 
 
 class WindowRecord:
     """class to handle and store data that is retrieved from the database"""
+
+    window_type: str
 
     def __init__(self, entry):
         window_name: str = entry[0]
@@ -67,7 +70,7 @@ class WindowRecordFetcher:
     """Class that fetches the data and formats it\n
     -> list[WindowRecords]"""
 
-    formatted_records = []
+    formatted_records: list[WindowRecord] = []
 
     def fetch_all_records(self):
         """combination of format_raw_entries and retrieve_raw_entries as one function"""
@@ -84,8 +87,33 @@ class WindowRecordFetcher:
         formatted_records = []
         for entry in raw_records:
             record = WindowRecord(entry)
+            record_type = window_type.WindowType()
+            record_type.window_name = record.window_full_name
+            record_type.check_app_type()
+            record.window_type = record_type.window_type
             formatted_records.append(record)
         return formatted_records
+
+    def filter_formatted_records_by_type(self, query_type: str) -> list[WindowRecord]:
+        """function to filter WindowRecord objects by their type
+
+        Parameters:
+        query_type: (string) the type you want to query
+
+        Return:
+        returns a list of filtered WindowRecord objects
+
+        """
+        filtered_formatted_records: list[WindowRecord] = []
+        if query_type is not "all":
+            for record in self.formatted_records:
+                if record.window_type == query_type:
+                    filtered_formatted_records.append(record)
+                else:
+                    pass
+        else:
+            return self.formatted_records
+        return filtered_formatted_records
 
     def retrieve_all_raw_records(self) -> list:
         """Method for retrieving all raw records from the database"""
