@@ -4,7 +4,7 @@ import time
 import datetime as dt
 from PytrackUtils import entry, point_tracker, window_type
 
-from PySide6.QtCore import QObject
+from PySide6.QtCore import QObject, Signal
 
 
 class PyTrackWorker(QObject):
@@ -83,15 +83,6 @@ class PyTrackWorker(QObject):
 
             self.printer()
 
-    def point_checking_loop(self, line_series: QLineSeries):
-        points: list[int] = []
-        while self.main_window.main_loop_active:
-            time.sleep(300)
-            print("checking the points")
-            new_point = self.point_tracker.points
-            points.append(new_point)
-            line_series.append(len(points), int(new_point / 10))
-
     def check_if_last_window_exists(self):
         """checks if last window is none if yes then set it to the new active window"""
         if self.last_active_window is None:
@@ -125,6 +116,27 @@ class PyTrackWorker(QObject):
             # app_type = check_app_type(self.last_active_window)
             elapsed_time = self.get_elapsed_time()
             print(elapsed_time)
+
+
+class PointChecker(QObject):
+    looped = Signal()
+
+    def __init__(self, main_window) -> None:
+        super().__init__()
+        self.line_series = QLineSeries()
+        self.main_window = main_window
+
+    def point_checking_loop(self):
+        points: list[int] = []
+        print("starting")
+        while self.main_window.main_loop_active:
+            print("looped")
+            time.sleep(300)
+            print("checking the points")
+            new_point = self.main_window.pytrack_worker.point_tracker.points
+            points.append(new_point)
+            self.line_series.append(len(points), int(new_point / 10))
+            self.looped.emit()
 
 
 # if __name__ == "__main__":
