@@ -106,7 +106,7 @@ class WindowRecordFetcher:
         TODO: this function is untested
         """
         filtered_formatted_records: list[WindowRecord] = []
-        if query_type is not "all":
+        if query_type != "all":
             for record in self.formatted_records:
                 if record.window_type == query_type:
                     filtered_formatted_records.append(record)
@@ -284,7 +284,7 @@ def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord])
         percentage = window_time_in_seconds / total_time_in_seconds
         percentage = percentage * 100
 
-        window.window_time_elapsed.percentage = percentage
+        window.window_time_elapsed.percentage = round(percentage, 2)
 
         percentages.append(window)
 
@@ -311,10 +311,10 @@ if __name__ == "__main__":
 
     full_percentage = 0
     for window in percentage_time_of_each_window:
-        print(f"name: {window.window_full_name}")
+        print(f"name: {window.window_short_name}")
         print(f"percentage: {window.window_time_elapsed.percentage}")
         full_percentage += window.window_time_elapsed.percentage
-    print(full_percentage)
+    print(round(full_percentage, 2))
 
     ###############################################################################
     # dates test
