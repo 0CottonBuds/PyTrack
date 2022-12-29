@@ -1,6 +1,9 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import QThread
 from PySide6.QtGui import Qt
+from PySide6.QtCharts import QChartView, QChart, QLineSeries
+
+import time
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
@@ -8,7 +11,7 @@ from UI.WindowRecordUi.window_record import Ui_Window_Record
 from PytrackUtils.config_helper import edit_config
 from PytrackUtils.window_record_reader import *
 
-from PyTrackMain import PyTrackWorker
+from PyTrackMain import PyTrackWorker, PointChecker
 
 
 class PytrackMainWindow(QMainWindow, Ui_MainWindow):
@@ -20,6 +23,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
         self.pytrack_worker = PyTrackWorker(self)
         self.pytrack_worker_thread = QThread()
+        self.point_checker_worker = PointChecker(self)
+        self.point_checker_worker_thread = QThread()
 
         # setting text and placeholder texts
         self.button_activate_deactivate_main_loop.setText("Activate")
@@ -37,12 +42,23 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.comboBox_type.addItems(combo_box_type_items)
         self.get_records("today", "all")
 
+        # set Charts
+        self.point_line_series = QLineSeries()
+        chart = QChart()
+        chart.addSeries(self.point_line_series)
+        chart.setTitle("Points Over Time")
+        chart_view = QChartView()
+        chart_view.setChart(chart)
+        self.point_graph_container_layout.addWidget(chart_view)
+
         # setting the button signals to slots
         self.button_go_to_home.clicked.connect(self.go_to_home_page)  # type: ignore
         self.button_go_to_analytics.clicked.connect(self.go_to_analytics_page)  # type: ignore
         self.button_go_to_settings.clicked.connect(self.go_to_settings_page)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.activate_deactivate_main_loop)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.pytrack_worker.main_loop)  # type: ignore
+        self.button_activate_deactivate_main_loop.clicked.connect(self.point_checker_worker.point_checking_loop)  # type: ignore
+        self.point_checker_worker.looped.connect(self.copy_line_series)
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
@@ -56,6 +72,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         # move workers to their threads and start the threads
         self.pytrack_worker.moveToThread(self.pytrack_worker_thread)
         self.pytrack_worker_thread.start()
+        self.point_checker_worker.moveToThread(self.point_checker_worker_thread)
+        self.point_checker_worker_thread.start()
 
         # show the window
         self.show()
@@ -128,6 +146,10 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             print("Deactivated")
             self.main_loop_active = False
             self.button_activate_deactivate_main_loop.setText("Activate")
+
+    def copy_line_series(self):
+        print("copied")
+        self.point_line_series = self.point_checker_worker.line_series
 
     def combo_box_date_updates(self, text):
         print(f"signal: {text}")
