@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QMainWindow, QPushButton,
     QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
     QVBoxLayout, QWidget)
-from .icons_rc import *
+from .icons_rc import*
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -388,7 +388,7 @@ class Ui_MainWindow(object):
         if QIcon.hasThemeIcon(iconThemeName):
             icon6 = QIcon.fromTheme(iconThemeName)
         else:
-            icon6.addFile(u"../../../../../../.designer/backup", QSize(), QIcon.Normal, QIcon.Off)
+            icon6.addFile(u"../../../../../../../../.designer/backup", QSize(), QIcon.Normal, QIcon.Off)
 
         self.button_activate_deactivate_main_loop.setIcon(icon6)
         self.button_activate_deactivate_main_loop.setCheckable(True)
@@ -581,8 +581,19 @@ class Ui_MainWindow(object):
         sizePolicy8.setVerticalStretch(9)
         sizePolicy8.setHeightForWidth(self.point_graph_container.sizePolicy().hasHeightForWidth())
         self.point_graph_container.setSizePolicy(sizePolicy8)
-        self.point_graph_container.setFrameShape(QFrame.NoFrame)
+        self.point_graph_container.setStyleSheet(u"")
+        self.point_graph_container.setFrameShape(QFrame.Box)
         self.point_graph_container.setFrameShadow(QFrame.Raised)
+        self.point_graph_container.setLineWidth(1)
+        self.verticalLayout_19 = QVBoxLayout(self.point_graph_container)
+        self.verticalLayout_19.setSpacing(0)
+        self.verticalLayout_19.setObjectName(u"verticalLayout_19")
+        self.verticalLayout_19.setContentsMargins(0, 0, 0, 0)
+        self.point_graph_container_layout = QVBoxLayout()
+        self.point_graph_container_layout.setObjectName(u"point_graph_container_layout")
+
+        self.verticalLayout_19.addLayout(self.point_graph_container_layout)
+
 
         self.verticalLayout_14.addWidget(self.point_graph_container)
 
@@ -808,6 +819,10 @@ class Ui_MainWindow(object):
         self.page_window_footer_2.setObjectName(u"page_window_footer_2")
         self.page_window_footer_2.setFrameShape(QFrame.NoFrame)
         self.page_window_footer_2.setFrameShadow(QFrame.Raised)
+        self.pushButton = QPushButton(self.page_window_footer_2)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setGeometry(QRect(30, 40, 75, 23))
+        self.pushButton.setFlat(True)
 
         self.verticalLayout_10.addWidget(self.page_window_footer_2)
 
@@ -829,44 +844,61 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_11.addWidget(self.page_about_header_3)
 
-        self.page_about_footer_3 = QFrame(self.page_settings_stacked_widget_page_about)
-        self.page_about_footer_3.setObjectName(u"page_about_footer_3")
-        self.page_about_footer_3.setFrameShape(QFrame.NoFrame)
-        self.page_about_footer_3.setFrameShadow(QFrame.Raised)
-        self.frame_10 = QFrame(self.page_about_footer_3)
+        self.page_about_body_3 = QFrame(self.page_settings_stacked_widget_page_about)
+        self.page_about_body_3.setObjectName(u"page_about_body_3")
+        self.page_about_body_3.setFrameShape(QFrame.NoFrame)
+        self.page_about_body_3.setFrameShadow(QFrame.Raised)
+        self.frame_10 = QFrame(self.page_about_body_3)
         self.frame_10.setObjectName(u"frame_10")
         self.frame_10.setGeometry(QRect(0, 30, 141, 101))
         self.frame_10.setFrameShape(QFrame.NoFrame)
         self.frame_10.setFrameShadow(QFrame.Raised)
         self.verticalLayout_13 = QVBoxLayout(self.frame_10)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.pushButton_2 = QPushButton(self.frame_10)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setFlat(True)
+        self.button_link_to_twitter = QPushButton(self.frame_10)
+        self.button_link_to_twitter.setObjectName(u"button_link_to_twitter")
+        self.button_link_to_twitter.setFlat(True)
 
-        self.verticalLayout_13.addWidget(self.pushButton_2)
+        self.verticalLayout_13.addWidget(self.button_link_to_twitter)
 
-        self.pushButton_3 = QPushButton(self.frame_10)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setFlat(True)
+        self.button_link_to_github = QPushButton(self.frame_10)
+        self.button_link_to_github.setObjectName(u"button_link_to_github")
+        self.button_link_to_github.setFlat(True)
 
-        self.verticalLayout_13.addWidget(self.pushButton_3)
+        self.verticalLayout_13.addWidget(self.button_link_to_github)
 
-        self.label_11 = QLabel(self.page_about_footer_3)
+        self.label_11 = QLabel(self.page_about_body_3)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setGeometry(QRect(10, 10, 151, 20))
         self.label_11.setFont(font5)
         self.label_11.setFrameShape(QFrame.NoFrame)
-        self.label_12 = QLabel(self.page_about_footer_3)
+        self.label_12 = QLabel(self.page_about_body_3)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setGeometry(QRect(50, 150, 351, 61))
         self.label_12.setWordWrap(True)
-        self.pushButton_4 = QPushButton(self.page_about_footer_3)
-        self.pushButton_4.setObjectName(u"pushButton_4")
-        self.pushButton_4.setGeometry(QRect(20, 220, 121, 31))
-        self.pushButton_4.setFlat(True)
+        self.button_link_to_youtube_video = QPushButton(self.page_about_body_3)
+        self.button_link_to_youtube_video.setObjectName(u"button_link_to_youtube_video")
+        self.button_link_to_youtube_video.setGeometry(QRect(20, 220, 131, 31))
+        self.button_link_to_youtube_video.setFlat(True)
+        self.button_link_to_youtube_channel = QPushButton(self.page_about_body_3)
+        self.button_link_to_youtube_channel.setObjectName(u"button_link_to_youtube_channel")
+        self.button_link_to_youtube_channel.setGeometry(QRect(10, 250, 161, 31))
+        self.button_link_to_youtube_channel.setFlat(True)
+        self.label_20 = QLabel(self.page_about_body_3)
+        self.label_20.setObjectName(u"label_20")
+        self.label_20.setGeometry(QRect(10, 310, 151, 20))
+        self.label_20.setFont(font5)
+        self.label_20.setFrameShape(QFrame.NoFrame)
+        self.label_21 = QLabel(self.page_about_body_3)
+        self.label_21.setObjectName(u"label_21")
+        self.label_21.setGeometry(QRect(40, 330, 351, 41))
+        self.label_21.setWordWrap(True)
+        self.button_link_to_github_repository = QPushButton(self.page_about_body_3)
+        self.button_link_to_github_repository.setObjectName(u"button_link_to_github_repository")
+        self.button_link_to_github_repository.setGeometry(QRect(0, 400, 171, 23))
+        self.button_link_to_github_repository.setFlat(True)
 
-        self.verticalLayout_11.addWidget(self.page_about_footer_3)
+        self.verticalLayout_11.addWidget(self.page_about_body_3)
 
         self.page_settings_stacked_widget.addWidget(self.page_settings_stacked_widget_page_about)
 
@@ -904,7 +936,7 @@ class Ui_MainWindow(object):
 
         self.button_go_to_settings.setDefault(False)
         self.stackedWidget.setCurrentIndex(0)
-        self.page_settings_stacked_widget.setCurrentIndex(0)
+        self.page_settings_stacked_widget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -940,11 +972,16 @@ class Ui_MainWindow(object):
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(Break)", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(warning)", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Window", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Add Window", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"About", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"Twitter", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Github", None))
+        self.button_link_to_twitter.setText(QCoreApplication.translate("MainWindow", u"Twitter", None))
+        self.button_link_to_github.setText(QCoreApplication.translate("MainWindow", u"Github", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Socials", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"I made this application as my year end project and my goal is to make a video out of it and post to youtube. If you would want to watch the video the link will be below.", None))
-        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Youtube Video", None))
+        self.button_link_to_youtube_video.setText(QCoreApplication.translate("MainWindow", u"Youtube Video", None))
+        self.button_link_to_youtube_channel.setText(QCoreApplication.translate("MainWindow", u"Youtube Channel", None))
+        self.label_20.setText(QCoreApplication.translate("MainWindow", u"Contribute", None))
+        self.label_21.setText(QCoreApplication.translate("MainWindow", u"This project is open source if you want to contribute you can using GitHub. Link Below", None))
+        self.button_link_to_github_repository.setText(QCoreApplication.translate("MainWindow", u"GitHub Repository", None))
     # retranslateUi
 

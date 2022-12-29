@@ -778,7 +778,7 @@ QPushButton{
                       </property>
                       <property name="icon">
                        <iconset theme="applications-games">
-                        <normaloff>../../../../../../.designer/backup</normaloff>../../../../../../.designer/backup</iconset>
+                        <normaloff>../../../../../../../../.designer/backup</normaloff>../../../../../../../../.designer/backup</iconset>
                       </property>
                       <property name="checkable">
                        <bool>true</bool>
@@ -1132,12 +1132,38 @@ QPushButton{
                        <verstretch>9</verstretch>
                       </sizepolicy>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
                      <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
+                      <enum>QFrame::Box</enum>
                      </property>
                      <property name="frameShadow">
                       <enum>QFrame::Raised</enum>
                      </property>
+                     <property name="lineWidth">
+                      <number>1</number>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_19">
+                      <property name="spacing">
+                       <number>0</number>
+                      </property>
+                      <property name="leftMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="topMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="rightMargin">
+                       <number>0</number>
+                      </property>
+                      <property name="bottomMargin">
+                       <number>0</number>
+                      </property>
+                      <item>
+                       <layout class="QVBoxLayout" name="point_graph_container_layout"/>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                    <item>
@@ -1344,7 +1370,7 @@ QPushButton{
                    <item>
                     <widget class="QStackedWidget" name="page_settings_stacked_widget">
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>2</number>
                      </property>
                      <widget class="QWidget" name="page_settings_stacked_widget_page_general">
                       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1538,6 +1564,22 @@ QPushButton{
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
+                         <widget class="QPushButton" name="pushButton">
+                          <property name="geometry">
+                           <rect>
+                            <x>30</x>
+                            <y>40</y>
+                            <width>75</width>
+                            <height>23</height>
+                           </rect>
+                          </property>
+                          <property name="text">
+                           <string>Add Window</string>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
                         </widget>
                        </item>
                       </layout>
@@ -1583,7 +1625,7 @@ QPushButton{
                         </widget>
                        </item>
                        <item>
-                        <widget class="QFrame" name="page_about_footer_3">
+                        <widget class="QFrame" name="page_about_body_3">
                          <property name="frameShape">
                           <enum>QFrame::NoFrame</enum>
                          </property>
@@ -1607,7 +1649,7 @@ QPushButton{
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_13">
                            <item>
-                            <widget class="QPushButton" name="pushButton_2">
+                            <widget class="QPushButton" name="button_link_to_twitter">
                              <property name="text">
                               <string>Twitter</string>
                              </property>
@@ -1617,7 +1659,7 @@ QPushButton{
                             </widget>
                            </item>
                            <item>
-                            <widget class="QPushButton" name="pushButton_3">
+                            <widget class="QPushButton" name="button_link_to_github">
                              <property name="text">
                               <string>Github</string>
                              </property>
@@ -1667,17 +1709,88 @@ QPushButton{
                            <bool>true</bool>
                           </property>
                          </widget>
-                         <widget class="QPushButton" name="pushButton_4">
+                         <widget class="QPushButton" name="button_link_to_youtube_video">
                           <property name="geometry">
                            <rect>
                             <x>20</x>
                             <y>220</y>
-                            <width>121</width>
+                            <width>131</width>
                             <height>31</height>
                            </rect>
                           </property>
                           <property name="text">
                            <string>Youtube Video</string>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                         <widget class="QPushButton" name="button_link_to_youtube_channel">
+                          <property name="geometry">
+                           <rect>
+                            <x>10</x>
+                            <y>250</y>
+                            <width>161</width>
+                            <height>31</height>
+                           </rect>
+                          </property>
+                          <property name="text">
+                           <string>Youtube Channel</string>
+                          </property>
+                          <property name="flat">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                         <widget class="QLabel" name="label_20">
+                          <property name="geometry">
+                           <rect>
+                            <x>10</x>
+                            <y>310</y>
+                            <width>151</width>
+                            <height>20</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>10</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="frameShape">
+                           <enum>QFrame::NoFrame</enum>
+                          </property>
+                          <property name="text">
+                           <string>Contribute</string>
+                          </property>
+                         </widget>
+                         <widget class="QLabel" name="label_21">
+                          <property name="geometry">
+                           <rect>
+                            <x>40</x>
+                            <y>330</y>
+                            <width>351</width>
+                            <height>41</height>
+                           </rect>
+                          </property>
+                          <property name="text">
+                           <string>This project is open source if you want to contribute you can using GitHub. Link Below</string>
+                          </property>
+                          <property name="wordWrap">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                         <widget class="QPushButton" name="button_link_to_github_repository">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>400</y>
+                            <width>171</width>
+                            <height>23</height>
+                           </rect>
+                          </property>
+                          <property name="text">
+                           <string>GitHub Repository</string>
                           </property>
                           <property name="flat">
                            <bool>true</bool>
@@ -1735,6 +1848,7 @@ QPushButton{
  <resources>
   <include location="icons.qrc"/>
   <include location="icons.qrc"/>
+  <include location="../../../../../../.designer/backup/icons.qrc"/>
  </resources>
  <connections/>
 </ui>
