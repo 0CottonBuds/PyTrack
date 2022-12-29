@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QSpacerItem
+from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtCore import QThread
 from PySide6.QtGui import Qt
 
@@ -6,6 +6,7 @@ from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
 
 from PytrackUtils.config_helper import edit_config
+from PytrackUtils.window_record_reader import *
 
 from PyTrackMain import PyTrackWorker
 
@@ -29,19 +30,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
         )
 
-        # set up scroll area
-        for i in range(1, 4):
-            obj = Ui_Window_Record()
-            self.scroll_area_contents_layout.addWidget(obj)
-            self.scroll_area_contents_layout.setAlignment(
-                obj, Qt.AlignmentFlag.AlignTop
-            )
-
         # set combo box items
-        combo_box_date_items = ["today", "yesterday", "last week", "last month", "all"]
+        combo_box_date_items = ["today", "yesterday", "this week", "this month", "all"]
         self.comboBox_date.addItems(combo_box_date_items)
         combo_box_type_items = ["all", "bad", "good"]
         self.comboBox_type.addItems(combo_box_type_items)
+        self.get_records("today", "all")
 
         # setting the button signals to slots
         self.button_go_to_home.clicked.connect(self.go_to_home_page)  # type: ignore
@@ -52,9 +46,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
-        # setting the text edit signal to slots
+        # setting the text edit signals to slots
         self.line_edit_point_threshold_break.editingFinished.connect(self.edit_point_threshold_break)  # type: ignore
         self.line_edit_point_threshold_warning.editingFinished.connect(self.edit_point_threshold_warning)  # type: ignore
+        # set combo box signals to slots
+        self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
+        self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
 
         # move workers to their threads and start the threads
         self.pytrack_worker.moveToThread(self.pytrack_worker_thread)
@@ -131,6 +128,58 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             print("Deactivated")
             self.main_loop_active = False
             self.button_activate_deactivate_main_loop.setText("Activate")
+
+    def combo_box_date_updates(self, text):
+        print(f"signal: {text}")
+        self.get_records(
+            self.comboBox_date.currentText(), self.comboBox_type.currentText()
+        )
+
+    def combo_box_type_updates(self, text):
+        print(f"signal: {text}")
+        self.get_records(
+            self.comboBox_date.currentText(), self.comboBox_type.currentText()
+        )
+
+    def get_records(self, query_date: str, query_type: str):
+        """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
+
+        Parameters:
+            query_date: (string) date to query ex. today, yesterday, etc
+            query_type: (string) type to query ex. good, bad, all"""
+
+        print("getting records")
+        records: list[WindowRecord] = []
+        fetcher = WindowRecordFetcher()
+        dates = fetcher.get_dates(query_date)
+        fetcher.format_records(fetcher.retrieve_all_raw_records_by_many_dates(dates))
+        fetcher.filter_formatted_records_by_type(query_type)
+        records = fetcher.formatted_records
+        records = get_time_of_each_window(records)
+        records = get_percentage_of_time_of_each_window(records)
+        self.update_scroll_area_contents(records)
+
+    def update_scroll_area_contents(self, records: list[WindowRecord]):
+        """Updates the scroll area contents by the list of window records that is passed
+
+        Parameters:
+            records: (list[WindowRecord]) list of window records that contains the data to update the contents of the scroll area"""
+
+        # clears the scroll area
+        for i in reversed(range(self.scroll_area_contents_layout.count())):
+            self.scroll_area_contents_layout.itemAt(i).widget().setParent(None)  # type: ignore
+
+        print("updating contents")
+        for record in records:
+            obj = Ui_Window_Record()
+            obj.label_name.setText(record.window_short_name)
+            obj.label_total_time.setText(str(record.window_time_elapsed.get_time()))
+            obj.progressBar.setValue(int(record.window_time_elapsed.percentage))
+
+            self.scroll_area_contents_layout.addWidget(obj)
+            self.scroll_area_contents_layout.setAlignment(
+                obj, Qt.AlignmentFlag.AlignTop
+            )
 
 
 if __name__ == "__main__":
