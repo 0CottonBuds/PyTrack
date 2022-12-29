@@ -103,6 +103,7 @@ class WindowRecordFetcher:
         Return:
         returns a list of filtered WindowRecord objects
 
+        TODO: this function is untested
         """
         filtered_formatted_records: list[WindowRecord] = []
         if query_type is not "all":
@@ -151,6 +152,8 @@ class WindowRecordFetcher:
 
         Returns:
             list: A list of dates that match the given query (today, yesterday, this week, or this month).
+
+        TODO: This function is untested and have a known bug
         """
 
         def list_to_strings(date) -> str:
