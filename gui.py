@@ -3,7 +3,7 @@ from PySide6.QtCore import QThread
 from PySide6.QtGui import Qt
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
-import time
+import webbrowser
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
@@ -58,10 +58,17 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_activate_deactivate_main_loop.clicked.connect(self.activate_deactivate_main_loop)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.pytrack_worker.main_loop)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.point_checker_worker.point_checking_loop)  # type: ignore
-        self.point_checker_worker.looped.connect(self.copy_line_series)
+        self.point_checker_worker.looped.connect(
+            self.copy_line_series
+        )  # this signal is used for the point checking loop
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
+        self.button_link_to_twitter.clicked.connect(self.go_to_link_twitter)  # type: ignore
+        self.button_link_to_github.clicked.connect(self.go_to_link_github)  # type: ignore
+        self.button_link_to_youtube_video.clicked.connect(self.go_to_link_youtube_video)  # type: ignore
+        self.button_link_to_youtube_channel.clicked.connect(self.go_to_link_youtube_channel)  # type: ignore
+        self.button_link_to_github_repository.clicked.connect(self.go_to_link_github_repository)  # type: ignore
         # setting the text edit signals to slots
         self.line_edit_point_threshold_break.editingFinished.connect(self.edit_point_threshold_break)  # type: ignore
         self.line_edit_point_threshold_warning.editingFinished.connect(self.edit_point_threshold_warning)  # type: ignore
@@ -107,6 +114,22 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.page_settings_stacked_widget.setCurrentWidget(
             self.page_settings_stacked_widget_page_about
         )
+
+    def go_to_link_twitter(self):
+        # webbrowser.open("")
+        pass
+
+    def go_to_link_github(self):
+        webbrowser.open("https://github.com/0CottonBuds")
+
+    def go_to_link_youtube_video(self):
+        webbrowser.open("")
+
+    def go_to_link_youtube_channel(self):
+        webbrowser.open("")
+
+    def go_to_link_github_repository(self):
+        webbrowser.open("https://github.com/0CottonBuds/pytrack")
 
     def edit_point_threshold_break(self):
         """edit the point threshold of break"""
