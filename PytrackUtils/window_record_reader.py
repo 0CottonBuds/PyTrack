@@ -236,9 +236,11 @@ def get_total_time_elapsed(formatted_records: list[WindowRecord]) -> WindowTime:
     return total_time
 
 
-def get_time_of_each_window(formatted_records: list[WindowRecord]) -> list[WindowTime]:
+def get_time_of_each_window(
+    formatted_records: list[WindowRecord],
+) -> list[WindowRecord]:
     """get time elapsed on each window"""
-    unique_windows: list[WindowTime] = []
+    unique_windows: list[WindowRecord] = []
 
     # loop through the entries
     for entry in formatted_records:
@@ -246,18 +248,16 @@ def get_time_of_each_window(formatted_records: list[WindowRecord]) -> list[Windo
         # loop through the unique window list find if there is a match or not
         is_unique: bool = True
         for window in unique_windows:
-            # if unique add time elapsed to the object that it matched
-            if window.name == entry.window_short_name:
+            # if not unique add time elapsed to the object that it matched
+            if window.window_short_name == entry.window_short_name:
                 is_unique = False
-                window += entry.window_time_elapsed
+                window.window_time_elapsed += entry.window_time_elapsed
             else:
                 pass
 
         # if unique then add a new item in the list
         if is_unique:
-            unique_window = entry.window_time_elapsed
-            unique_window.full_name = entry.window_full_name
-            unique_window.name = entry.window_short_name
+            unique_window = entry
             unique_windows.append(unique_window)
 
     return unique_windows
@@ -266,25 +266,25 @@ def get_time_of_each_window(formatted_records: list[WindowRecord]) -> list[Windo
 def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord]):
     """returns list of window and percentage"""
     total_time: WindowTime = get_total_time_elapsed(formatted_records)
-    time_of_each_window: list[WindowTime] = get_time_of_each_window(formatted_records)
+    time_of_each_window: list[WindowRecord] = get_time_of_each_window(formatted_records)
 
     total_time_in_seconds = total_time.hours * 3600
     total_time_in_seconds += total_time.minutes * 60
     total_time_in_seconds += total_time.seconds
 
-    percentages: list[WindowTime] = []  # this will be the returned list
+    percentages: list[WindowRecord] = []  # this will be the returned list
 
     for window in time_of_each_window:
         percentage = 0
 
-        window_time_in_seconds = window.hours * 3600
-        window_time_in_seconds += window.minutes * 60
-        window_time_in_seconds += window.seconds
+        window_time_in_seconds = window.window_time_elapsed.hours * 3600
+        window_time_in_seconds += window.window_time_elapsed.minutes * 60
+        window_time_in_seconds += window.window_time_elapsed.seconds
 
         percentage = window_time_in_seconds / total_time_in_seconds
         percentage = percentage * 100
 
-        window.percentage = percentage
+        window.window_time_elapsed.percentage = percentage
 
         percentages.append(window)
 
@@ -292,29 +292,29 @@ def get_percentage_of_time_of_each_window(formatted_records: list[WindowRecord])
 
 
 if __name__ == "__main__":
-    # records = WindowRecordFetcher()
-    # records.fetch_all_records()
-    # records = records.formatted_records
-    # # print(records)
+    records = WindowRecordFetcher()
+    records.fetch_all_records()
+    records = records.formatted_records
+    # print(records)
 
-    # total_time_elapsed = get_total_time_elapsed(records)
-    # print(total_time_elapsed.get_time())
-    # print()
+    total_time_elapsed = get_total_time_elapsed(records)
+    print(total_time_elapsed.get_time())
+    print()
 
-    # time_of_each_window = get_time_of_each_window(records)
+    time_of_each_window = get_time_of_each_window(records)
 
-    # for window in time_of_each_window:
-    #     print(window.full_name)
-    #     print(window.get_time())
+    for window in time_of_each_window:
+        print(window.window_full_name)
+        print(window.window_time_elapsed.get_time())
 
-    # percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
+    percentage_time_of_each_window = get_percentage_of_time_of_each_window(records)
 
-    # full_percentage = 0
-    # for window in percentage_time_of_each_window:
-    #     print(f"name: {window.full_name}")
-    #     print(f"percentage: {window.percentage}")
-    #     full_percentage += window.percentage
-    # print(full_percentage)
+    full_percentage = 0
+    for window in percentage_time_of_each_window:
+        print(f"name: {window.window_full_name}")
+        print(f"percentage: {window.window_time_elapsed.percentage}")
+        full_percentage += window.window_time_elapsed.percentage
+    print(full_percentage)
 
     ###############################################################################
     # dates test
