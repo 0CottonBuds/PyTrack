@@ -1,3 +1,4 @@
+from PySide6.QtCharts import QLineSeries
 import pygetwindow as gw
 import time
 import datetime as dt
@@ -36,7 +37,7 @@ class PyTrackWorker(QObject):
                 self.dt_now.minute,
                 self.dt_now.second,
             )
-            #Hello
+            # Hello
 
             # check app type and change points
             window = window_type.WindowType()
@@ -81,6 +82,15 @@ class PyTrackWorker(QObject):
             self.check_if_last_window_exists()
 
             self.printer()
+
+    def point_checking_loop(self, line_series: QLineSeries):
+        points: list[int] = []
+        while self.main_window.main_loop_active:
+            time.sleep(300)
+            print("checking the points")
+            new_point = self.point_tracker.points
+            points.append(new_point)
+            line_series.append(len(points), int(new_point / 10))
 
     def check_if_last_window_exists(self):
         """checks if last window is none if yes then set it to the new active window"""
