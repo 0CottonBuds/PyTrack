@@ -19,13 +19,15 @@ from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QMainWindow, QPushButton,
     QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
     QVBoxLayout, QWidget)
-from .icons_rc import*
+import icons_rc
+import icons_rc
+import icons_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1060, 659)
+        MainWindow.resize(1060, 677)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -528,7 +530,7 @@ class Ui_MainWindow(object):
         self.scrollArea_window_records.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 541, 469))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 541, 487))
         sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         sizePolicy5.setHorizontalStretch(0)
         sizePolicy5.setVerticalStretch(0)
@@ -819,10 +821,39 @@ class Ui_MainWindow(object):
         self.page_window_footer_2.setObjectName(u"page_window_footer_2")
         self.page_window_footer_2.setFrameShape(QFrame.NoFrame)
         self.page_window_footer_2.setFrameShadow(QFrame.Raised)
-        self.pushButton = QPushButton(self.page_window_footer_2)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(30, 40, 75, 23))
-        self.pushButton.setFlat(True)
+        self.verticalLayout_18 = QVBoxLayout(self.page_window_footer_2)
+        self.verticalLayout_18.setObjectName(u"verticalLayout_18")
+        self.frame_15 = QFrame(self.page_window_footer_2)
+        self.frame_15.setObjectName(u"frame_15")
+        self.frame_15.setMinimumSize(QSize(0, 50))
+        self.frame_15.setFrameShape(QFrame.NoFrame)
+        self.frame_15.setFrameShadow(QFrame.Raised)
+        self.button_add_windows = QPushButton(self.frame_15)
+        self.button_add_windows.setObjectName(u"button_add_windows")
+        self.button_add_windows.setGeometry(QRect(10, 20, 75, 23))
+        self.button_add_windows.setFlat(True)
+
+        self.verticalLayout_18.addWidget(self.frame_15)
+
+        self.scrollArea = QScrollArea(self.page_window_footer_2)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setFrameShape(QFrame.NoFrame)
+        self.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_2 = QWidget()
+        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 770, 429))
+        self.verticalLayout_21 = QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_21.setObjectName(u"verticalLayout_21")
+        self.add_window_contents_layout = QVBoxLayout()
+        self.add_window_contents_layout.setObjectName(u"add_window_contents_layout")
+
+        self.verticalLayout_21.addLayout(self.add_window_contents_layout)
+
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents_2)
+
+        self.verticalLayout_18.addWidget(self.scrollArea)
+
 
         self.verticalLayout_10.addWidget(self.page_window_footer_2)
 
@@ -936,7 +967,7 @@ class Ui_MainWindow(object):
 
         self.button_go_to_settings.setDefault(False)
         self.stackedWidget.setCurrentIndex(0)
-        self.page_settings_stacked_widget.setCurrentIndex(2)
+        self.page_settings_stacked_widget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -972,7 +1003,7 @@ class Ui_MainWindow(object):
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(Break)", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(warning)", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Window", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Add Window", None))
+        self.button_add_windows.setText(QCoreApplication.translate("MainWindow", u"Add Window", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"About", None))
         self.button_link_to_twitter.setText(QCoreApplication.translate("MainWindow", u"Twitter", None))
         self.button_link_to_github.setText(QCoreApplication.translate("MainWindow", u"Github", None))

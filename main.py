@@ -4,12 +4,15 @@ from PySide6.QtGui import Qt
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
 import webbrowser
+import pygetwindow
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
+from UI.AddWindowUi.add_window import UiAddWindow
 
 from PytrackUtils.config_helper import edit_config
 from PytrackUtils.window_record_reader import *
+from PytrackUtils.window_type import *
 
 from PyTrackMain import PyTrackWorker, PointChecker
 
@@ -69,6 +72,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_link_to_youtube_video.clicked.connect(self.go_to_link_youtube_video)  # type: ignore
         self.button_link_to_youtube_channel.clicked.connect(self.go_to_link_youtube_channel)  # type: ignore
         self.button_link_to_github_repository.clicked.connect(self.go_to_link_github_repository)  # type: ignore
+        self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
         # setting the text edit signals to slots
         self.line_edit_point_threshold_break.editingFinished.connect(self.edit_point_threshold_break)  # type: ignore
         self.line_edit_point_threshold_warning.editingFinished.connect(self.edit_point_threshold_warning)  # type: ignore
@@ -225,6 +229,19 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.scroll_area_contents_layout.setAlignment(
                 obj, Qt.AlignmentFlag.AlignTop
             )
+
+    def add_windows(self):
+        """this function spawns add window ui in the add ui scroll area"""
+        window_filter = WindowFilter(pygetwindow.getAllWindows())
+        window_filter.full_filter()
+
+        # clear the add window contents layout
+        for i in reversed(range(self.add_window_contents_layout.count())):
+            self.add_window_contents_layout.itemAt(i).widget().setParent(None)  # type: ignore
+
+        for window in window_filter.windows:
+            add_window_ui = UiAddWindow(window.title)
+            self.add_window_contents_layout.addWidget(add_window_ui)
 
 
 if __name__ == "__main__":

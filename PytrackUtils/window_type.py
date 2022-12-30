@@ -17,7 +17,7 @@ class WindowType:
         print("input ")
         return separated_window_name[int(index)]
 
-    def check_app_type(self):   
+    def check_app_type(self):
         '''Takes a window checks and returns string "bad" or "good"'''
 
         separated_window_title = self.window_name.split("- ")
@@ -40,10 +40,8 @@ class WindowType:
 class WindowTypeIn(WindowType):
     """inherits from class window type have functions to enter data in database"""
 
-    def __init__(self, window_name: str) -> None:
-        self.window_name = self.name_chooser(window_name)
-        self.window_type = input("What type of app is this (good, bad): ")
-        self.window_rating = int(input("Rating of application (1-100): "))
+    window_type: str
+    window_rating: int
 
     def record_in_database(self):
         """enter the data to data base"""
@@ -139,11 +137,11 @@ def find_window_on_database_by_name(query_name: str) -> WindowType | None:
         return None
 
 
-if __name__ == "__main__":
-    windows = pygetwindow.getAllWindows()
-    window_filter = WindowFilter(windows)
-    window_filter.full_filter()
+# if __name__ == "__main__":
+#     windows = pygetwindow.getAllWindows()
+#     window_filter = WindowFilter(windows)
+#     window_filter.full_filter()
 
-    for window in window_filter.windows:
-        temp = WindowTypeIn(window.title)
-        temp.record_in_database()
+#     for window in window_filter.windows:
+#         temp = WindowTypeIn(window.title)s
+#         temp.record_in_database()

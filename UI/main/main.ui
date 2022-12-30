@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1060</width>
-    <height>659</height>
+    <height>677</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1061,7 +1061,7 @@ QPushButton{
                            <x>0</x>
                            <y>0</y>
                            <width>541</width>
-                           <height>469</height>
+                           <height>487</height>
                           </rect>
                          </property>
                          <property name="sizePolicy">
@@ -1370,7 +1370,7 @@ QPushButton{
                    <item>
                     <widget class="QStackedWidget" name="page_settings_stacked_widget">
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="page_settings_stacked_widget_page_general">
                       <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1564,22 +1564,68 @@ QPushButton{
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <widget class="QPushButton" name="pushButton">
-                          <property name="geometry">
-                           <rect>
-                            <x>30</x>
-                            <y>40</y>
-                            <width>75</width>
-                            <height>23</height>
-                           </rect>
-                          </property>
-                          <property name="text">
-                           <string>Add Window</string>
-                          </property>
-                          <property name="flat">
-                           <bool>true</bool>
-                          </property>
-                         </widget>
+                         <layout class="QVBoxLayout" name="verticalLayout_18">
+                          <item>
+                           <widget class="QFrame" name="frame_15">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>50</height>
+                             </size>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <widget class="QPushButton" name="button_add_windows">
+                             <property name="geometry">
+                              <rect>
+                               <x>10</x>
+                               <y>20</y>
+                               <width>75</width>
+                               <height>23</height>
+                              </rect>
+                             </property>
+                             <property name="text">
+                              <string>Add Window</string>
+                             </property>
+                             <property name="flat">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QScrollArea" name="scrollArea">
+                            <property name="frameShape">
+                             <enum>QFrame::NoFrame</enum>
+                            </property>
+                            <property name="horizontalScrollBarPolicy">
+                             <enum>Qt::ScrollBarAlwaysOff</enum>
+                            </property>
+                            <property name="widgetResizable">
+                             <bool>true</bool>
+                            </property>
+                            <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                             <property name="geometry">
+                              <rect>
+                               <x>0</x>
+                               <y>0</y>
+                               <width>770</width>
+                               <height>429</height>
+                              </rect>
+                             </property>
+                             <layout class="QVBoxLayout" name="verticalLayout_21">
+                              <item>
+                               <layout class="QVBoxLayout" name="add_window_contents_layout"/>
+                              </item>
+                             </layout>
+                            </widget>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>
@@ -1848,7 +1894,7 @@ QPushButton{
  <resources>
   <include location="icons.qrc"/>
   <include location="icons.qrc"/>
-  <include location="../../../../../../.designer/backup/icons.qrc"/>
+  <include location="icons.qrc"/>
  </resources>
  <connections/>
 </ui>
