@@ -122,6 +122,10 @@ class WindowRecordFetcher:
         """Method for retrieving all raw records from the database"""
         conn = sqlite3.connect("pyTrack.db")
         c = conn.cursor()
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTimeEntries(windowName text, timeElapsed text, date text)"""
+        )
+
         c.execute("SELECT * FROM windowTimeEntries")
         raw_records = c.fetchall()
         conn.commit()
@@ -132,6 +136,10 @@ class WindowRecordFetcher:
         """Method for retrieving raw records from the database by date"""
         conn = sqlite3.connect("pyTrack.db")
         c = conn.cursor()
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTimeEntries(windowName text, timeElapsed text, date text)"""
+        )
+
         c.execute("SELECT * FROM windowTimeEntries WHERE date = ?", (date,))
         raw_records = c.fetchall()
         conn.commit()

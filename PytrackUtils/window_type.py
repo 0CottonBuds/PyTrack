@@ -47,6 +47,10 @@ class WindowTypeIn(WindowType):
         """enter the data to data base"""
         conn = sqlite3.connect("pyTrack.db")
         c = conn.cursor()
+
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
+        )
         c.execute(
             """INSERT INTO windowTypes(windowName, windowType, windowRating) VALUES(?,?,?)""",
             (self.window_name, self.window_type, self.window_rating),
@@ -120,6 +124,9 @@ def find_window_on_database_by_name(query_name: str) -> WindowType | None:
     """find window on data base by name returns windowType object"""
     conn = sqlite3.connect("pyTrack.db")
     c = conn.cursor()
+    c.execute(
+        """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
+    )
     c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
     results = c.fetchall()
     if results != []:

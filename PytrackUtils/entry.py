@@ -2,7 +2,6 @@ import sqlite3
 import datetime as dt
 
 
-
 class WindowEntryIn:
     """Takes Window Title, Time Started, Time Finished \n
     class for window entry that wil handle the data structure and entry of the data to the database
@@ -19,6 +18,10 @@ class WindowEntryIn:
         c = conn.cursor()
 
         c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTimeEntries(windowName text, timeElapsed text, date text)"""
+        )
+
+        c.execute(
             """INSERT INTO windowTimeEntries VALUES(?,?,?)""",
             (self.window_title, str(self.time_elapsed), str(dt.date.today())),
         )
@@ -28,6 +31,3 @@ class WindowEntryIn:
         conn.close()
 
         print("successfully added to database")
-
-
-

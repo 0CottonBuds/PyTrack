@@ -59,5 +59,5 @@ class PointTracker:
 
 if __name__ == "__main__":
     point = PointTracker()
-    # point.points = 0
+    point.points = 0
     point.check_point_threshold()
