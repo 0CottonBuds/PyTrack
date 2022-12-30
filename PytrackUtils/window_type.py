@@ -17,7 +17,7 @@ class WindowType:
         print("input ")
         return separated_window_name[int(index)]
 
-    def check_app_type(self):
+    def check_app_type(self):   
         '''Takes a window checks and returns string "bad" or "good"'''
 
         separated_window_title = self.window_name.split("- ")
