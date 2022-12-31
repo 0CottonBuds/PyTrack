@@ -1,0 +1,21 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>../icons/chart-histogram.png</file>
+    <file>../icons/chat-arrow-grow.png</file>
+    <file>../icons/cross.png</file>
+    <file>../icons/expand.png</file>
+    <file>../icons/home.png</file>
+    <file>../icons/homeX64.png</file>
+    <file>../icons/menu-burger.png</file>
+    <file>../icons/minus.png</file>
+    <file>../icons/settings (1).png</file>
+    <file>../icons/settings (2).png</file>
+    <file>../icons/settings.png</file>
+    <file>../icons/stats.png</file>
+  </qresource>
+  <qresource prefix="logo">
+    <file>../logo/logo small v2.png</file>
+    <file>../logo/logo small.png</file>
+    <file>../logo/logo v1.png</file>
+  </qresource>
+</RCC>
