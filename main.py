@@ -5,6 +5,7 @@ from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
 import webbrowser
 import pygetwindow
+import configparser
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
@@ -139,9 +140,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         """edit the point threshold of break"""
         value = self.line_edit_point_threshold_break.text()
         print(f"changing point threshold for break to {value}")
-        edit_config(
-            "PytrackUtils/settings/settingsConfig.ini", "App", "break_threshold", value
-        )
+        edit_config("./settings", "App", "break_threshold", value)
         self.pytrack_worker.point_tracker.read_settings_config_file()
         self.line_edit_point_threshold_break.setPlaceholderText(
             str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
@@ -152,12 +151,14 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         """edit the point threshold of warning"""
         value = self.line_edit_point_threshold_warning.text()
         print(f"changing point threshold for warning to {value}")
-        edit_config(
-            "PytrackUtils/settings/settingsConfig.ini",
-            "App",
-            "warning_threshold",
-            value,
-        )
+
+        config_obj = configparser.ConfigParser()
+        config_obj.read("settingsConfig.ini")
+        section_to_edit = config_obj["App"]
+        section_to_edit["warning_threshold"] = value
+        with open("settingsConfig.ini", "w") as config_file:
+            config_obj.write(config_file)
+
         self.pytrack_worker.point_tracker.read_settings_config_file()
         self.line_edit_point_threshold_warning.setPlaceholderText(
             str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
