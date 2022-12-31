@@ -1,6 +1,0 @@
-*.db
-queries.py
-config.ipynb
-/venv
-/.vscode
-/__pycache__
