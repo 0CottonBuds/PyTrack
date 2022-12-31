@@ -27,11 +27,11 @@ exe = EXE(
     [],
     exclude_binaries=True,
     name='PyTrack',
-    debug=True,
+    debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
@@ -47,8 +47,9 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='main',
+    name='PyTrack 1.0.0',
 )
 
 import shutil
 shutil.copyfile('settingsConfig.ini', '{0}/main/settingsConfig.ini'.format(DISTPATH))
+shutil.copytree('notificationIcons', '{0}/main/notificationIcons'.format(DISTPATH))

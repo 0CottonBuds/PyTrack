@@ -696,6 +696,14 @@
    'C:\\Users\\Emil '
    'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\plyer\\facades\\accelerometer.py',
    'PYMODULE'),
+  ('stringprep',
+   'C:\\Users\\Emil '
+   'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\stringprep.py',
+   'PYMODULE'),
+  ('_py_abc',
+   'C:\\Users\\Emil '
+   'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\_py_abc.py',
+   'PYMODULE'),
   ('getpass',
    'C:\\Users\\Emil '
    'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\getpass.py',
@@ -727,14 +735,6 @@
   ('tracemalloc',
    'C:\\Users\\Emil '
    'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\tracemalloc.py',
-   'PYMODULE'),
-  ('_py_abc',
-   'C:\\Users\\Emil '
-   'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\_py_abc.py',
-   'PYMODULE'),
-  ('stringprep',
-   'C:\\Users\\Emil '
-   'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\stringprep.py',
    'PYMODULE'),
   ('PyTrackMain',
    'C:\\Users\\Emil John\\Documents\\Projects\\python '

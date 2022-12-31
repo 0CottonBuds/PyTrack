@@ -1,7 +1,7 @@
 ('C:\\Users\\Emil John\\Documents\\Projects\\python '
  'projects\\PyTrack\\build\\main\\PyTrack.exe',
- True,
- True,
+ False,
+ False,
  True,
  ['C:\\Users\\Emil John\\Documents\\Projects\\python '
   'projects\\PyTrack\\icon.ico'],
@@ -68,8 +68,8 @@
  [],
  False,
  False,
- 1672473611,
- [('run_d.exe',
+ 1672476573,
+ [('runw.exe',
    'C:\\Users\\Emil '
-   'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run_d.exe',
+   'John\\AppData\\Local\\Programs\\Python\\Python310\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\runw.exe',
    'EXECUTABLE')])
