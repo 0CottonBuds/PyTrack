@@ -17,13 +17,15 @@ class WindowEntryIn:
 
         c = conn.cursor()
 
-        c.execute(
-            """CREATE TABLE IF NOT EXISTS windowTimeEntries(windowName text, timeElapsed text, date text)"""
-        )
+        c.execute("""CREATE TABLE IF NOT EXISTS windowTimeEntries(windowName text, timeElapsed text, date text)""")
+
+        today = dt.date.today()
+        today = [today.year, today.month, today.day]
+        date_string = f"{today[0]}-{today[1]}-{today[2]}"
 
         c.execute(
             """INSERT INTO windowTimeEntries VALUES(?,?,?)""",
-            (self.window_title, str(self.time_elapsed), str(dt.date.today())),
+            (self.window_title, str(self.time_elapsed), date_string),
         )
 
         conn.commit()
