@@ -138,32 +138,57 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
     def edit_point_threshold_break(self):
         """edit the point threshold of break"""
+
         value = self.line_edit_point_threshold_break.text()
-        print(f"changing point threshold for break to {value}")
-        edit_config("./settings", "App", "break_threshold", value)
-        self.pytrack_worker.point_tracker.read_settings_config_file()
-        self.line_edit_point_threshold_break.setPlaceholderText(
-            str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
-        )
-        self.line_edit_point_threshold_break.clear()
+        if value == "":
+            value: str = str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)  # type: ignore bypass formatting
+
+        if value.isnumeric():
+            print(f"changing point threshold for break to {value}")
+
+            edit_config("./settingsConfig.ini", "App", "break_threshold", value)
+            self.pytrack_worker.point_tracker.read_settings_config_file()
+
+            # Set line edit placeholder text.
+            self.line_edit_point_threshold_break.setPlaceholderText(
+                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
+            )
+            self.line_edit_point_threshold_break.clear()
+        else:
+            print(f"tried to input {value} but it is not numeric.")
+
+            # Set line edit placeholder text.
+            self.line_edit_point_threshold_break.setPlaceholderText(
+                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
+            )
+            self.line_edit_point_threshold_break.clear()
 
     def edit_point_threshold_warning(self):
         """edit the point threshold of warning"""
-        value = self.line_edit_point_threshold_warning.text()
-        print(f"changing point threshold for warning to {value}")
 
-        config_obj = configparser.ConfigParser()
-        config_obj.read("settingsConfig.ini")
-        section_to_edit = config_obj["App"]
-        section_to_edit["warning_threshold"] = value
-        with open("settingsConfig.ini", "w") as config_file:
-            config_obj.write(config_file)
+        value: str = self.line_edit_point_threshold_warning.text()
+        if value == "":
+            value = str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)  # type: ignore bypass formatting
 
-        self.pytrack_worker.point_tracker.read_settings_config_file()
-        self.line_edit_point_threshold_warning.setPlaceholderText(
-            str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
-        )
-        self.line_edit_point_threshold_break.clear()
+        if value.isnumeric():
+            print(f"changing point threshold for warning to {value}")
+
+            edit_config("./settingsConfig.ini", "App", "warning_threshold", value)
+            self.pytrack_worker.point_tracker.read_settings_config_file()
+
+            # Set line edit placeholder text.
+            self.line_edit_point_threshold_warning.setPlaceholderText(
+                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
+            )
+            self.line_edit_point_threshold_warning.clear()
+        else:
+            print(f"tried to input {value} but it is not numeric.")
+
+            # Set line edit placeholder text.
+            self.line_edit_point_threshold_warning.setPlaceholderText(
+                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
+            )
+            self.line_edit_point_threshold_warning.clear()
 
     def activate_deactivate_main_loop(self):
         if not self.main_loop_active:
