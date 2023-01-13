@@ -1,4 +1,6 @@
 #PyTrack
+
+
 PyTrack is a tool to help you track your time on your computer and improve your productivity. It works by monitoring the windows you have open and assigning points based on whether the window is deemed productive or unproductive. The application also keeps a history of the windows you have spent time on, so you can see how your time is being used.
 
 ##Features
