@@ -1,6 +1,4 @@
 import sqlite3
-import pygetwindow
-
 
 class WindowType:
     """Class window type use to store name type and rating of window"""
@@ -8,14 +6,6 @@ class WindowType:
     window_name: str = ""
     window_type: str = "good"
     window_rating: int = 0
-
-    def name_chooser(self, window_full_name: str):
-        """lets you pick what part of the full name do you want this window to use"""
-        separated_window_name = window_full_name.split("- ")
-        print(separated_window_name)
-        index = input("What name would you like to put (index): ")
-        print("input ")
-        return separated_window_name[int(index)]
 
     def check_app_type(self):
         '''Takes a window checks and returns string "bad" or "good"'''
@@ -119,7 +109,6 @@ class WindowFilter:
     def __str__(self) -> str:
         return f"{self.windows}"
 
-
 def find_window_on_database_by_name(query_name: str) -> WindowType | None:
     """find window on data base by name returns windowType object"""
     conn = sqlite3.connect("pyTrack.db")
@@ -142,13 +131,3 @@ def find_window_on_database_by_name(query_name: str) -> WindowType | None:
         conn.commit()
         conn.close()
         return None
-
-
-# if __name__ == "__main__":
-#     windows = pygetwindow.getAllWindows()
-#     window_filter = WindowFilter(windows)
-#     window_filter.full_filter()
-
-#     for window in window_filter.windows:
-#         temp = WindowTypeIn(window.title)s
-#         temp.record_in_database()
