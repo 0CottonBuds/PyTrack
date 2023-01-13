@@ -32,12 +32,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
         # setting text and placeholder texts
         self.button_activate_deactivate_main_loop.setText("Activate")
-        self.line_edit_point_threshold_break.setPlaceholderText(
-            str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
-        )
-        self.line_edit_point_threshold_warning.setPlaceholderText(
-            str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
-        )
+        self.line_edit_point_threshold_break.setPlaceholderText(str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK))
+        self.line_edit_point_threshold_warning.setPlaceholderText(str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK))
 
         # set combo box items
         combo_box_date_items = ["today", "yesterday", "this week", "this month", "all"]
@@ -62,9 +58,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_activate_deactivate_main_loop.clicked.connect(self.activate_deactivate_main_loop)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.pytrack_worker.main_loop)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.point_checker_worker.point_checking_loop)  # type: ignore
-        self.point_checker_worker.looped.connect(
-            self.copy_line_series
-        )  # this signal is used for the point checking loop
+        self.point_checker_worker.looped.connect(self.copy_line_series)  # type: ignore this signal is used for the point checking loop
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
@@ -104,21 +98,15 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
     def go_to_settings_general(self):
         print("go to general settings")
-        self.page_settings_stacked_widget.setCurrentWidget(
-            self.page_settings_stacked_widget_page_general
-        )
+        self.page_settings_stacked_widget.setCurrentWidget(self.page_settings_stacked_widget_page_general)
 
     def go_to_settings_window(self):
         print("go to window settings")
-        self.page_settings_stacked_widget.setCurrentWidget(
-            self.page_settings_stacked_widget_page_window
-        )
+        self.page_settings_stacked_widget.setCurrentWidget(self.page_settings_stacked_widget_page_window)
 
     def go_to_settings_about(self):
         print("go to about settings")
-        self.page_settings_stacked_widget.setCurrentWidget(
-            self.page_settings_stacked_widget_page_about
-        )
+        self.page_settings_stacked_widget.setCurrentWidget(self.page_settings_stacked_widget_page_about)
 
     def go_to_link_twitter(self):
         # webbrowser.open("")
@@ -150,17 +138,13 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.pytrack_worker.point_tracker.read_settings_config_file()
 
             # Set line edit placeholder text.
-            self.line_edit_point_threshold_break.setPlaceholderText(
-                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
-            )
+            self.line_edit_point_threshold_break.setPlaceholderText(str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK))
             self.line_edit_point_threshold_break.clear()
         else:
             print(f"tried to input {value} but it is not numeric.")
 
             # Set line edit placeholder text.
-            self.line_edit_point_threshold_break.setPlaceholderText(
-                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK)
-            )
+            self.line_edit_point_threshold_break.setPlaceholderText(str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_TAKE_A_BREAK))
             self.line_edit_point_threshold_break.clear()
 
     def edit_point_threshold_warning(self):
@@ -177,17 +161,13 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.pytrack_worker.point_tracker.read_settings_config_file()
 
             # Set line edit placeholder text.
-            self.line_edit_point_threshold_warning.setPlaceholderText(
-                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
-            )
+            self.line_edit_point_threshold_warning.setPlaceholderText(str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK))
             self.line_edit_point_threshold_warning.clear()
         else:
             print(f"tried to input {value} but it is not numeric.")
 
             # Set line edit placeholder text.
-            self.line_edit_point_threshold_warning.setPlaceholderText(
-                str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK)
-            )
+            self.line_edit_point_threshold_warning.setPlaceholderText(str(self.pytrack_worker.point_tracker.POINT_THRESHOLD_GET_BACK_TO_WORK))
             self.line_edit_point_threshold_warning.clear()
 
     def activate_deactivate_main_loop(self):
@@ -206,15 +186,11 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
     def combo_box_date_updates(self, text):
         print(f"signal: {text}")
-        self.get_records(
-            self.comboBox_date.currentText(), self.comboBox_type.currentText()
-        )
+        self.get_records(self.comboBox_date.currentText(), self.comboBox_type.currentText())
 
     def combo_box_type_updates(self, text):
         print(f"signal: {text}")
-        self.get_records(
-            self.comboBox_date.currentText(), self.comboBox_type.currentText()
-        )
+        self.get_records(self.comboBox_date.currentText(), self.comboBox_type.currentText())
 
     def get_records(self, query_date: str, query_type: str):
         """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
@@ -252,9 +228,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             obj.progressBar.setValue(int(record.window_time_elapsed.percentage))
 
             self.scroll_area_contents_layout.addWidget(obj)
-            self.scroll_area_contents_layout.setAlignment(
-                obj, Qt.AlignmentFlag.AlignTop
-            )
+            self.scroll_area_contents_layout.setAlignment(obj, Qt.AlignmentFlag.AlignTop)
 
     def add_windows(self):
         """this function spawns add window ui in the add ui scroll area"""
