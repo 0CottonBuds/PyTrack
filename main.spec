@@ -47,9 +47,10 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='PyTrack 1.0.0',
+    name='PyTrack 1.0.0 debug',
 )
 
 import shutil
-shutil.copyfile('settingsConfig.ini', '{0}/main/settingsConfig.ini'.format(DISTPATH))
-shutil.copytree('notificationIcons', '{0}/main/notificationIcons'.format(DISTPATH))
+shutil.copyfile('settingsConfig.ini', '{0}/PyTrack 1.0.0 debug/settingsConfig.ini'.format(DISTPATH))
+shutil.copyfile('pyTrack.db', '{0}/PyTrack 1.0.0 debug/pyTrack.db'.format(DISTPATH))
+shutil.copytree('notificationIcons', '{0}/PyTrack 1.0.0 debug/notificationIcons'.format(DISTPATH))
