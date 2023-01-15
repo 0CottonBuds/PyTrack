@@ -18,9 +18,7 @@ class PointTracker:
             print(f"added {window.window_rating} points\ntotal points: {self.points}")
         elif window.window_type == "bad":
             self.subtract_points(window.window_rating)
-            print(
-                f"subtract {window.window_rating} points\ntotal points: {self.points}"
-            )
+            print(f"subtract {window.window_rating} points\ntotal points: {self.points}")
         else:
             print(window.window_name)
             print("this window does not have a label")
@@ -36,10 +34,10 @@ class PointTracker:
         calls the notification module to fire notification when threshold is reached."""
         # self.read_settings_config_file()
 
-        if self.points >= self.POINT_THRESHOLD_TAKE_A_BREAK:
+        if self.points >= self.threshold_break:
             notification_manager = NotificationManager()
             notification_manager.take_a_break()
-        if self.points <= self.POINT_THRESHOLD_GET_BACK_TO_WORK:
+        if self.points <= self.threshold_warning:
             notification_manager = NotificationManager()
             notification_manager.get_back_to_work()
 
@@ -48,8 +46,8 @@ class PointTracker:
         config_parser.read(r".\settingsConfig.ini")  # type: ignore
 
         self.starting_points = int(config_parser["App"]["starting_points"])
-        self.POINT_THRESHOLD_GET_BACK_TO_WORK = int(config_parser["App"]["warning_threshold"])  # type: ignore
-        self.POINT_THRESHOLD_TAKE_A_BREAK = int(config_parser["App"]["break_threshold"])
+        self.threshold_warning = int(config_parser["App"]["warning_threshold"])  # type: ignore
+        self.threshold_break = int(config_parser["App"]["break_threshold"])
 
     def __str__(self) -> str:
         return f"Points: {self.points}"
