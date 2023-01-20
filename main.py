@@ -76,7 +76,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
         # set timer signals to slots
-        self.main_loop_timer.timeout.connect() # type: ignore
+        self.main_loop_timer.timeout.connect(self.pytrack_worker.run) # type: ignore
 
         # show the window
         self.show()
