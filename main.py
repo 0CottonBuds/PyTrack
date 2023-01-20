@@ -40,7 +40,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
         # set Charts
         self.point_line_series = QLineSeries()
-        self.point_line_series.append(0, 0)
+        self.point_line_series.append(0, self.pytrack_worker.point_tracker.points / 10)
         chart = QChart()
         chart.addSeries(self.point_line_series)
         chart.setTitle("Points Over Time")
