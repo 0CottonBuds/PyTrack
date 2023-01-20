@@ -23,64 +23,6 @@ class PyTrackWorker(QObject):
         self.time_finished = (0, 0, 0)
         self.point_tracker = point_tracker.PointTracker()
 
-        # self.main_loop()
-
-    def main_loop(self):
-        while self.main_window.main_loop_active:
-            time.sleep(5)
-            # get the active windows
-            self.new_active_window = gw.getActiveWindow()
-
-            self.dt_now = dt.datetime.now()
-            self.time_finished = (
-                self.dt_now.hour,
-                self.dt_now.minute,
-                self.dt_now.second,
-            )
-
-            # check app type and change points
-            window = window_type.WindowType()
-            window.window_name = self.new_active_window.title  # type: ignore
-            window.check_app_type()
-            self.point_tracker.change_points(window)
-            self.point_tracker.check_point_threshold()
-
-            print(f"Active Window: {window}")
-            print(self.point_tracker)
-            self.main_window.label_points_home.setText(str(self.point_tracker))
-
-            if self.new_active_window != self.last_active_window:
-                """checks if window changed if it changes it records the data to the
-                database if all prerequisite parameters exists
-                time_finished and time_started
-                last_active_window and new_active_window"""
-
-                is_parameters_complete = (
-                    self.time_finished is not None
-                    and self.time_started is not None
-                    and self.last_active_window is not None
-                    and self.new_active_window is not None
-                )
-                if is_parameters_complete:
-
-                    window_entry = entry.WindowEntryIn(
-                        self.last_active_window.title,  # type: ignore
-                        self.get_elapsed_time(),
-                    )
-                    window_entry.record_in_database()
-
-                # set the last active window to the current window
-                self.last_active_window = self.new_active_window
-
-                self.time_started = (
-                    self.dt_now.hour,
-                    self.dt_now.minute,
-                    self.dt_now.second,
-                )
-
-            self.check_if_last_window_exists()
-
-            self.printer()
     def run(self):
         self.new_active_window = gw.getActiveWindow()
 
