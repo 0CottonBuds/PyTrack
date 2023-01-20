@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QThread
+from PySide6.QtCore import QThread, QTimer
 from PySide6.QtGui import Qt
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
@@ -49,6 +49,9 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         chart_view.setChart(chart)
         self.point_graph_container_layout.addWidget(chart_view)
 
+        #set timers
+        self.main_loop_timer = QTimer()
+
         # setting the button signals to slots
         self.button_go_to_home.clicked.connect(self.go_to_home_page)  # type: ignore
         self.button_go_to_analytics.clicked.connect(self.go_to_analytics_page)  # type: ignore
@@ -72,6 +75,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         # set combo box signals to slots
         self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
+        # set timer signals to slots
+        self.main_loop_timer.timeout.connect() # type: ignore
 
         # show the window
         self.show()
