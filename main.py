@@ -49,7 +49,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         chart_view.setChart(chart)
         self.point_graph_container_layout.addWidget(chart_view)
 
-        #set timers
+        # set timers
         self.main_loop_timer = QTimer()
 
         # setting the button signals to slots
@@ -57,8 +57,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_go_to_analytics.clicked.connect(self.go_to_analytics_page)  # type: ignore
         self.button_go_to_settings.clicked.connect(self.go_to_settings_page)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.activate_deactivate_main_loop)  # type: ignore
-        self.button_activate_deactivate_main_loop.clicked.connect(self.pytrack_worker.main_loop)  # type: ignore
-        self.button_activate_deactivate_main_loop.clicked.connect(self.point_checker_worker.point_checking_loop)  # type: ignore
         self.point_checker_worker.looped.connect(self.copy_line_series)  # type: ignore this signal is used for the point checking loop
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
@@ -76,7 +74,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
         # set timer signals to slots
-        self.main_loop_timer.timeout.connect(self.pytrack_worker.run) # type: ignore
+        self.main_loop_timer.timeout.connect(self.pytrack_worker.run)  # type: ignore
 
         # show the window
         self.show()
@@ -170,10 +168,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def activate_deactivate_main_loop(self):
         if not self.main_loop_active:
             print("Activated")
+            self.main_loop_timer.start(5000)
             self.main_loop_active = True
             self.button_activate_deactivate_main_loop.setText("Deactivate")
         elif self.main_loop_active:
             print("Deactivated")
+            self.main_loop_timer.stop()
             self.main_loop_active = False
             self.button_activate_deactivate_main_loop.setText("Activate")
 
