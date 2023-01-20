@@ -40,12 +40,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
         # set Charts
         self.point_line_series = QLineSeries()
-        chart = QChart()
-        chart.addSeries(self.point_line_series)
-        chart.setTitle("Points Over Time")
-        chart_view = QChartView()
-        chart_view.setChart(chart)
-        self.point_graph_container_layout.addWidget(chart_view)
+        self.chart = QChart()
+        self.chart.addSeries(self.point_line_series)
+        self.chart.setTitle("Points Over Time")
+        self.chart_view = QChartView()
+        self.chart_view.setChart(self.chart)
+        self.point_graph_container_layout.addWidget(self.chart_view)
 
         # set timers
         self.main_loop_timer = QTimer()
