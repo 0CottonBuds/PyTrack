@@ -191,7 +191,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         count = self.point_line_series.count()
         points = self.pytrack_worker.point_tracker.points / 10  # points divided by 10
         self.point_line_series.append(count, points)
-
+        print(f"adding points: {count}, {points}")
+        
     def get_records(self, query_date: str, query_type: str):
         """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
 
