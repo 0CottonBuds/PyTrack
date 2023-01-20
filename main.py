@@ -40,11 +40,13 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
         # set Charts
         self.point_line_series = QLineSeries()
-        self.chart = QChart()
-        self.chart.addSeries(self.point_line_series)
-        self.chart.setTitle("Points Over Time")
+        self.point_line_series.append(0, 0)
+        chart = QChart()
+        chart.addSeries(self.point_line_series)
+        chart.setTitle("Points Over Time")
+
         self.chart_view = QChartView()
-        self.chart_view.setChart(self.chart)
+        self.chart_view.setChart(chart)
         self.point_graph_container_layout.addWidget(self.chart_view)
 
         # set timers
@@ -191,8 +193,15 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         count = self.point_line_series.count()
         points = self.pytrack_worker.point_tracker.points / 10  # points divided by 10
         self.point_line_series.append(count, points)
+        self.update_chart_view()
         print(f"adding points: {count}, {points}")
-        
+
+    def update_chart_view(self):
+        chart = QChart()
+        chart.addSeries(self.point_line_series)
+        chart.setTitle("Points Over Time")
+        self.chart_view.setChart(chart)
+
     def get_records(self, query_date: str, query_type: str):
         """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
 
