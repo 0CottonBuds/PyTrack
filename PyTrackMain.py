@@ -111,27 +111,3 @@ class PyTrackWorker(QObject):
             elapsed_time = self.get_elapsed_time()
             print(elapsed_time)
 
-
-class PointChecker(QObject):
-    looped = Signal()
-
-    def __init__(self, main_window) -> None:
-        super().__init__()
-        self.line_series = QLineSeries()
-        self.main_window = main_window
-
-    def point_checking_loop(self):
-        points: list[int] = []
-        print("starting")
-        while self.main_window.main_loop_active:
-            print("looped")
-            time.sleep(300)
-            print("checking the points")
-            new_point = self.main_window.pytrack_worker.point_tracker.points
-            points.append(new_point)
-            self.line_series.append(len(points), int(new_point / 10))
-            self.looped.emit()
-
-
-# if __name__ == "__main__":
-#     app1 = PyTrack()
