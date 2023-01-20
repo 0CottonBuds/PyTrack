@@ -49,6 +49,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
         # set timers
         self.main_loop_timer = QTimer()
+        self.point_graph_timer = QTimer()
 
         # setting the button signals to slots
         self.button_go_to_home.clicked.connect(self.go_to_home_page)  # type: ignore
@@ -72,6 +73,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
         # set timer signals to slots
         self.main_loop_timer.timeout.connect(self.pytrack_worker.run)  # type: ignore
+        self.point_graph_timer.timeout.connect(self.add_point_to_point_graph)
 
         # show the window
         self.show()
@@ -165,15 +167,17 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def activate_deactivate_main_loop(self):
         if not self.main_loop_active:
             print("Activated")
-            self.main_loop_timer.start(5000)
+            time_to_loop = 5000  # msec(5 secs)
+            self.main_loop_timer.start(time_to_loop)
+            self.point_graph_timer.start(time_to_loop)
             self.main_loop_active = True
             self.button_activate_deactivate_main_loop.setText("Deactivate")
         elif self.main_loop_active:
             print("Deactivated")
             self.main_loop_timer.stop()
+            self.point_graph_timer.stop()
             self.main_loop_active = False
             self.button_activate_deactivate_main_loop.setText("Activate")
-
 
     def combo_box_date_updates(self, text):
         print(f"signal: {text}")
@@ -182,6 +186,11 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def combo_box_type_updates(self, text):
         print(f"signal: {text}")
         self.get_records(self.comboBox_date.currentText(), self.comboBox_type.currentText())
+
+    def add_point_to_point_graph(self):
+        count = self.point_line_series.count()
+        points = self.pytrack_worker.point_tracker.points / 10  # points divided by 10
+        self.point_line_series.append(count, points)
 
     def get_records(self, query_date: str, query_type: str):
         """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
