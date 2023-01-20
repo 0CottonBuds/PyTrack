@@ -14,7 +14,7 @@ from PytrackUtils.config_helper import edit_config
 from PytrackUtils.window_record_reader import *
 from PytrackUtils.window_type import *
 
-from PyTrackMain import PyTrackWorker, PointChecker
+from PyTrackMain import PyTrackWorker
 
 
 class PytrackMainWindow(QMainWindow, Ui_MainWindow):
@@ -25,7 +25,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.main_loop_active = False
 
         self.pytrack_worker = PyTrackWorker(self)
-        self.point_checker_worker = PointChecker(self)
 
         # setting text and placeholder texts
         self.button_activate_deactivate_main_loop.setText("Activate")
@@ -41,22 +40,24 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
         # set Charts
         self.point_line_series = QLineSeries()
+        self.point_line_series.append(0, self.pytrack_worker.point_tracker.points / 10)
         chart = QChart()
         chart.addSeries(self.point_line_series)
         chart.setTitle("Points Over Time")
-        chart_view = QChartView()
-        chart_view.setChart(chart)
-        self.point_graph_container_layout.addWidget(chart_view)
+
+        self.chart_view = QChartView()
+        self.chart_view.setChart(chart)
+        self.point_graph_container_layout.addWidget(self.chart_view)
 
         # set timers
         self.main_loop_timer = QTimer()
+        self.point_graph_timer = QTimer()
 
         # setting the button signals to slots
         self.button_go_to_home.clicked.connect(self.go_to_home_page)  # type: ignore
         self.button_go_to_analytics.clicked.connect(self.go_to_analytics_page)  # type: ignore
         self.button_go_to_settings.clicked.connect(self.go_to_settings_page)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.activate_deactivate_main_loop)  # type: ignore
-        self.point_checker_worker.looped.connect(self.copy_line_series)  # type: ignore this signal is used for the point checking loop
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
@@ -74,6 +75,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
         # set timer signals to slots
         self.main_loop_timer.timeout.connect(self.pytrack_worker.run)  # type: ignore
+        self.point_graph_timer.timeout.connect(self.add_point_to_point_graph)
 
         # show the window
         self.show()
@@ -167,18 +169,17 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def activate_deactivate_main_loop(self):
         if not self.main_loop_active:
             print("Activated")
-            self.main_loop_timer.start(5000)
+            time_to_loop = 5000  # msec(5 secs)
+            self.main_loop_timer.start(time_to_loop)
+            self.point_graph_timer.start(time_to_loop)
             self.main_loop_active = True
             self.button_activate_deactivate_main_loop.setText("Deactivate")
         elif self.main_loop_active:
             print("Deactivated")
             self.main_loop_timer.stop()
+            self.point_graph_timer.stop()
             self.main_loop_active = False
             self.button_activate_deactivate_main_loop.setText("Activate")
-
-    def copy_line_series(self):
-        print("copied")
-        self.point_line_series = self.point_checker_worker.line_series
 
     def combo_box_date_updates(self, text):
         print(f"signal: {text}")
@@ -187,6 +188,19 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def combo_box_type_updates(self, text):
         print(f"signal: {text}")
         self.get_records(self.comboBox_date.currentText(), self.comboBox_type.currentText())
+
+    def add_point_to_point_graph(self):
+        count = self.point_line_series.count()
+        points = self.pytrack_worker.point_tracker.points / 10  # points divided by 10
+        self.point_line_series.append(count, points)
+        self.update_chart_view()
+        print(f"adding points: {count}, {points}")
+
+    def update_chart_view(self):
+        chart = QChart()
+        chart.addSeries(self.point_line_series)
+        chart.setTitle("Points Over Time")
+        self.chart_view.setChart(chart)
 
     def get_records(self, query_date: str, query_type: str):
         """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
