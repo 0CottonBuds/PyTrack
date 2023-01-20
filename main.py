@@ -26,9 +26,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.main_loop_active = False
 
         self.pytrack_worker = PyTrackWorker(self)
-        self.pytrack_worker_thread = QThread()
         self.point_checker_worker = PointChecker(self)
-        self.point_checker_worker_thread = QThread()
 
         # setting text and placeholder texts
         self.button_activate_deactivate_main_loop.setText("Activate")
@@ -74,12 +72,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         # set combo box signals to slots
         self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
-
-        # move workers to their threads and start the threads
-        self.pytrack_worker.moveToThread(self.pytrack_worker_thread)
-        self.pytrack_worker_thread.start()
-        self.point_checker_worker.moveToThread(self.point_checker_worker_thread)
-        self.point_checker_worker_thread.start()
 
         # show the window
         self.show()
