@@ -14,7 +14,7 @@ from PytrackUtils.config_helper import edit_config
 from PytrackUtils.window_record_reader import *
 from PytrackUtils.window_type import *
 
-from PyTrackMain import PyTrackWorker, PointChecker
+from PyTrackMain import PyTrackWorker
 
 
 class PytrackMainWindow(QMainWindow, Ui_MainWindow):
@@ -25,7 +25,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.main_loop_active = False
 
         self.pytrack_worker = PyTrackWorker(self)
-        self.point_checker_worker = PointChecker(self)
 
         # setting text and placeholder texts
         self.button_activate_deactivate_main_loop.setText("Activate")
@@ -56,7 +55,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_go_to_analytics.clicked.connect(self.go_to_analytics_page)  # type: ignore
         self.button_go_to_settings.clicked.connect(self.go_to_settings_page)  # type: ignore
         self.button_activate_deactivate_main_loop.clicked.connect(self.activate_deactivate_main_loop)  # type: ignore
-        self.point_checker_worker.looped.connect(self.copy_line_series)  # type: ignore this signal is used for the point checking loop
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
@@ -176,9 +174,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.main_loop_active = False
             self.button_activate_deactivate_main_loop.setText("Activate")
 
-    def copy_line_series(self):
-        print("copied")
-        self.point_line_series = self.point_checker_worker.line_series
 
     def combo_box_date_updates(self, text):
         print(f"signal: {text}")
