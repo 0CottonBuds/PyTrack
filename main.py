@@ -5,7 +5,6 @@ from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
 import webbrowser
 import pygetwindow
-import configparser
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
