@@ -70,6 +70,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_link_to_youtube_channel.clicked.connect(self.go_to_link_youtube_channel)  # type: ignore
         self.button_link_to_github_repository.clicked.connect(self.go_to_link_github_repository)  # type: ignore
         self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
+        self.button_exit.clicked.connect(lambda q: quit())
+        self.button_minimize.clicked.connect(lambda m: self.showMinimized())
         # setting the text edit signals to slots
         self.line_edit_point_threshold_break.editingFinished.connect(self.edit_point_threshold_break)  # type: ignore
         self.line_edit_point_threshold_warning.editingFinished.connect(self.edit_point_threshold_warning)  # type: ignore

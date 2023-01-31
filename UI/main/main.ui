@@ -309,26 +309,6 @@ QPushButton{
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="button_maximize">
-                 <property name="styleSheet">
-                  <string notr="true"/>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="icons.qrc">
-                   <normaloff>:/icons/icons/expand.png</normaloff>:/icons/icons/expand.png</iconset>
-                 </property>
-                 <property name="checkable">
-                  <bool>true</bool>
-                 </property>
-                 <property name="flat">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QPushButton" name="button_exit">
                  <property name="styleSheet">
                   <string notr="true"/>
@@ -1124,8 +1104,8 @@ QPushButton{
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>528</width>
-                              <height>465</height>
+                              <width>403</width>
+                              <height>300</height>
                              </rect>
                             </property>
                             <property name="sizePolicy">
@@ -1677,8 +1657,8 @@ QPushButton{
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>47</width>
-                                  <height>20</height>
+                                  <width>100</width>
+                                  <height>30</height>
                                  </rect>
                                 </property>
                                 <layout class="QVBoxLayout" name="verticalLayout_21">
