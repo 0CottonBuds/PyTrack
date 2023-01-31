@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QThread, QTimer
+from PySide6.QtCore import QThread, QTimer, Qt
+from PySide6 import QtCore
 from PySide6.QtGui import Qt
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
@@ -23,6 +24,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Pytrack")
         self.main_loop_active = False
+
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # type: ignore
 
         self.pytrack_worker = PyTrackWorker(self)
 
@@ -67,6 +70,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_link_to_youtube_channel.clicked.connect(self.go_to_link_youtube_channel)  # type: ignore
         self.button_link_to_github_repository.clicked.connect(self.go_to_link_github_repository)  # type: ignore
         self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
+        self.button_exit.clicked.connect(lambda q: quit())
+        self.button_minimize.clicked.connect(lambda m: self.showMinimized())
         # setting the text edit signals to slots
         self.line_edit_point_threshold_break.editingFinished.connect(self.edit_point_threshold_break)  # type: ignore
         self.line_edit_point_threshold_warning.editingFinished.connect(self.edit_point_threshold_warning)  # type: ignore
@@ -252,6 +257,20 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         for window in window_filter.windows:
             add_window_ui = UiAddWindow(window.title)
             self.add_window_contents_layout.addWidget(add_window_ui)
+
+    def mousePressEvent(self, event):
+        self.start = self.mapToGlobal(event.pos())
+        self.pressing = True
+
+    def mouseMoveEvent(self, event):
+        if self.pressing:
+            self.end = self.mapToGlobal(event.pos())
+            self.movement = self.end - self.start
+            self.setGeometry(self.mapToGlobal(self.movement).x(), self.mapToGlobal(self.movement).y(), self.width(), self.height())
+            self.start = self.end
+
+    def mouseReleaseEvent(self, event):
+        self.pressing = False
 
 
 if __name__ == "__main__":

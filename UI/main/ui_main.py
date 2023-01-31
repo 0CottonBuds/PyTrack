@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.1
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
+    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
+    QPushButton, QScrollArea, QSizePolicy, QSpacerItem,
+    QStackedWidget, QVBoxLayout, QWidget)
 import icons_rc
 import icons_rc
 import icons_rc
@@ -46,10 +46,39 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.setSpacing(8)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.verticalLayout_16.setContentsMargins(0, 0, 0, 0)
+        self.main_grid_layout = QFrame(self.centralwidget)
+        self.main_grid_layout.setObjectName(u"main_grid_layout")
+        self.main_grid_layout.setFrameShape(QFrame.StyledPanel)
+        self.main_grid_layout.setFrameShadow(QFrame.Raised)
+        self.gridLayout = QGridLayout(self.main_grid_layout)
+        self.gridLayout.setSpacing(0)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.size_grip_top = QFrame(self.main_grid_layout)
+        self.size_grip_top.setObjectName(u"size_grip_top")
+        self.size_grip_top.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_top.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_top, 0, 1, 1, 1)
+
+        self.size_grip_bottom = QFrame(self.main_grid_layout)
+        self.size_grip_bottom.setObjectName(u"size_grip_bottom")
+        self.size_grip_bottom.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_bottom.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_bottom, 2, 1, 1, 1)
+
+        self.size_grip_left = QFrame(self.main_grid_layout)
+        self.size_grip_left.setObjectName(u"size_grip_left")
+        self.size_grip_left.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_left.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_left, 1, 0, 1, 1)
+
         self.window_layout = QVBoxLayout()
         self.window_layout.setSpacing(0)
         self.window_layout.setObjectName(u"window_layout")
-        self.header_container = QFrame(self.centralwidget)
+        self.header_container = QFrame(self.main_grid_layout)
         self.header_container.setObjectName(u"header_container")
         self.header_container.setMinimumSize(QSize(0, 32))
         self.header_container.setMaximumSize(QSize(16777215, 24))
@@ -108,17 +137,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setSpacing(12)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(self.header_right)
-        self.frame.setObjectName(u"frame")
+        self.frame_2 = QFrame(self.header_right)
+        self.frame_2.setObjectName(u"frame_2")
         sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
-        self.frame.setSizePolicy(sizePolicy1)
-        self.frame.setFrameShape(QFrame.NoFrame)
-        self.frame.setFrameShadow(QFrame.Plain)
+        sizePolicy1.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
+        self.frame_2.setSizePolicy(sizePolicy1)
+        self.frame_2.setFrameShape(QFrame.NoFrame)
+        self.frame_2.setFrameShadow(QFrame.Plain)
 
-        self.horizontalLayout_5.addWidget(self.frame)
+        self.horizontalLayout_5.addWidget(self.frame_2)
 
         self.button_minimize = QPushButton(self.header_right)
         self.button_minimize.setObjectName(u"button_minimize")
@@ -130,23 +159,12 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5.addWidget(self.button_minimize)
 
-        self.button_maximize = QPushButton(self.header_right)
-        self.button_maximize.setObjectName(u"button_maximize")
-        self.button_maximize.setStyleSheet(u"")
-        icon1 = QIcon()
-        icon1.addFile(u":/icons/icons/expand.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.button_maximize.setIcon(icon1)
-        self.button_maximize.setCheckable(True)
-        self.button_maximize.setFlat(True)
-
-        self.horizontalLayout_5.addWidget(self.button_maximize)
-
         self.button_exit = QPushButton(self.header_right)
         self.button_exit.setObjectName(u"button_exit")
         self.button_exit.setStyleSheet(u"")
-        icon2 = QIcon()
-        icon2.addFile(u":/icons/icons/cross.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.button_exit.setIcon(icon2)
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/icons/cross.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.button_exit.setIcon(icon1)
         self.button_exit.setFlat(True)
 
         self.horizontalLayout_5.addWidget(self.button_exit)
@@ -157,7 +175,7 @@ class Ui_MainWindow(object):
 
         self.window_layout.addWidget(self.header_container)
 
-        self.body_container = QFrame(self.centralwidget)
+        self.body_container = QFrame(self.main_grid_layout)
         self.body_container.setObjectName(u"body_container")
         self.body_container.setFrameShape(QFrame.NoFrame)
         self.body_container.setFrameShadow(QFrame.Plain)
@@ -187,9 +205,9 @@ class Ui_MainWindow(object):
         self.button_go_to_home.setObjectName(u"button_go_to_home")
         self.button_go_to_home.setMinimumSize(QSize(0, 56))
         self.button_go_to_home.setStyleSheet(u"border-radius : 50")
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/icons/homeX64.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.button_go_to_home.setIcon(icon3)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/icons/homeX64.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.button_go_to_home.setIcon(icon2)
         self.button_go_to_home.setIconSize(QSize(24, 24))
         self.button_go_to_home.setFlat(True)
 
@@ -199,9 +217,9 @@ class Ui_MainWindow(object):
         self.button_go_to_analytics.setObjectName(u"button_go_to_analytics")
         self.button_go_to_analytics.setMinimumSize(QSize(0, 56))
         self.button_go_to_analytics.setStyleSheet(u"border-radius : 50")
-        icon4 = QIcon()
-        icon4.addFile(u":/icons/icons/chart-histogram.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.button_go_to_analytics.setIcon(icon4)
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/icons/chart-histogram.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.button_go_to_analytics.setIcon(icon3)
         self.button_go_to_analytics.setIconSize(QSize(24, 24))
         self.button_go_to_analytics.setFlat(True)
 
@@ -211,21 +229,21 @@ class Ui_MainWindow(object):
         self.button_go_to_settings.setObjectName(u"button_go_to_settings")
         self.button_go_to_settings.setMinimumSize(QSize(0, 56))
         self.button_go_to_settings.setStyleSheet(u"border-radius : 50")
-        icon5 = QIcon()
-        icon5.addFile(u":/icons/icons/settings (1).png", QSize(), QIcon.Normal, QIcon.Off)
-        self.button_go_to_settings.setIcon(icon5)
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/icons/settings (1).png", QSize(), QIcon.Normal, QIcon.Off)
+        self.button_go_to_settings.setIcon(icon4)
         self.button_go_to_settings.setIconSize(QSize(24, 24))
         self.button_go_to_settings.setAutoDefault(False)
         self.button_go_to_settings.setFlat(True)
 
         self.verticalLayout_2.addWidget(self.button_go_to_settings)
 
-        self.frame_2 = QFrame(self.sidebaar_button_container)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.NoFrame)
-        self.frame_2.setFrameShadow(QFrame.Plain)
+        self.frame_3 = QFrame(self.sidebaar_button_container)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setFrameShape(QFrame.NoFrame)
+        self.frame_3.setFrameShadow(QFrame.Plain)
 
-        self.verticalLayout_2.addWidget(self.frame_2)
+        self.verticalLayout_2.addWidget(self.frame_3)
 
 
         self.verticalLayout.addWidget(self.sidebaar_button_container)
@@ -370,11 +388,13 @@ class Ui_MainWindow(object):
 
         self.page_home_footer_center = QFrame(self.page_home_footer)
         self.page_home_footer_center.setObjectName(u"page_home_footer_center")
+        self.page_home_footer_center.setMinimumSize(QSize(310, 160))
+        self.page_home_footer_center.setMaximumSize(QSize(310, 160))
         self.page_home_footer_center.setFrameShape(QFrame.NoFrame)
         self.page_home_footer_center.setFrameShadow(QFrame.Raised)
         self.button_activate_deactivate_main_loop = QPushButton(self.page_home_footer_center)
         self.button_activate_deactivate_main_loop.setObjectName(u"button_activate_deactivate_main_loop")
-        self.button_activate_deactivate_main_loop.setGeometry(QRect(80, 20, 151, 41))
+        self.button_activate_deactivate_main_loop.setGeometry(QRect(60, 30, 151, 41))
         font2 = QFont()
         font2.setFamilies([u"Times New Roman"])
         font2.setPointSize(14)
@@ -385,21 +405,19 @@ class Ui_MainWindow(object):
 "	border-radius: 20px;\n"
 "\n"
 "}")
-        icon6 = QIcon()
+        icon5 = QIcon()
         iconThemeName = u"applications-games"
         if QIcon.hasThemeIcon(iconThemeName):
-            icon6 = QIcon.fromTheme(iconThemeName)
+            icon5 = QIcon.fromTheme(iconThemeName)
         else:
-            icon6.addFile(u"../../../../../../../../.designer/backup", QSize(), QIcon.Normal, QIcon.Off)
+            icon5.addFile(u"../../../../../../../../.designer/backup", QSize(), QIcon.Normal, QIcon.Off)
 
-        self.button_activate_deactivate_main_loop.setIcon(icon6)
+        self.button_activate_deactivate_main_loop.setIcon(icon5)
         self.button_activate_deactivate_main_loop.setCheckable(True)
         self.button_activate_deactivate_main_loop.setFlat(True)
         self.label_points_home = QLabel(self.page_home_footer_center)
         self.label_points_home.setObjectName(u"label_points_home")
-        self.label_points_home.setGeometry(QRect(130, 0, 81, 21))
-        self.label_points_home.raise_()
-        self.button_activate_deactivate_main_loop.raise_()
+        self.label_points_home.setGeometry(QRect(110, 10, 61, 21))
 
         self.horizontalLayout_10.addWidget(self.page_home_footer_center)
 
@@ -431,21 +449,21 @@ class Ui_MainWindow(object):
         self.verticalLayout_6.setSpacing(0)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.frame_3 = QFrame(self.page_analytics_window_container)
-        self.frame_3.setObjectName(u"frame_3")
+        self.frame_4 = QFrame(self.page_analytics_window_container)
+        self.frame_4.setObjectName(u"frame_4")
         sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(1)
-        sizePolicy3.setHeightForWidth(self.frame_3.sizePolicy().hasHeightForWidth())
-        self.frame_3.setSizePolicy(sizePolicy3)
-        self.frame_3.setMaximumSize(QSize(16777215, 120))
-        self.frame_3.setFrameShape(QFrame.NoFrame)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_7 = QVBoxLayout(self.frame_3)
+        sizePolicy3.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
+        self.frame_4.setSizePolicy(sizePolicy3)
+        self.frame_4.setMaximumSize(QSize(16777215, 120))
+        self.frame_4.setFrameShape(QFrame.NoFrame)
+        self.frame_4.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_7 = QVBoxLayout(self.frame_4)
         self.verticalLayout_7.setSpacing(0)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.frame_7 = QFrame(self.frame_3)
+        self.frame_7 = QFrame(self.frame_4)
         self.frame_7.setObjectName(u"frame_7")
         self.frame_7.setMaximumSize(QSize(16777215, 60))
         self.frame_7.setFrameShape(QFrame.NoFrame)
@@ -463,7 +481,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.frame_7)
 
-        self.frame_8 = QFrame(self.frame_3)
+        self.frame_8 = QFrame(self.frame_4)
         self.frame_8.setObjectName(u"frame_8")
         self.frame_8.setMaximumSize(QSize(16777215, 40))
         self.frame_8.setFrameShape(QFrame.NoFrame)
@@ -507,20 +525,20 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addWidget(self.frame_8)
 
 
-        self.verticalLayout_6.addWidget(self.frame_3)
+        self.verticalLayout_6.addWidget(self.frame_4)
 
-        self.frame_4 = QFrame(self.page_analytics_window_container)
-        self.frame_4.setObjectName(u"frame_4")
+        self.frame_5 = QFrame(self.page_analytics_window_container)
+        self.frame_5.setObjectName(u"frame_5")
         sizePolicy4 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(2)
-        sizePolicy4.setHeightForWidth(self.frame_4.sizePolicy().hasHeightForWidth())
-        self.frame_4.setSizePolicy(sizePolicy4)
-        self.frame_4.setFrameShape(QFrame.NoFrame)
-        self.frame_4.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_8 = QVBoxLayout(self.frame_4)
+        sizePolicy4.setHeightForWidth(self.frame_5.sizePolicy().hasHeightForWidth())
+        self.frame_5.setSizePolicy(sizePolicy4)
+        self.frame_5.setFrameShape(QFrame.NoFrame)
+        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_8 = QVBoxLayout(self.frame_5)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.scrollArea_window_records = QScrollArea(self.frame_4)
+        self.scrollArea_window_records = QScrollArea(self.frame_5)
         self.scrollArea_window_records.setObjectName(u"scrollArea_window_records")
         self.scrollArea_window_records.setMinimumSize(QSize(420, 300))
         self.scrollArea_window_records.setMaximumSize(QSize(12321, 600))
@@ -530,7 +548,7 @@ class Ui_MainWindow(object):
         self.scrollArea_window_records.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 541, 487))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 403, 300))
         sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         sizePolicy5.setHorizontalStretch(0)
         sizePolicy5.setVerticalStretch(0)
@@ -548,7 +566,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.addWidget(self.scrollArea_window_records)
 
 
-        self.verticalLayout_6.addWidget(self.frame_4)
+        self.verticalLayout_6.addWidget(self.frame_5)
 
 
         self.horizontalLayout_12.addWidget(self.page_analytics_window_container)
@@ -666,13 +684,13 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addWidget(self.button_settings_window)
 
-        self.frame_5 = QFrame(self.page_settings_pages_container_top)
-        self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setMaximumSize(QSize(16777215, 40))
-        self.frame_5.setFrameShape(QFrame.NoFrame)
-        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.frame_9 = QFrame(self.page_settings_pages_container_top)
+        self.frame_9.setObjectName(u"frame_9")
+        self.frame_9.setMaximumSize(QSize(16777215, 40))
+        self.frame_9.setFrameShape(QFrame.NoFrame)
+        self.frame_9.setFrameShadow(QFrame.Raised)
 
-        self.verticalLayout_5.addWidget(self.frame_5)
+        self.verticalLayout_5.addWidget(self.frame_9)
 
         self.button_settings_about = QPushButton(self.page_settings_pages_container_top)
         self.button_settings_about.setObjectName(u"button_settings_about")
@@ -737,14 +755,14 @@ class Ui_MainWindow(object):
         self.page_general_footer.setObjectName(u"page_general_footer")
         self.page_general_footer.setFrameShape(QFrame.NoFrame)
         self.page_general_footer.setFrameShadow(QFrame.Raised)
-        self.frame_9 = QFrame(self.page_general_footer)
-        self.frame_9.setObjectName(u"frame_9")
-        self.frame_9.setGeometry(QRect(50, 10, 403, 146))
-        self.frame_9.setFrameShape(QFrame.NoFrame)
-        self.frame_9.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_12 = QVBoxLayout(self.frame_9)
+        self.frame_10 = QFrame(self.page_general_footer)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setGeometry(QRect(50, 10, 403, 146))
+        self.frame_10.setFrameShape(QFrame.NoFrame)
+        self.frame_10.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_12 = QVBoxLayout(self.frame_10)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
-        self.label_8 = QLabel(self.frame_9)
+        self.label_8 = QLabel(self.frame_10)
         self.label_8.setObjectName(u"label_8")
         font5 = QFont()
         font5.setPointSize(10)
@@ -753,7 +771,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_12.addWidget(self.label_8)
 
-        self.frame_11 = QFrame(self.frame_9)
+        self.frame_11 = QFrame(self.frame_10)
         self.frame_11.setObjectName(u"frame_11")
         sizePolicy.setHeightForWidth(self.frame_11.sizePolicy().hasHeightForWidth())
         self.frame_11.setSizePolicy(sizePolicy)
@@ -775,7 +793,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_12.addWidget(self.frame_11)
 
-        self.frame_12 = QFrame(self.frame_9)
+        self.frame_12 = QFrame(self.frame_10)
         self.frame_12.setObjectName(u"frame_12")
         sizePolicy.setHeightForWidth(self.frame_12.sizePolicy().hasHeightForWidth())
         self.frame_12.setSizePolicy(sizePolicy)
@@ -842,7 +860,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 770, 429))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_21 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
         self.add_window_contents_layout = QVBoxLayout()
@@ -879,20 +897,20 @@ class Ui_MainWindow(object):
         self.page_about_body_3.setObjectName(u"page_about_body_3")
         self.page_about_body_3.setFrameShape(QFrame.NoFrame)
         self.page_about_body_3.setFrameShadow(QFrame.Raised)
-        self.frame_10 = QFrame(self.page_about_body_3)
-        self.frame_10.setObjectName(u"frame_10")
-        self.frame_10.setGeometry(QRect(0, 30, 141, 101))
-        self.frame_10.setFrameShape(QFrame.NoFrame)
-        self.frame_10.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_13 = QVBoxLayout(self.frame_10)
+        self.frame_16 = QFrame(self.page_about_body_3)
+        self.frame_16.setObjectName(u"frame_16")
+        self.frame_16.setGeometry(QRect(0, 30, 141, 101))
+        self.frame_16.setFrameShape(QFrame.NoFrame)
+        self.frame_16.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_13 = QVBoxLayout(self.frame_16)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.button_link_to_twitter = QPushButton(self.frame_10)
+        self.button_link_to_twitter = QPushButton(self.frame_16)
         self.button_link_to_twitter.setObjectName(u"button_link_to_twitter")
         self.button_link_to_twitter.setFlat(True)
 
         self.verticalLayout_13.addWidget(self.button_link_to_twitter)
 
-        self.button_link_to_github = QPushButton(self.frame_10)
+        self.button_link_to_github = QPushButton(self.frame_16)
         self.button_link_to_github.setObjectName(u"button_link_to_github")
         self.button_link_to_github.setFlat(True)
 
@@ -959,7 +977,45 @@ class Ui_MainWindow(object):
         self.window_layout.addWidget(self.body_container)
 
 
-        self.verticalLayout_16.addLayout(self.window_layout)
+        self.gridLayout.addLayout(self.window_layout, 1, 1, 1, 1)
+
+        self.size_grip_right = QFrame(self.main_grid_layout)
+        self.size_grip_right.setObjectName(u"size_grip_right")
+        self.size_grip_right.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_right.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_right, 1, 2, 1, 1)
+
+        self.size_grip_top_left = QFrame(self.main_grid_layout)
+        self.size_grip_top_left.setObjectName(u"size_grip_top_left")
+        self.size_grip_top_left.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_top_left.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_top_left, 0, 0, 1, 1)
+
+        self.size_grip_top_right = QFrame(self.main_grid_layout)
+        self.size_grip_top_right.setObjectName(u"size_grip_top_right")
+        self.size_grip_top_right.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_top_right.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_top_right, 0, 2, 1, 1)
+
+        self.size_grip_bottom_right = QFrame(self.main_grid_layout)
+        self.size_grip_bottom_right.setObjectName(u"size_grip_bottom_right")
+        self.size_grip_bottom_right.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_bottom_right.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_bottom_right, 2, 2, 1, 1)
+
+        self.size_grip_bottom_left = QFrame(self.main_grid_layout)
+        self.size_grip_bottom_left.setObjectName(u"size_grip_bottom_left")
+        self.size_grip_bottom_left.setFrameShape(QFrame.StyledPanel)
+        self.size_grip_bottom_left.setFrameShadow(QFrame.Raised)
+
+        self.gridLayout.addWidget(self.size_grip_bottom_left, 2, 0, 1, 1)
+
+
+        self.verticalLayout_16.addWidget(self.main_grid_layout)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -967,7 +1023,7 @@ class Ui_MainWindow(object):
 
         self.button_go_to_settings.setDefault(False)
         self.stackedWidget.setCurrentIndex(0)
-        self.page_settings_stacked_widget.setCurrentIndex(1)
+        self.page_settings_stacked_widget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -978,7 +1034,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"PyTrack", None))
         self.label_4.setText("")
         self.button_minimize.setText("")
-        self.button_maximize.setText("")
         self.button_go_to_home.setText("")
         self.button_go_to_analytics.setText("")
         self.button_go_to_settings.setText("")

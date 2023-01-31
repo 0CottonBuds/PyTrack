@@ -31,7 +31,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=False,
+    console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
@@ -47,10 +47,10 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='PyTrack 1.0.0 debug',
+    name='PyTrack 1.0.1 debug',
 )
 
 import shutil
-shutil.copyfile('settingsConfig.ini', '{0}/PyTrack 1.0.0 debug/settingsConfig.ini'.format(DISTPATH))
-shutil.copyfile('pyTrack.db', '{0}/PyTrack 1.0.0 debug/pyTrack.db'.format(DISTPATH))
-shutil.copytree('notificationIcons', '{0}/PyTrack 1.0.0 debug/notificationIcons'.format(DISTPATH))
+shutil.copyfile('settingsConfig.ini', str(coll.name) +'/settingsConfig.ini'.format(DISTPATH))
+shutil.copyfile('pyTrack.db', str(coll.name) + '/pyTrack.db'.format(DISTPATH))
+shutil.copytree('notificationIcons', str(coll.name) +'/notificationIcons'.format(DISTPATH))
