@@ -4,10 +4,7 @@ from PySide6 import QtCore
 from PySide6.QtGui import Qt
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
-import webbrowser
 import pygetwindow
-
-from qt_material import apply_stylesheet
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
@@ -16,6 +13,7 @@ from UI.AddWindowUi.add_window import UiAddWindow
 from PytrackUtils.config_helper import edit_config
 from PytrackUtils.window_record_reader import *
 from PytrackUtils.window_type import *
+from PytrackUtils.webbrowser_helper import *
 
 from PyTrackMain import PyTrackWorker
 
@@ -26,8 +24,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Pytrack")
         self.main_loop_active = False
-
-        apply_stylesheet(app, theme="light_amber.xml")
 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # type: ignore
 
@@ -68,11 +64,11 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
-        self.button_link_to_twitter.clicked.connect(self.go_to_link_twitter)  # type: ignore
-        self.button_link_to_github.clicked.connect(self.go_to_link_github)  # type: ignore
-        self.button_link_to_youtube_video.clicked.connect(self.go_to_link_youtube_video)  # type: ignore
-        self.button_link_to_youtube_channel.clicked.connect(self.go_to_link_youtube_channel)  # type: ignore
-        self.button_link_to_github_repository.clicked.connect(self.go_to_link_github_repository)  # type: ignore
+        self.button_link_to_twitter.clicked.connect(go_to_link_twitter)  # type: ignore
+        self.button_link_to_github.clicked.connect(go_to_link_github)  # type: ignore
+        self.button_link_to_youtube_video.clicked.connect(go_to_link_youtube_video)  # type: ignore
+        self.button_link_to_youtube_channel.clicked.connect(go_to_link_youtube_channel)  # type: ignore
+        self.button_link_to_github_repository.clicked.connect(go_to_link_github_repository)  # type: ignore
         self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
         self.button_exit.clicked.connect(lambda q: quit())
         self.button_minimize.clicked.connect(lambda m: self.showMinimized())
@@ -112,22 +108,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def go_to_settings_about(self):
         print("go to about settings")
         self.page_settings_stacked_widget.setCurrentWidget(self.page_settings_stacked_widget_page_about)
-
-    def go_to_link_twitter(self):
-        # webbrowser.open("")
-        pass
-
-    def go_to_link_github(self):
-        webbrowser.open("https://github.com/0CottonBuds")
-
-    def go_to_link_youtube_video(self):
-        webbrowser.open("")
-
-    def go_to_link_youtube_channel(self):
-        webbrowser.open("")
-
-    def go_to_link_github_repository(self):
-        webbrowser.open("https://github.com/0CottonBuds/pytrack")
 
     def edit_point_threshold_break(self):
         """edit the point threshold of break"""
