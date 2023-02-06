@@ -20,7 +20,9 @@ If you would like to contribute to the development of PyTrack, please feel free 
 If you need help getting started or have any questions, please open an issue on the Github repository or contact the developers directly.
 
 ### requirements
-pygetwindow
-PySide6
-config parser
-sqlite3
+
+pygetwindow,
+PySide6,
+config parser,
+sqlite3,
+qt-material
