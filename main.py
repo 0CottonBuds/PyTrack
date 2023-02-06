@@ -7,6 +7,8 @@ from PySide6.QtCharts import QChartView, QChart, QLineSeries
 import webbrowser
 import pygetwindow
 
+from qt_material import apply_stylesheet
+
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
 from UI.AddWindowUi.add_window import UiAddWindow
@@ -24,6 +26,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("Pytrack")
         self.main_loop_active = False
+
+        apply_stylesheet(app, theme="light_amber.xml")
 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # type: ignore
 
