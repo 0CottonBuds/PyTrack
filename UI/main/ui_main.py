@@ -77,7 +77,7 @@ class Ui_MainWindow(object):
         self.label_3 = QLabel(self.header_center)
         self.label_3.setObjectName(u"label_3")
         self.label_3.setMaximumSize(QSize(70, 16777215))
-        self.label_3.setStyleSheet(u"font: 90 16pt \"Times New Roman\";")
+        self.label_3.setStyleSheet(u"")
 
         self.horizontalLayout_6.addWidget(self.label_3, 0, Qt.AlignLeft)
 
@@ -332,11 +332,7 @@ class Ui_MainWindow(object):
         font2.setPointSize(14)
         self.button_activate_deactivate_main_loop.setFont(font2)
         self.button_activate_deactivate_main_loop.setAutoFillBackground(False)
-        self.button_activate_deactivate_main_loop.setStyleSheet(u"QPushButton{\n"
-"	border: 2px solid gray;\n"
-"	border-radius: 20px;\n"
-"\n"
-"}")
+        self.button_activate_deactivate_main_loop.setStyleSheet(u"")
         icon5 = QIcon()
         iconThemeName = u"applications-games"
         if QIcon.hasThemeIcon(iconThemeName):

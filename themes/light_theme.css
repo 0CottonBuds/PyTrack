@@ -1,3 +1,12 @@
 QMainWindow{
     background-color: "white";
 }
+
+QLabel#label_3{
+    font: 90 14pt \"Times New Roman\";
+}
+
+QPushButton#button_activate_deactivate_main_loop{
+    border: 2px solid gray;
+    border-radius: 20px;
+}
