@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QThread, QTimer, Qt
+from PySide6.QtCore import QTimer, Qt
 from PySide6 import QtCore
 from PySide6.QtGui import Qt
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
@@ -253,11 +253,15 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.setGeometry(self.mapToGlobal(self.movement).x(), self.mapToGlobal(self.movement).y(), self.width(), self.height())
             self.start = self.end
 
-    def mouseReleaseEvent(self, event):
+    def mouseReleaseEvent(self):
         self.pressing = False
 
 
 if __name__ == "__main__":
     app = QApplication()
+
+    css = open("themes/light_theme.css","r").read()
+    app.setStyleSheet(css)
+
     window = PytrackMainWindow()
     app.exec()
