@@ -441,18 +441,16 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.widget_4)
 
-        self.frame_5 = QFrame(self.page_analytics_window_container)
-        self.frame_5.setObjectName(u"frame_5")
+        self.widget_5 = QWidget(self.page_analytics_window_container)
+        self.widget_5.setObjectName(u"widget_5")
         sizePolicy4 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy4.setHorizontalStretch(0)
         sizePolicy4.setVerticalStretch(2)
-        sizePolicy4.setHeightForWidth(self.frame_5.sizePolicy().hasHeightForWidth())
-        self.frame_5.setSizePolicy(sizePolicy4)
-        self.frame_5.setFrameShape(QFrame.NoFrame)
-        self.frame_5.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_8 = QVBoxLayout(self.frame_5)
+        sizePolicy4.setHeightForWidth(self.widget_5.sizePolicy().hasHeightForWidth())
+        self.widget_5.setSizePolicy(sizePolicy4)
+        self.verticalLayout_8 = QVBoxLayout(self.widget_5)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.scrollArea_window_records = QScrollArea(self.frame_5)
+        self.scrollArea_window_records = QScrollArea(self.widget_5)
         self.scrollArea_window_records.setObjectName(u"scrollArea_window_records")
         self.scrollArea_window_records.setMinimumSize(QSize(420, 300))
         self.scrollArea_window_records.setMaximumSize(QSize(12321, 600))
@@ -480,7 +478,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.addWidget(self.scrollArea_window_records)
 
 
-        self.verticalLayout_6.addWidget(self.frame_5)
+        self.verticalLayout_6.addWidget(self.widget_5)
 
 
         self.horizontalLayout_12.addWidget(self.page_analytics_window_container)
@@ -739,7 +737,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 758, 407))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
         self.verticalLayout_21 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
         self.add_window_contents_layout = QVBoxLayout()

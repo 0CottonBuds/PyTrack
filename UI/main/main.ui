@@ -150,7 +150,7 @@
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font: 90 16pt &quot;Times New Roman&quot;;</string>
+                  <string notr="true"/>
                  </property>
                  <property name="text">
                   <string>PyTrack</string>
@@ -645,11 +645,7 @@
                           <bool>false</bool>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">QPushButton{
-	border: 2px solid gray;
-	border-radius: 20px;
-
-}</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>Deactivate</string>
@@ -848,18 +844,12 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="frame_5">
+                       <widget class="QWidget" name="widget_5" native="true">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                           <horstretch>0</horstretch>
                           <verstretch>2</verstretch>
                          </sizepolicy>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_8">
                          <item>
@@ -1339,8 +1329,8 @@
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>758</width>
-                                  <height>407</height>
+                                  <width>100</width>
+                                  <height>30</height>
                                  </rect>
                                 </property>
                                 <layout class="QVBoxLayout" name="verticalLayout_21">

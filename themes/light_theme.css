@@ -10,3 +10,22 @@ QPushButton#button_activate_deactivate_main_loop{
     border: 2px solid gray;
     border-radius: 20px;
 }
+
+QScrollBar{
+    background-color: white;
+    height: 0px;
+}
+
+QVBoxLayout{
+    background-color: white;
+}
+
+QWidget{
+    background-color: white;
+}
+
+QFrame{
+    background-color: white;
+}
+
+/* Button Icons */
