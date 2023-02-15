@@ -29,3 +29,25 @@ QFrame{
 }
 
 /* Button Icons */
+
+QPushButton#button_minimize{
+    qproperty-icon: url(":/icons/icons/minus.png");
+}
+QPushButton#button_exit{
+    qproperty-icon: url(":/icons/icons/cross.png");
+}
+QPushButton#button_go_to_home{
+    qproperty-icon: url(":/icons/icons/homeX64.png");
+}
+QPushButton#button_go_to_analytics{
+    qproperty-icon: url(":/icons/icons/chart-histogram.png");
+}
+QPushButton#button_go_to_settings{
+    qproperty-icon: url(":/icons/icons/settings (1).png");
+}
+QPushButton#button_minimize{
+    qproperty-icon: url(":/icons/icons/minus.png");
+}
+QPushButton#button_minimize{
+    qproperty-icon: url(":/icons/icons/minus.png");
+}

@@ -116,9 +116,9 @@ class Ui_MainWindow(object):
         self.button_minimize = QPushButton(self.header_right)
         self.button_minimize.setObjectName(u"button_minimize")
         self.button_minimize.setStyleSheet(u"")
-        icon = QIcon()
-        icon.addFile(u":/icons/icons/minus.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.button_minimize.setIcon(icon)
+        # icon = QIcon()
+        # icon.addFile(u":/icons/icons/minus.png", QSize(), QIcon.Normal, QIcon.Off)
+        # self.button_minimize.setIcon(icon)
         self.button_minimize.setFlat(True)
 
         self.horizontalLayout_5.addWidget(self.button_minimize)
