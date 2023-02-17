@@ -14,6 +14,7 @@ from PytrackUtils.config_helper import edit_config
 from PytrackUtils.window_record_reader import *
 from PytrackUtils.window_type import *
 from PytrackUtils.webbrowser_helper import *
+from PytrackUtils.stylesheet_helper import change_stylesheet, get_themes
 
 from PyTrackMain import PyTrackWorker
 
@@ -40,8 +41,11 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         combo_box_type_items = ["all", "bad", "good"]
         self.comboBox_type.addItems(combo_box_type_items)
         self.get_records("today", "all")
-        self.combo_box_theme_items = ["light","dark"]
-        self.comboBox_theme.addItems(self.combo_box_theme_items)
+        combo_box_theme_items = get_themes()
+        self.comboBox_theme.addItems(combo_box_theme_items)
+        # set stylesheet as the first one on the list by default
+        # TODO: set this to the theme in the settings.
+        change_stylesheet(self, str(combo_box_theme_items[0]), app)
 
         # set Charts
         self.point_line_series = QLineSeries()
@@ -182,10 +186,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.get_records(self.comboBox_date.currentText(), self.comboBox_type.currentText())
 
     def combo_box_theme_updates(self, text):
-        theme = open(f"themes/{text}_theme.css","r").read()
-        app.setStyleSheet(theme)
-        print(f"Changed theme to {text} theme.")
-        self.update()
+        change_stylesheet(self, text, app)
 
     def add_point_to_point_graph(self):
         count = self.point_line_series.count()
