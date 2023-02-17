@@ -1,0 +1,53 @@
+QMainWindow{
+    background-color: gray;
+}
+
+QLabel#label_3{
+    font: 90 14pt \"Times New Roman\";
+}
+
+QPushButton#button_activate_deactivate_main_loop{
+    border: 2px solid gray;
+    border-radius: 20px;
+}
+
+QScrollBar{
+    background-color: white;
+    height: 0px;
+}
+
+QVBoxLayout{
+    background-color: white;
+}
+
+QWidget{
+    background-color: white;
+}
+
+QFrame{
+    background-color: white;
+}
+
+/* Button Icons */
+
+QPushButton#button_minimize{
+    qproperty-icon: url(":/icons/icons/minus.png");
+}
+QPushButton#button_exit{
+    qproperty-icon: url(":/icons/icons/cross.png");
+}
+QPushButton#button_go_to_home{
+    qproperty-icon: url(":/icons/icons/homeX64.png");
+}
+QPushButton#button_go_to_analytics{
+    qproperty-icon: url(":/icons/icons/chart-histogram.png");
+}
+QPushButton#button_go_to_settings{
+    qproperty-icon: url(":/icons/icons/settings (1).png");
+}
+QPushButton#button_minimize{
+    qproperty-icon: url(":/icons/icons/minus.png");
+}
+QPushButton#button_minimize{
+    qproperty-icon: url(":/icons/icons/minus.png");
+}
