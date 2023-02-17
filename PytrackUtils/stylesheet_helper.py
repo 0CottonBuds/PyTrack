@@ -20,7 +20,7 @@ def get_themes():
         A list of stings containing the names for themes.
     """
     themes = str(read_config("settingsConfig.ini", "App", "themes"))
-    themes = themes.split("-")
+    themes = themes.split(", ")
     return themes
 
 get_themes()
