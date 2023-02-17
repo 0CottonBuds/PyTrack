@@ -1,5 +1,5 @@
 QMainWindow{
-    background-color: gray;
+    background-color: black;
 }
 
 QLabel#label_3{
@@ -7,25 +7,25 @@ QLabel#label_3{
 }
 
 QPushButton#button_activate_deactivate_main_loop{
-    border: 2px solid gray;
+    border: 2px solid white;
     border-radius: 20px;
 }
 
 QScrollBar{
-    background-color: white;
+    background-color: gray;
     height: 0px;
 }
 
 QVBoxLayout{
-    background-color: white;
+    background-color: gray;
 }
 
 QWidget{
-    background-color: white;
+    background-color: gray;
 }
 
 QFrame{
-    background-color: white;
+    background-color: gray;
 }
 
 /* Button Icons */

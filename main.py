@@ -40,6 +40,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         combo_box_type_items = ["all", "bad", "good"]
         self.comboBox_type.addItems(combo_box_type_items)
         self.get_records("today", "all")
+        self.combo_box_theme_items = ["light","dark"]
+        self.comboBox_theme.addItems(self.combo_box_theme_items)
 
         # set Charts
         self.point_line_series = QLineSeries()
@@ -78,6 +80,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         # set combo box signals to slots
         self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
+        self.comboBox_theme.currentTextChanged.connect(self.combo_box_theme_updates) # type: ignore
         # set timer signals to slots
         self.main_loop_timer.timeout.connect(self.pytrack_worker.run)  # type: ignore
         self.point_graph_timer.timeout.connect(self.add_point_to_point_graph)
@@ -178,6 +181,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         print(f"signal: {text}")
         self.get_records(self.comboBox_date.currentText(), self.comboBox_type.currentText())
 
+    def combo_box_theme_updates(self, text):
+        theme = open(f"themes/{text}_theme.css","r").read()
+        app.setStyleSheet(theme)
+        print(f"Changed theme to {text} theme.")
+        self.update()
+
     def add_point_to_point_graph(self):
         count = self.point_line_series.count()
         points = self.pytrack_worker.point_tracker.points / 10  # points divided by 10
@@ -253,15 +262,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.setGeometry(self.mapToGlobal(self.movement).x(), self.mapToGlobal(self.movement).y(), self.width(), self.height())
             self.start = self.end
 
-    def mouseReleaseEvent(self):
+    def mouseReleaseEvent(self, event):
         self.pressing = False
 
 
 if __name__ == "__main__":
     app = QApplication()
-
-    css = open("themes/light_theme.css","r").read()
-    app.setStyleSheet(css)
 
     window = PytrackMainWindow()
     app.exec()
