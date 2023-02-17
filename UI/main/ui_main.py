@@ -116,9 +116,9 @@ class Ui_MainWindow(object):
         self.button_minimize = QPushButton(self.header_right)
         self.button_minimize.setObjectName(u"button_minimize")
         self.button_minimize.setStyleSheet(u"")
-        # icon = QIcon()
-        # icon.addFile(u":/icons/icons/minus.png", QSize(), QIcon.Normal, QIcon.Off)
-        # self.button_minimize.setIcon(icon)
+        icon = QIcon()
+        icon.addFile(u":/icons/icons/minus.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.button_minimize.setIcon(icon)
         self.button_minimize.setFlat(True)
 
         self.horizontalLayout_5.addWidget(self.button_minimize)
@@ -646,9 +646,10 @@ class Ui_MainWindow(object):
         self.page_general_footer.setObjectName(u"page_general_footer")
         self.widget_10 = QWidget(self.page_general_footer)
         self.widget_10.setObjectName(u"widget_10")
-        self.widget_10.setGeometry(QRect(50, 10, 403, 146))
+        self.widget_10.setGeometry(QRect(50, 10, 291, 141))
         self.verticalLayout_12 = QVBoxLayout(self.widget_10)
         self.verticalLayout_12.setObjectName(u"verticalLayout_12")
+        self.verticalLayout_12.setContentsMargins(0, 0, 0, 0)
         self.label_8 = QLabel(self.widget_10)
         self.label_8.setObjectName(u"label_8")
         font5 = QFont()
@@ -697,6 +698,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_12.addWidget(self.widget_12)
 
+        self.widget = QWidget(self.widget_10)
+        self.widget.setObjectName(u"widget")
+        self.label_theme = QLabel(self.widget)
+        self.label_theme.setObjectName(u"label_theme")
+        self.label_theme.setGeometry(QRect(10, 0, 111, 20))
+        self.comboBox_theme = QComboBox(self.widget)
+        self.comboBox_theme.setObjectName(u"comboBox_theme")
+        self.comboBox_theme.setGeometry(QRect(50, 0, 69, 20))
+
+        self.verticalLayout_12.addWidget(self.widget)
+
 
         self.verticalLayout_9.addWidget(self.page_general_footer)
 
@@ -737,7 +749,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 100, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 758, 407))
         self.verticalLayout_21 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_21.setObjectName(u"verticalLayout_21")
         self.add_window_contents_layout = QVBoxLayout()
@@ -923,6 +935,7 @@ class Ui_MainWindow(object):
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"App", None))
         self.label_9.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(Break)", None))
         self.label_10.setText(QCoreApplication.translate("MainWindow", u"Point Treshold(warning)", None))
+        self.label_theme.setText(QCoreApplication.translate("MainWindow", u"Theme", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Window", None))
         self.button_add_windows.setText(QCoreApplication.translate("MainWindow", u"Add Window", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"About", None))

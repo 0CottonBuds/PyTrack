@@ -1177,11 +1177,23 @@
                               <rect>
                                <x>50</x>
                                <y>10</y>
-                               <width>403</width>
-                               <height>146</height>
+                               <width>291</width>
+                               <height>141</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_12">
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
                               <item>
                                <widget class="QLabel" name="label_8">
                                 <property name="font">
@@ -1242,6 +1254,33 @@
                                   <widget class="QLineEdit" name="line_edit_point_threshold_warning"/>
                                  </item>
                                 </layout>
+                               </widget>
+                              </item>
+                              <item>
+                               <widget class="QWidget" name="widget" native="true">
+                                <widget class="QLabel" name="label_theme">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>10</x>
+                                   <y>0</y>
+                                   <width>111</width>
+                                   <height>20</height>
+                                  </rect>
+                                 </property>
+                                 <property name="text">
+                                  <string>Theme</string>
+                                 </property>
+                                </widget>
+                                <widget class="QComboBox" name="comboBox_theme">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>50</x>
+                                   <y>0</y>
+                                   <width>69</width>
+                                   <height>20</height>
+                                  </rect>
+                                 </property>
+                                </widget>
                                </widget>
                               </item>
                              </layout>
@@ -1329,8 +1368,8 @@
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>100</width>
-                                  <height>30</height>
+                                  <width>758</width>
+                                  <height>407</height>
                                  </rect>
                                 </property>
                                 <layout class="QVBoxLayout" name="verticalLayout_21">
