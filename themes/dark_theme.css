@@ -1,9 +1,17 @@
 QMainWindow{
-    background-color: black;
+    background-color: rgb(29, 29, 29);
 }
 
 QLabel#label_3{
     font: 90 14pt \"Times New Roman\";
+}
+
+QLabel{
+    color: white;
+}
+
+QPushButton{
+    color: white;
 }
 
 QPushButton#button_activate_deactivate_main_loop{
@@ -12,20 +20,24 @@ QPushButton#button_activate_deactivate_main_loop{
 }
 
 QScrollBar{
-    background-color: gray;
+    background-color: rgb(29, 29, 29);
     height: 0px;
 }
 
 QVBoxLayout{
-    background-color: gray;
+    background-color: rgb(29, 29, 29);
 }
 
 QWidget{
-    background-color: gray;
+    background-color: rgb(29, 29, 29);
 }
 
 QFrame{
-    background-color: gray;
+    background-color: rgb(29, 29, 29);
+}
+
+QComboBox{
+    color: white;
 }
 
 /* Button Icons */
