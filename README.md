@@ -24,5 +24,4 @@ If you need help getting started or have any questions, please open an issue on 
 pygetwindow,
 PySide6,
 config parser,
-sqlite3,
-qt-material
+sqlite3
