@@ -27,12 +27,7 @@
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-QPushButton{
-	border: 2px solid gray
-	border-radius: 50px
-}
-</string>
+    <string notr="true"/>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_16">
     <property name="spacing">
@@ -74,43 +69,13 @@ QPushButton{
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="0" column="1">
-        <widget class="QFrame" name="size_grip_top">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QFrame" name="size_grip_bottom">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QFrame" name="size_grip_left">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1">
         <layout class="QVBoxLayout" name="window_layout">
          <property name="spacing">
           <number>0</number>
          </property>
          <item>
-          <widget class="QFrame" name="header_container">
+          <widget class="QWidget" name="header_container" native="true">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -122,12 +87,6 @@ QPushButton{
              <width>16777215</width>
              <height>24</height>
             </size>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_4">
             <property name="spacing">
@@ -146,7 +105,7 @@ QPushButton{
              <number>0</number>
             </property>
             <item>
-             <widget class="QFrame" name="header_left">
+             <widget class="QWidget" name="header_left" native="true">
               <property name="minimumSize">
                <size>
                 <width>10</width>
@@ -156,27 +115,15 @@ QPushButton{
               <property name="cursor">
                <cursorShape>SizeFDiagCursor</cursorShape>
               </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="header_center">
+             <widget class="QWidget" name="header_center" native="true">
               <property name="minimumSize">
                <size>
                 <width>160</width>
                 <height>0</height>
                </size>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_6">
                <property name="spacing">
@@ -203,7 +150,7 @@ QPushButton{
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font: 90 16pt &quot;Times New Roman&quot;;</string>
+                  <string notr="true"/>
                  </property>
                  <property name="text">
                   <string>PyTrack</string>
@@ -252,13 +199,7 @@ QPushButton{
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="header_right">
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
+             <widget class="QWidget" name="header_right" native="true">
               <layout class="QHBoxLayout" name="horizontalLayout_5">
                <property name="spacing">
                 <number>12</number>
@@ -276,18 +217,12 @@ QPushButton{
                 <number>0</number>
                </property>
                <item>
-                <widget class="QFrame" name="frame_2">
+                <widget class="QWidget" name="widget_2" native="true">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
                  </property>
                 </widget>
                </item>
@@ -353,7 +288,7 @@ QPushButton{
              <number>0</number>
             </property>
             <item>
-             <widget class="QFrame" name="sidebar_container">
+             <widget class="QWidget" name="sidebar_container" native="true">
               <property name="minimumSize">
                <size>
                 <width>56</width>
@@ -365,12 +300,6 @@ QPushButton{
                 <width>56</width>
                 <height>16777215</height>
                </size>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout">
                <property name="spacing">
@@ -389,13 +318,7 @@ QPushButton{
                 <number>0</number>
                </property>
                <item>
-                <widget class="QFrame" name="sidebaar_button_container">
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
-                 </property>
+                <widget class="QWidget" name="sidebaar_button_container" native="true">
                  <layout class="QVBoxLayout" name="verticalLayout_2">
                   <property name="spacing">
                    <number>24</number>
@@ -506,39 +429,19 @@ QPushButton{
                    </widget>
                   </item>
                   <item>
-                   <widget class="QFrame" name="frame_3">
-                    <property name="frameShape">
-                     <enum>QFrame::NoFrame</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Plain</enum>
-                    </property>
-                   </widget>
+                   <widget class="QWidget" name="widget_3" native="true"/>
                   </item>
                  </layout>
                 </widget>
                </item>
                <item>
-                <widget class="QFrame" name="sidebar_footer">
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Plain</enum>
-                 </property>
-                </widget>
+                <widget class="QWidget" name="sidebar_footer" native="true"/>
                </item>
               </layout>
              </widget>
             </item>
             <item>
-             <widget class="QFrame" name="body_container_2">
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
+             <widget class="QWidget" name="body_container_2" native="true">
               <layout class="QHBoxLayout" name="horizontalLayout_3">
                <property name="spacing">
                 <number>0</number>
@@ -578,43 +481,24 @@ QPushButton{
                     <number>0</number>
                    </property>
                    <item>
-                    <widget class="QFrame" name="page_home_header">
+                    <widget class="QWidget" name="page_home_header" native="true">
                      <property name="maximumSize">
                       <size>
                        <width>16777215</width>
                        <height>125</height>
                       </size>
                      </property>
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
                      <layout class="QHBoxLayout" name="horizontalLayout_9">
                       <item>
-                       <widget class="QFrame" name="page_home_header_left">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_home_header_left" native="true"/>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_home_header_center">
+                       <widget class="QWidget" name="page_home_header_center" native="true">
                         <property name="minimumSize">
                          <size>
                           <width>0</width>
                           <height>100</height>
                          </size>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QHBoxLayout" name="horizontalLayout_11">
                          <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
@@ -647,31 +531,18 @@ QPushButton{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_home_header_right">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_home_header_right" native="true"/>
                       </item>
                      </layout>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QFrame" name="page_home_body">
+                    <widget class="QWidget" name="page_home_body" native="true">
                      <property name="minimumSize">
                       <size>
                        <width>0</width>
                        <height>300</height>
                       </size>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
                      </property>
                      <layout class="QHBoxLayout" name="horizontalLayout_7">
                       <property name="spacing">
@@ -690,28 +561,15 @@ QPushButton{
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QFrame" name="page_home_body_left">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_home_body_left" native="true"/>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_home_body_center">
+                       <widget class="QWidget" name="page_home_body_center" native="true">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                           <horstretch>0</horstretch>
                           <verstretch>0</verstretch>
                          </sizepolicy>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QHBoxLayout" name="horizontalLayout_8">
                          <item alignment="Qt::AlignTop">
@@ -743,39 +601,19 @@ QPushButton{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_home_body_right">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_home_body_right" native="true"/>
                       </item>
                      </layout>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QFrame" name="page_home_footer">
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
+                    <widget class="QWidget" name="page_home_footer" native="true">
                      <layout class="QHBoxLayout" name="horizontalLayout_10">
                       <item>
-                       <widget class="QFrame" name="page_home_footer_left">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_home_footer_left" native="true"/>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_home_footer_center">
+                       <widget class="QWidget" name="page_home_footer_center" native="true">
                         <property name="minimumSize">
                          <size>
                           <width>310</width>
@@ -787,12 +625,6 @@ QPushButton{
                           <width>310</width>
                           <height>160</height>
                          </size>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
                         </property>
                         <widget class="QPushButton" name="button_activate_deactivate_main_loop">
                          <property name="geometry">
@@ -813,11 +645,7 @@ QPushButton{
                           <bool>false</bool>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">QPushButton{
-	border: 2px solid gray;
-	border-radius: 20px;
-
-}</string>
+                          <string notr="true"/>
                          </property>
                          <property name="text">
                           <string>Deactivate</string>
@@ -849,14 +677,7 @@ QPushButton{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_home_footerright">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_home_footerright" native="true"/>
                       </item>
                      </layout>
                     </widget>
@@ -866,18 +687,12 @@ QPushButton{
                  <widget class="QWidget" name="page_analytics">
                   <layout class="QHBoxLayout" name="horizontalLayout_12">
                    <item>
-                    <widget class="QFrame" name="page_analytics_window_container">
+                    <widget class="QWidget" name="page_analytics_window_container" native="true">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                        <horstretch>6</horstretch>
                        <verstretch>1</verstretch>
                       </sizepolicy>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_6">
                       <property name="spacing">
@@ -896,7 +711,7 @@ QPushButton{
                        <number>0</number>
                       </property>
                       <item>
-                       <widget class="QFrame" name="frame_4">
+                       <widget class="QWidget" name="widget_4" native="true">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                           <horstretch>0</horstretch>
@@ -908,12 +723,6 @@ QPushButton{
                           <width>16777215</width>
                           <height>120</height>
                          </size>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_7">
                          <property name="spacing">
@@ -932,18 +741,12 @@ QPushButton{
                           <number>0</number>
                          </property>
                          <item>
-                          <widget class="QFrame" name="frame_7">
+                          <widget class="QWidget" name="widget_7" native="true">
                            <property name="maximumSize">
                             <size>
                              <width>16777215</width>
                              <height>60</height>
                             </size>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
                            </property>
                            <widget class="QLabel" name="label_13">
                             <property name="geometry">
@@ -973,20 +776,14 @@ QPushButton{
                           </widget>
                          </item>
                          <item>
-                          <widget class="QFrame" name="frame_8">
+                          <widget class="QWidget" name="widget_8" native="true">
                            <property name="maximumSize">
                             <size>
                              <width>16777215</width>
                              <height>40</height>
                             </size>
                            </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
-                           </property>
-                           <widget class="QFrame" name="frame_13">
+                           <widget class="QWidget" name="widget_13" native="true">
                             <property name="geometry">
                              <rect>
                               <x>10</x>
@@ -994,12 +791,6 @@ QPushButton{
                               <width>146</width>
                               <height>38</height>
                              </rect>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
                             </property>
                             <layout class="QHBoxLayout" name="horizontalLayout_18">
                              <item>
@@ -1018,7 +809,7 @@ QPushButton{
                              </item>
                             </layout>
                            </widget>
-                           <widget class="QFrame" name="frame_14">
+                           <widget class="QWidget" name="widget_14" native="true">
                             <property name="geometry">
                              <rect>
                               <x>190</x>
@@ -1026,12 +817,6 @@ QPushButton{
                               <width>146</width>
                               <height>38</height>
                              </rect>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
                             </property>
                             <layout class="QHBoxLayout" name="horizontalLayout_19">
                              <item>
@@ -1059,18 +844,12 @@ QPushButton{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="frame_5">
+                       <widget class="QWidget" name="widget_5" native="true">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                           <horstretch>0</horstretch>
                           <verstretch>2</verstretch>
                          </sizepolicy>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_8">
                          <item>
@@ -1104,8 +883,8 @@ QPushButton{
                              <rect>
                               <x>0</x>
                               <y>0</y>
-                              <width>403</width>
-                              <height>300</height>
+                              <width>534</width>
+                              <height>465</height>
                              </rect>
                             </property>
                             <property name="sizePolicy">
@@ -1129,18 +908,12 @@ QPushButton{
                     </widget>
                    </item>
                    <item>
-                    <widget class="QFrame" name="page_analytic_points_container">
+                    <widget class="QWidget" name="page_analytic_points_container" native="true">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                        <horstretch>4</horstretch>
                        <verstretch>4</verstretch>
                       </sizepolicy>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_14">
                       <item>
@@ -1169,7 +942,7 @@ QPushButton{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="point_graph_container">
+                       <widget class="QWidget" name="point_graph_container" native="true">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                           <horstretch>0</horstretch>
@@ -1178,15 +951,6 @@ QPushButton{
                         </property>
                         <property name="styleSheet">
                          <string notr="true"/>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::Box</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                        <property name="lineWidth">
-                         <number>1</number>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_19">
                          <property name="spacing">
@@ -1211,18 +975,12 @@ QPushButton{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="frame_6">
+                       <widget class="QWidget" name="widget_6" native="true">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                           <horstretch>0</horstretch>
                           <verstretch>4</verstretch>
                          </sizepolicy>
-                        </property>
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
                         </property>
                         <layout class="QVBoxLayout" name="verticalLayout_15">
                          <item>
@@ -1250,7 +1008,7 @@ QPushButton{
                  <widget class="QWidget" name="page_settings">
                   <layout class="QHBoxLayout" name="horizontalLayout_13">
                    <item>
-                    <widget class="QFrame" name="page_settings_pages_container">
+                    <widget class="QWidget" name="page_settings_pages_container" native="true">
                      <property name="minimumSize">
                       <size>
                        <width>100</width>
@@ -1263,21 +1021,9 @@ QPushButton{
                        <height>16777215</height>
                       </size>
                      </property>
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
-                     </property>
                      <layout class="QVBoxLayout" name="verticalLayout_4">
                       <item>
-                       <widget class="QFrame" name="page_settings_pages_container_top">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
+                       <widget class="QWidget" name="page_settings_pages_container_top" native="true">
                         <layout class="QVBoxLayout" name="verticalLayout_5">
                          <item>
                           <widget class="QPushButton" name="button_settings_general">
@@ -1331,18 +1077,12 @@ QPushButton{
                           </widget>
                          </item>
                          <item>
-                          <widget class="QFrame" name="frame_9">
+                          <widget class="QWidget" name="widget_9" native="true">
                            <property name="maximumSize">
                             <size>
                              <width>16777215</width>
                              <height>40</height>
                             </size>
-                           </property>
-                           <property name="frameShape">
-                            <enum>QFrame::NoFrame</enum>
-                           </property>
-                           <property name="frameShadow">
-                            <enum>QFrame::Raised</enum>
                            </property>
                           </widget>
                          </item>
@@ -1374,41 +1114,21 @@ QPushButton{
                        </widget>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_settings_pages_container_center">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_settings_pages_container_center" native="true"/>
                       </item>
                       <item>
-                       <widget class="QFrame" name="page_settings_pages_container_bot">
-                        <property name="frameShape">
-                         <enum>QFrame::NoFrame</enum>
-                        </property>
-                        <property name="frameShadow">
-                         <enum>QFrame::Raised</enum>
-                        </property>
-                       </widget>
+                       <widget class="QWidget" name="page_settings_pages_container_bot" native="true"/>
                       </item>
                      </layout>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QFrame" name="page_settings_stacked_widget_container">
+                    <widget class="QWidget" name="page_settings_stacked_widget_container" native="true">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
-                     </property>
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
-                     </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Raised</enum>
                      </property>
                      <layout class="QHBoxLayout" name="horizontalLayout_14">
                       <item>
@@ -1419,7 +1139,7 @@ QPushButton{
                         <widget class="QWidget" name="page_settings_stacked_widget_page_general">
                          <layout class="QVBoxLayout" name="verticalLayout_9">
                           <item>
-                           <widget class="QFrame" name="page_general_header">
+                           <widget class="QWidget" name="page_general_header" native="true">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1431,12 +1151,6 @@ QPushButton{
                               <width>16777215</width>
                               <height>80</height>
                              </size>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
                             </property>
                             <widget class="QLabel" name="label_2">
                              <property name="geometry">
@@ -1457,29 +1171,29 @@ QPushButton{
                            </widget>
                           </item>
                           <item>
-                           <widget class="QFrame" name="page_general_footer">
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <widget class="QFrame" name="frame_10">
+                           <widget class="QWidget" name="page_general_footer" native="true">
+                            <widget class="QWidget" name="widget_10" native="true">
                              <property name="geometry">
                               <rect>
                                <x>50</x>
                                <y>10</y>
-                               <width>403</width>
-                               <height>146</height>
+                               <width>291</width>
+                               <height>141</height>
                               </rect>
                              </property>
-                             <property name="frameShape">
-                              <enum>QFrame::NoFrame</enum>
-                             </property>
-                             <property name="frameShadow">
-                              <enum>QFrame::Raised</enum>
-                             </property>
                              <layout class="QVBoxLayout" name="verticalLayout_12">
+                              <property name="leftMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="topMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="rightMargin">
+                               <number>0</number>
+                              </property>
+                              <property name="bottomMargin">
+                               <number>0</number>
+                              </property>
                               <item>
                                <widget class="QLabel" name="label_8">
                                 <property name="font">
@@ -1495,18 +1209,12 @@ QPushButton{
                                </widget>
                               </item>
                               <item>
-                               <widget class="QFrame" name="frame_11">
+                               <widget class="QWidget" name="widget_11" native="true">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                   <horstretch>0</horstretch>
                                   <verstretch>0</verstretch>
                                  </sizepolicy>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::NoFrame</enum>
-                                </property>
-                                <property name="frameShadow">
-                                 <enum>QFrame::Raised</enum>
                                 </property>
                                 <layout class="QHBoxLayout" name="horizontalLayout_16">
                                  <item>
@@ -1527,18 +1235,12 @@ QPushButton{
                                </widget>
                               </item>
                               <item>
-                               <widget class="QFrame" name="frame_12">
+                               <widget class="QWidget" name="widget_12" native="true">
                                 <property name="sizePolicy">
                                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                   <horstretch>0</horstretch>
                                   <verstretch>0</verstretch>
                                  </sizepolicy>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::NoFrame</enum>
-                                </property>
-                                <property name="frameShadow">
-                                 <enum>QFrame::Raised</enum>
                                 </property>
                                 <layout class="QHBoxLayout" name="horizontalLayout_17">
                                  <item>
@@ -1554,6 +1256,33 @@ QPushButton{
                                 </layout>
                                </widget>
                               </item>
+                              <item>
+                               <widget class="QWidget" name="widget" native="true">
+                                <widget class="QLabel" name="label_theme">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>10</x>
+                                   <y>0</y>
+                                   <width>111</width>
+                                   <height>20</height>
+                                  </rect>
+                                 </property>
+                                 <property name="text">
+                                  <string>Theme</string>
+                                 </property>
+                                </widget>
+                                <widget class="QComboBox" name="comboBox_theme">
+                                 <property name="geometry">
+                                  <rect>
+                                   <x>50</x>
+                                   <y>0</y>
+                                   <width>69</width>
+                                   <height>20</height>
+                                  </rect>
+                                 </property>
+                                </widget>
+                               </widget>
+                              </item>
                              </layout>
                             </widget>
                            </widget>
@@ -1563,7 +1292,7 @@ QPushButton{
                         <widget class="QWidget" name="page_settings_stacked_widget_page_window">
                          <layout class="QVBoxLayout" name="verticalLayout_10">
                           <item>
-                           <widget class="QFrame" name="page_window_header_2">
+                           <widget class="QWidget" name="page_window_header_2" native="true">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1575,12 +1304,6 @@ QPushButton{
                               <width>16777215</width>
                               <height>80</height>
                              </size>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
                             </property>
                             <widget class="QLabel" name="label_6">
                              <property name="geometry">
@@ -1601,27 +1324,15 @@ QPushButton{
                            </widget>
                           </item>
                           <item>
-                           <widget class="QFrame" name="page_window_footer_2">
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
+                           <widget class="QWidget" name="page_window_footer_2" native="true">
                             <layout class="QVBoxLayout" name="verticalLayout_18">
                              <item>
-                              <widget class="QFrame" name="frame_15">
+                              <widget class="QWidget" name="widget_15" native="true">
                                <property name="minimumSize">
                                 <size>
                                  <width>0</width>
                                  <height>50</height>
                                 </size>
-                               </property>
-                               <property name="frameShape">
-                                <enum>QFrame::NoFrame</enum>
-                               </property>
-                               <property name="frameShadow">
-                                <enum>QFrame::Raised</enum>
                                </property>
                                <widget class="QPushButton" name="button_add_windows">
                                 <property name="geometry">
@@ -1657,8 +1368,8 @@ QPushButton{
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>100</width>
-                                  <height>30</height>
+                                  <width>758</width>
+                                  <height>407</height>
                                  </rect>
                                 </property>
                                 <layout class="QVBoxLayout" name="verticalLayout_21">
@@ -1677,7 +1388,7 @@ QPushButton{
                         <widget class="QWidget" name="page_settings_stacked_widget_page_about">
                          <layout class="QVBoxLayout" name="verticalLayout_11">
                           <item>
-                           <widget class="QFrame" name="page_about_header_3">
+                           <widget class="QWidget" name="page_about_header_3" native="true">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1689,12 +1400,6 @@ QPushButton{
                               <width>16777215</width>
                               <height>80</height>
                              </size>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
                             </property>
                             <widget class="QLabel" name="label_7">
                              <property name="geometry">
@@ -1715,14 +1420,8 @@ QPushButton{
                            </widget>
                           </item>
                           <item>
-                           <widget class="QFrame" name="page_about_body_3">
-                            <property name="frameShape">
-                             <enum>QFrame::NoFrame</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <widget class="QFrame" name="frame_16">
+                           <widget class="QWidget" name="page_about_body_3" native="true">
+                            <widget class="QWidget" name="widget_16" native="true">
                              <property name="geometry">
                               <rect>
                                <x>0</x>
@@ -1730,12 +1429,6 @@ QPushButton{
                                <width>141</width>
                                <height>101</height>
                               </rect>
-                             </property>
-                             <property name="frameShape">
-                              <enum>QFrame::NoFrame</enum>
-                             </property>
-                             <property name="frameShadow">
-                              <enum>QFrame::Raised</enum>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_13">
                               <item>
@@ -1899,31 +1592,6 @@ QPushButton{
                  </widget>
                 </widget>
                </item>
-               <item alignment="Qt::AlignBottom">
-                <widget class="QFrame" name="grip_down_left">
-                 <property name="minimumSize">
-                  <size>
-                   <width>10</width>
-                   <height>10</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>10</width>
-                   <height>10</height>
-                  </size>
-                 </property>
-                 <property name="cursor">
-                  <cursorShape>SizeFDiagCursor</cursorShape>
-                 </property>
-                 <property name="frameShape">
-                  <enum>QFrame::NoFrame</enum>
-                 </property>
-                 <property name="frameShadow">
-                  <enum>QFrame::Raised</enum>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </widget>
             </item>
@@ -1932,55 +1600,29 @@ QPushButton{
          </item>
         </layout>
        </item>
-       <item row="1" column="2">
-        <widget class="QFrame" name="size_grip_right">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QFrame" name="size_grip_top_left">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QFrame" name="size_grip_top_right">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QFrame" name="size_grip_bottom_right">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
+       <item row="2" column="1">
+        <widget class="QWidget" name="size_grip_bottom" native="true"/>
        </item>
        <item row="2" column="0">
-        <widget class="QFrame" name="size_grip_bottom_left">
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-        </widget>
+        <widget class="QWidget" name="size_grip_bottom_left" native="true"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QWidget" name="size_grip_bottom_right" native="true"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QWidget" name="size_grip_left" native="true"/>
+       </item>
+       <item row="1" column="2">
+        <widget class="QWidget" name="size_grip_right" native="true"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QWidget" name="size_grip_top" native="true"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QWidget" name="size_grip_top_left" native="true"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QWidget" name="size_grip_top_right" native="true"/>
        </item>
       </layout>
      </widget>

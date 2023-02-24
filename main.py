@@ -1,19 +1,20 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtCore import QThread, QTimer, Qt
+from PySide6.QtCore import QTimer, Qt
 from PySide6 import QtCore
 from PySide6.QtGui import Qt
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
-import webbrowser
 import pygetwindow
 
 from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
 from UI.AddWindowUi.add_window import UiAddWindow
 
-from PytrackUtils.config_helper import edit_config
+from PytrackUtils.config_helper import edit_config, read_config
 from PytrackUtils.window_record_reader import *
 from PytrackUtils.window_type import *
+from PytrackUtils.webbrowser_helper import *
+from PytrackUtils.stylesheet_helper import change_stylesheet, get_themes
 
 from PyTrackMain import PyTrackWorker
 
@@ -40,6 +41,10 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         combo_box_type_items = ["all", "bad", "good"]
         self.comboBox_type.addItems(combo_box_type_items)
         self.get_records("today", "all")
+        combo_box_theme_items = get_themes()
+        self.comboBox_theme.addItems(combo_box_theme_items)
+        # set stylesheet as the first one on the list by default
+        change_stylesheet(self, read_config("settingsConfig.ini", "App", "theme"), app)
 
         # set Charts
         self.point_line_series = QLineSeries()
@@ -64,11 +69,11 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_settings_general.clicked.connect(self.go_to_settings_general)  # type: ignore
         self.button_settings_window.clicked.connect(self.go_to_settings_window)  # type: ignore
         self.button_settings_about.clicked.connect(self.go_to_settings_about)  # type: ignore
-        self.button_link_to_twitter.clicked.connect(self.go_to_link_twitter)  # type: ignore
-        self.button_link_to_github.clicked.connect(self.go_to_link_github)  # type: ignore
-        self.button_link_to_youtube_video.clicked.connect(self.go_to_link_youtube_video)  # type: ignore
-        self.button_link_to_youtube_channel.clicked.connect(self.go_to_link_youtube_channel)  # type: ignore
-        self.button_link_to_github_repository.clicked.connect(self.go_to_link_github_repository)  # type: ignore
+        self.button_link_to_twitter.clicked.connect(go_to_link_twitter)  # type: ignore
+        self.button_link_to_github.clicked.connect(go_to_link_github)  # type: ignore
+        self.button_link_to_youtube_video.clicked.connect(go_to_link_youtube_video)  # type: ignore
+        self.button_link_to_youtube_channel.clicked.connect(go_to_link_youtube_channel)  # type: ignore
+        self.button_link_to_github_repository.clicked.connect(go_to_link_github_repository)  # type: ignore
         self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
         self.button_exit.clicked.connect(lambda q: quit())
         self.button_minimize.clicked.connect(lambda m: self.showMinimized())
@@ -78,6 +83,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         # set combo box signals to slots
         self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
+        self.comboBox_theme.currentTextChanged.connect(self.combo_box_theme_updates) # type: ignore
         # set timer signals to slots
         self.main_loop_timer.timeout.connect(self.pytrack_worker.run)  # type: ignore
         self.point_graph_timer.timeout.connect(self.add_point_to_point_graph)
@@ -108,22 +114,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def go_to_settings_about(self):
         print("go to about settings")
         self.page_settings_stacked_widget.setCurrentWidget(self.page_settings_stacked_widget_page_about)
-
-    def go_to_link_twitter(self):
-        # webbrowser.open("")
-        pass
-
-    def go_to_link_github(self):
-        webbrowser.open("https://github.com/0CottonBuds")
-
-    def go_to_link_youtube_video(self):
-        webbrowser.open("")
-
-    def go_to_link_youtube_channel(self):
-        webbrowser.open("")
-
-    def go_to_link_github_repository(self):
-        webbrowser.open("https://github.com/0CottonBuds/pytrack")
 
     def edit_point_threshold_break(self):
         """edit the point threshold of break"""
@@ -193,6 +183,10 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def combo_box_type_updates(self, text):
         print(f"signal: {text}")
         self.get_records(self.comboBox_date.currentText(), self.comboBox_type.currentText())
+
+    def combo_box_theme_updates(self, text):
+        change_stylesheet(self, text, app)
+        edit_config("settingsConfig.ini", "App", "theme", text)
 
     def add_point_to_point_graph(self):
         count = self.point_line_series.count()
@@ -275,5 +269,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication()
+
     window = PytrackMainWindow()
     app.exec()
