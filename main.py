@@ -10,7 +10,7 @@ from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
 from UI.AddWindowUi.add_window import UiAddWindow
 
-from PytrackUtils.config_helper import edit_config
+from PytrackUtils.config_helper import edit_config, read_config
 from PytrackUtils.window_record_reader import *
 from PytrackUtils.window_type import *
 from PytrackUtils.webbrowser_helper import *
@@ -44,8 +44,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         combo_box_theme_items = get_themes()
         self.comboBox_theme.addItems(combo_box_theme_items)
         # set stylesheet as the first one on the list by default
-        # TODO: set this to the theme in the settings.
-        change_stylesheet(self, str(combo_box_theme_items[0]), app)
+        change_stylesheet(self, read_config("settingsConfig.ini", "App", "theme"), app)
 
         # set Charts
         self.point_line_series = QLineSeries()
@@ -187,6 +186,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
     def combo_box_theme_updates(self, text):
         change_stylesheet(self, text, app)
+        edit_config("settingsConfig.ini", "App", "theme", text)
 
     def add_point_to_point_graph(self):
         count = self.point_line_series.count()

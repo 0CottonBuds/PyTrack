@@ -21,6 +21,8 @@ def get_themes():
     """
     themes = str(read_config("settingsConfig.ini", "App", "themes"))
     themes = themes.split(", ")
+    default_theme= read_config("settingsConfig.ini", "App", "theme")
+    themes.remove(default_theme)
+    themes.insert(0, default_theme)
     return themes
 
-get_themes()
