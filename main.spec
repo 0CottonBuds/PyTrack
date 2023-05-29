@@ -37,7 +37,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['icon.ico'],
+    icon=['Icons\icon.ico'],
 )
 coll = COLLECT(
     exe,
@@ -53,4 +53,4 @@ coll = COLLECT(
 import shutil
 shutil.copyfile('settingsConfig.ini', str(coll.name) +'/settingsConfig.ini'.format(DISTPATH))
 shutil.copyfile('pyTrack.db', str(coll.name) + '/pyTrack.db'.format(DISTPATH))
-shutil.copytree('notificationIcons', str(coll.name) +'/notificationIcons'.format(DISTPATH))
+shutil.copytree('Icons', str(coll.name) +'/Icons'.format(DISTPATH))
