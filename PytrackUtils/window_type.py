@@ -5,7 +5,7 @@ class WindowType:
 
     window_name: str = ""
     window_type: str = "good"
-    window_rating: int = 0
+    window_points: int = 0
 
     def check_app_type(self):
         '''Takes a window checks and returns string "bad" or "good"'''
@@ -18,13 +18,13 @@ class WindowType:
             if window != None:
                 self.window_name = window.window_name
                 self.window_type = window.window_type
-                self.window_rating = window.window_rating
+                self.window_points = window.window_points
                 break
             else:
                 pass
 
     def __str__(self) -> str:
-        return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_rating}"
+        return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_points}"
 
 
 class WindowTypeIn(WindowType):
@@ -122,7 +122,7 @@ def find_window_on_database_by_name(query_name: str) -> WindowType | None:
         window = WindowType()
         window.window_name = results[0][0]
         window.window_type = results[0][1]
-        window.window_rating = results[0][2]
+        window.window_points = results[0][2]
         conn.commit()
         conn.close()
         return window

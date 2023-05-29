@@ -10,17 +10,16 @@ class PointTracker:
         self.read_settings_config_file()
         self.points = self.starting_points
 
-    def change_points(self, window: WindowType):
+    def change_points(self, window_type, window_points):
         """add and subtracts points based on app type. \n"""
 
-        if window.window_type == "good":
-            self.add_points(window.window_rating)
-            print(f"added {window.window_rating} points\ntotal points: {self.points}")
-        elif window.window_type == "bad":
-            self.subtract_points(window.window_rating)
-            print(f"subtract {window.window_rating} points\ntotal points: {self.points}")
+        if window_type == "good":
+            self.add_points(window_points)
+            print(f"added {window_points} points\ntotal points: {self.points}")
+        elif window_type == "bad":
+            self.subtract_points(window_points)
+            print(f"subtract {window_points} points\ntotal points: {self.points}")
         else:
-            print(window.window_name)
             print("this window does not have a label")
 
     def add_points(self, point_to_add: int):
