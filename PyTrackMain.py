@@ -1,10 +1,8 @@
-from PySide6.QtCharts import QLineSeries
 import pygetwindow as gw
-import time
 import datetime as dt
 from PytrackUtils import entry, point_tracker, window_type
 
-from PySide6.QtCore import QObject, Signal
+from PySide6.QtCore import QObject
 
 
 class PyTrackWorker(QObject):
