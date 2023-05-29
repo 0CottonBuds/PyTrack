@@ -43,7 +43,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.combo_box_signals_init()
 
         # set stylesheet as the first one on the list by default
-        change_stylesheet(self, read_config("settingsConfig.ini", "App", "theme"), app)
+        change_stylesheet(self, read_config("config.ini", "App", "theme"), app)
         
         self.show()
 
@@ -147,7 +147,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         if value.isnumeric():
             print(f"changing point threshold for break to {value}")
 
-            edit_config("./settingsConfig.ini", "App", "break_threshold", value)
+            edit_config("./config.ini", "App", "break_threshold", value)
             self.pytrack_worker.point_tracker.read_settings_config_file()
 
             # Set line edit placeholder text.
@@ -170,7 +170,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         if value.isnumeric():
             print(f"changing point threshold for warning to {value}")
 
-            edit_config("./settingsConfig.ini", "App", "warning_threshold", value)
+            edit_config("./config.ini", "App", "warning_threshold", value)
             self.pytrack_worker.point_tracker.read_settings_config_file()
 
             # Set line edit placeholder text.
@@ -208,7 +208,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
     def combo_box_theme_updates(self, text):
         change_stylesheet(self, text, app)
-        edit_config("settingsConfig.ini", "App", "theme", text)
+        edit_config("config.ini", "App", "theme", text)
 
     def add_point_to_point_graph(self):
         count = self.point_line_series.count()

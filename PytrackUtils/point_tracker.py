@@ -14,24 +14,18 @@ class PointTracker:
         """add and subtracts points based on app type. \n"""
 
         if window_type == "good":
-            self.add_points(window_points)
+            self.points += window_points
             print(f"added {window_points} points\ntotal points: {self.points}")
         elif window_type == "bad":
-            self.subtract_points(window_points)
+            self.points -= window_points
             print(f"subtract {window_points} points\ntotal points: {self.points}")
         else:
             print("this window does not have a label")
 
-    def add_points(self, point_to_add: int):
-        self.points += point_to_add
-
-    def subtract_points(self, point_to_add: int):
-        self.points -= point_to_add
-
     def check_point_threshold(self):
         """check point threshold. \n
         calls the notification module to fire notification when threshold is reached."""
-        # self.read_settings_config_file()
+        self.read_settings_config_file()
 
         if self.points >= self.threshold_break:
             notification_manager = NotificationManager()
@@ -42,7 +36,7 @@ class PointTracker:
 
     def read_settings_config_file(self):
         config_parser = configparser.ConfigParser()
-        config_parser.read(r".\settingsConfig.ini")  # type: ignore
+        config_parser.read(r".\config.ini")  # type: ignore
 
         self.starting_points = int(config_parser["App"]["starting_points"])
         self.threshold_warning = int(config_parser["App"]["warning_threshold"])  # type: ignore
