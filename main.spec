@@ -31,7 +31,7 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    console=True,
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
@@ -51,6 +51,10 @@ coll = COLLECT(
 )
 
 import shutil
-shutil.copyfile('settingsConfig.ini', str(coll.name) +'/settingsConfig.ini'.format(DISTPATH))
+shutil.copyfile('config.ini', str(coll.name) +'/Config.ini'.format(DISTPATH))
 shutil.copyfile('pyTrack.db', str(coll.name) + '/pyTrack.db'.format(DISTPATH))
 shutil.copytree('Icons', str(coll.name) +'/Icons'.format(DISTPATH))
+shutil.copytree('PytrackUtils', str(coll.name) +'/PytrackUtils'.format(DISTPATH))
+shutil.copytree('Themes', str(coll.name) +'/Themes'.format(DISTPATH))
+shutil.copytree('UI', str(coll.name) +'/UI'.format(DISTPATH))
+

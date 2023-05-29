@@ -18,6 +18,7 @@ from PytrackUtils.stylesheet_helper import change_stylesheet, get_themes
 
 from PytrackUtils.PyTrackWorker import PyTrackWorker
 
+import sys
 
 class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     main_loop_active : bool
@@ -101,7 +102,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_link_to_youtube_channel.clicked.connect(go_to_link_youtube_channel)  # type: ignore
         self.button_link_to_github_repository.clicked.connect(go_to_link_github_repository)  # type: ignore
         self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
-        self.button_exit.clicked.connect(lambda q: quit())
+        self.button_exit.clicked.connect(lambda q: sys.exit())
         self.button_minimize.clicked.connect(lambda m: self.showMinimized())
 
     def text_edit_init(self):
