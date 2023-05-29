@@ -16,7 +16,7 @@ from PytrackUtils.window_type import *
 from PytrackUtils.webbrowser_helper import *
 from PytrackUtils.stylesheet_helper import change_stylesheet, get_themes
 
-from PyTrackMain import PyTrackWorker
+from PytrackUtils.PyTrackWorker import PyTrackWorker
 
 
 class PytrackMainWindow(QMainWindow, Ui_MainWindow):
