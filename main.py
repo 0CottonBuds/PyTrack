@@ -116,6 +116,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.comboBox_theme.currentTextChanged.connect(self.combo_box_theme_updates) # type: ignore
 
     ### PYTRACK FUNCTIONS ###
+    
     def activate_deactivate_main_loop(self):
         if not self.main_loop_active:
             print("Activated")
