@@ -47,6 +47,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         
         self.show()
 
+    ###INIT FUNCTIONS ###
+
     def place_holder_text_init(self):
         # setting text and placeholder texts
         self.button_activate_deactivate_main_loop.setText("Activate")
@@ -113,6 +115,42 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
         self.comboBox_theme.currentTextChanged.connect(self.combo_box_theme_updates) # type: ignore
 
+    ### PYTRACK FUNCTIONS ###
+    def activate_deactivate_main_loop(self):
+        if not self.main_loop_active:
+            print("Activated")
+            time_to_loop = 5000  # msec(5 secs)
+            self.main_loop_timer.start(time_to_loop)
+            self.point_graph_timer.start(time_to_loop)
+            self.main_loop_active = True
+            self.button_activate_deactivate_main_loop.setText("Deactivate")
+        elif self.main_loop_active:
+            print("Deactivated")
+            self.main_loop_timer.stop()
+            self.point_graph_timer.stop()
+            self.main_loop_active = False
+            self.button_activate_deactivate_main_loop.setText("Activate")
+
+    def get_records(self, query_date: str, query_type: str):
+        """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
+
+        Parameters:
+            query_date: (string) date to query ex. today, yesterday, etc
+            query_type: (string) type to query ex. good, bad, all"""
+
+        print("getting records")
+        records: list[WindowRecord] = []
+        fetcher = WindowRecordFetcher()
+        dates = fetcher.get_dates(query_date)
+        fetcher.format_records(fetcher.retrieve_all_raw_records_by_many_dates(dates))
+        fetcher.filter_formatted_records_by_type(query_type)
+        records = fetcher.formatted_records
+        records = get_time_of_each_window(records)
+        records = get_percentage_of_time_of_each_window(records)
+        self.update_scroll_area_contents(records)
+
+    ### NAVIGATION FUNCTIONS ###
+
     def go_to_home_page(self):
         print("to home page")
         self.stackedWidget.setCurrentWidget(self.page_home)
@@ -136,6 +174,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     def go_to_settings_about(self):
         print("go to about settings")
         self.page_settings_stacked_widget.setCurrentWidget(self.page_settings_stacked_widget_page_about)
+
+    ### CONFIG FUNCTIONS ###
 
     def edit_point_threshold_break(self):
         """edit the point threshold of break"""
@@ -183,20 +223,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.line_edit_point_threshold_warning.setPlaceholderText(str(self.pytrack_worker.point_tracker.threshold_warning))
             self.line_edit_point_threshold_warning.clear()
 
-    def activate_deactivate_main_loop(self):
-        if not self.main_loop_active:
-            print("Activated")
-            time_to_loop = 5000  # msec(5 secs)
-            self.main_loop_timer.start(time_to_loop)
-            self.point_graph_timer.start(time_to_loop)
-            self.main_loop_active = True
-            self.button_activate_deactivate_main_loop.setText("Deactivate")
-        elif self.main_loop_active:
-            print("Deactivated")
-            self.main_loop_timer.stop()
-            self.point_graph_timer.stop()
-            self.main_loop_active = False
-            self.button_activate_deactivate_main_loop.setText("Activate")
+    ### UI FUNCTIONS ###
 
     def combo_box_date_updates(self, text):
         print(f"signal: {text}")
@@ -222,24 +249,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         chart.addSeries(self.point_line_series)
         chart.setTitle("Points Over Time")
         self.chart_view.setChart(chart)
-
-    def get_records(self, query_date: str, query_type: str):
-        """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
-
-        Parameters:
-            query_date: (string) date to query ex. today, yesterday, etc
-            query_type: (string) type to query ex. good, bad, all"""
-
-        print("getting records")
-        records: list[WindowRecord] = []
-        fetcher = WindowRecordFetcher()
-        dates = fetcher.get_dates(query_date)
-        fetcher.format_records(fetcher.retrieve_all_raw_records_by_many_dates(dates))
-        fetcher.filter_formatted_records_by_type(query_type)
-        records = fetcher.formatted_records
-        records = get_time_of_each_window(records)
-        records = get_percentage_of_time_of_each_window(records)
-        self.update_scroll_area_contents(records)
 
     def update_scroll_area_contents(self, records: list[WindowRecord]):
         """Updates the scroll area contents by the list of window records that is passed
@@ -273,6 +282,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         for window in window_filter.windows:
             add_window_ui = UiAddWindow(window.title)
             self.add_window_contents_layout.addWidget(add_window_ui)
+
+    ### WINDOW FUNCTIONS ###
 
     def mousePressEvent(self, event):
         self.start = self.mapToGlobal(event.pos())
