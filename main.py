@@ -10,11 +10,11 @@ from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
 from UI.AddWindowUi.add_window import UiAddWindow
 
-from PytrackUtils.config_helper import edit_config, read_config
 from PytrackUtils.window_record_reader import *
 from PytrackUtils.window_type import *
-from PytrackUtils.webbrowser_helper import *
-from PytrackUtils.stylesheet_helper import change_stylesheet, get_themes
+from PytrackUtils.Helpers.webbrowser_helper import *
+from PytrackUtils.Helpers.stylesheet_helper import change_stylesheet, get_themes
+from PytrackUtils.Helpers.config_helper import edit_config, read_config
 
 from PytrackUtils.PyTrackWorker import PyTrackWorker
 
