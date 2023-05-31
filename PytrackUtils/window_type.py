@@ -7,10 +7,10 @@ class WindowType:
     window_type: str = "good"
     window_points: int = 0
 
-    def check_app_type(self):
-        '''Takes a window checks and returns string "bad" or "good"'''
+    def check_app_type(self, window_name_param : str):
+        '''Takes a window checks and assign values to the instance."'''
 
-        separated_window_title = self.window_name.split("- ")
+        separated_window_title = window_name_param.split("- ")
 
         for part in separated_window_title:
             window = self.find_window_on_database_by_name(part)

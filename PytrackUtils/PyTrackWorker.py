@@ -33,8 +33,7 @@ class PyTrackWorker(QObject):
 
         # check app type
         window = window_type.WindowType()
-        window.window_name = self.new_active_window.title  # type: ignore
-        window.check_app_type()
+        window.check_app_type(self.new_active_window.title)
         # change points
         self.point_tracker.change_points(window.window_type, window.window_points)
         self.point_tracker.check_point_threshold()

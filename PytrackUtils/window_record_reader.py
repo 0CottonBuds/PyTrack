@@ -86,8 +86,7 @@ class WindowRecordFetcher:
         for entry in raw_records:
             record = WindowRecord(entry)
             record_type = WindowType()
-            record_type.window_name = record.window_full_name
-            record_type.check_app_type()
+            record_type.check_app_type(record.window_full_name)
             record.window_type = record_type.window_type
             formatted_records.append(record)
         self.formatted_records = formatted_records
