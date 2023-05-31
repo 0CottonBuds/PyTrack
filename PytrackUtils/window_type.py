@@ -1,7 +1,7 @@
 import sqlite3
 
 class WindowType:
-    """Class window type use to store name type and rating of window"""
+    """Class WindowType use to store name, type, and rating of window. These are used for storing user preference on how each window should be treated by the main loop."""
 
     window_name: str = ""
     window_type: str = "good"
@@ -39,10 +39,35 @@ class WindowType:
         conn.close()
         print("successfully added to database")
 
+    def find_window_on_database_by_name(self, query_name: str):
+        """find window on data base by name returns windowType object"""
+        conn = sqlite3.connect("pyTrack.db")
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
+        )
+        c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
+        results = c.fetchall()
+        if results != []:
+            window = WindowType()
+            window.window_name = results[0][0]
+            window.window_type = results[0][1]
+            window.window_points = results[0][2]
+            conn.commit()
+            conn.close()
+            return window
+
+        else:
+            conn.commit()
+            conn.close()
+            return None
+
+
     def __str__(self) -> str:
         return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_points}"
 
 class WindowFilter:
+    '''WindowFilter class is used for filtering WindowType class entries on the database see WindowType's documentation.'''
     def __init__(self, windows: list) -> None:
         self.windows = windows
 
