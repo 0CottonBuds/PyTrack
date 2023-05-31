@@ -84,7 +84,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.point_graph_timer = QTimer()
 
         # set timer signals to slots
-        self.main_loop_timer.timeout.connect(self.pytrack_worker.run)  # type: ignore
+        self.main_loop_timer.timeout.connect(self.pytrack_worker.main_loop)  # type: ignore
         self.point_graph_timer.timeout.connect(self.add_point_to_point_graph)
 
     def buttons_init(self):
