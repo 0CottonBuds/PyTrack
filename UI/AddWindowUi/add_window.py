@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget
-from PytrackUtils.window_type import *
+from PytrackUtils.WindowUtils.window_type import *
 from .ui_add_window import *
 
 

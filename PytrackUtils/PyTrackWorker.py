@@ -1,8 +1,10 @@
 import pygetwindow as gw
 import datetime as dt
-from PytrackUtils import entry, point_tracker, window_type
+from PytrackUtils import point_tracker
 
 from PySide6.QtCore import QObject
+
+from PytrackUtils.WindowUtils import window_entry, window_type
 
 
 class PyTrackWorker(QObject):
@@ -57,7 +59,7 @@ class PyTrackWorker(QObject):
             )
             if is_parameters_complete:
 
-                window_entry = entry.WindowEntryIn(
+                window_entry = window_entry.WindowEntryIn(
                     self.last_active_window.title,  # type: ignore
                     self.get_elapsed_time(),
                 )
