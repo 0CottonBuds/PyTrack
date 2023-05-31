@@ -1,38 +1,28 @@
 import sqlite3
 
 class WindowType:
-    """Class window type use to store name type and rating of window"""
+    """Class WindowType use to store name, type, and rating of window. These are used for storing user preference on how each window should be treated by the main loop."""
 
     window_name: str = ""
     window_type: str = "good"
-    window_rating: int = 0
+    window_points: int = 0
 
-    def check_app_type(self):
-        '''Takes a window checks and returns string "bad" or "good"'''
+    def check_app_type(self, window_name_param : str):
+        '''Takes a window checks and assign values to the instance."'''
 
-        separated_window_title = self.window_name.split("- ")
+        separated_window_title = window_name_param.split("- ")
 
         for part in separated_window_title:
-            window = find_window_on_database_by_name(part)
+            window = self.find_window_on_database_by_name(part)
 
             if window != None:
                 self.window_name = window.window_name
                 self.window_type = window.window_type
-                self.window_rating = window.window_rating
+                self.window_points = window.window_points
                 break
             else:
                 pass
-
-    def __str__(self) -> str:
-        return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_rating}"
-
-
-class WindowTypeIn(WindowType):
-    """inherits from class window type have functions to enter data in database"""
-
-    window_type: str
-    window_rating: int
-
+    
     def record_in_database(self):
         """enter the data to data base"""
         conn = sqlite3.connect("pyTrack.db")
@@ -49,8 +39,35 @@ class WindowTypeIn(WindowType):
         conn.close()
         print("successfully added to database")
 
+    def find_window_on_database_by_name(self, query_name: str):
+        """find window on data base by name returns windowType object"""
+        conn = sqlite3.connect("pyTrack.db")
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
+        )
+        c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
+        results = c.fetchall()
+        if results != []:
+            window = WindowType()
+            window.window_name = results[0][0]
+            window.window_type = results[0][1]
+            window.window_points = results[0][2]
+            conn.commit()
+            conn.close()
+            return window
+
+        else:
+            conn.commit()
+            conn.close()
+            return None
+
+
+    def __str__(self) -> str:
+        return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_points}"
 
 class WindowFilter:
+    '''WindowFilter class is used for filtering WindowType class entries on the database see WindowType's documentation.'''
     def __init__(self, windows: list) -> None:
         self.windows = windows
 
@@ -68,7 +85,7 @@ class WindowFilter:
             splitted_name = window.title.split("- ")
             is_unique = False
             for part in splitted_name:
-                result = find_window_on_database_by_name(part)
+                result = self.find_window_on_database_by_name(part)
                 if result == None:
                     is_unique = True
                     pass
@@ -106,28 +123,30 @@ class WindowFilter:
         self.windows = filtered_windows
         return filtered_windows
 
+    def find_window_on_database_by_name(self, query_name: str) -> WindowType | None:
+        """find window on data base by name returns windowType object"""
+        conn = sqlite3.connect("pyTrack.db")
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
+        )
+        c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
+        results = c.fetchall()
+        if results != []:
+            window = WindowType()
+            window.window_name = results[0][0]
+            window.window_type = results[0][1]
+            window.window_points = results[0][2]
+            conn.commit()
+            conn.close()
+            return window
+
+        else:
+            conn.commit()
+            conn.close()
+            return None
+
     def __str__(self) -> str:
         return f"{self.windows}"
 
-def find_window_on_database_by_name(query_name: str) -> WindowType | None:
-    """find window on data base by name returns windowType object"""
-    conn = sqlite3.connect("pyTrack.db")
-    c = conn.cursor()
-    c.execute(
-        """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
-    )
-    c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
-    results = c.fetchall()
-    if results != []:
-        window = WindowType()
-        window.window_name = results[0][0]
-        window.window_type = results[0][1]
-        window.window_rating = results[0][2]
-        conn.commit()
-        conn.close()
-        return window
 
-    else:
-        conn.commit()
-        conn.close()
-        return None

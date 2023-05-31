@@ -3,6 +3,11 @@ queries.py
 config.ipynb
 /venv
 /.vscode
-/__pycache__
 /dist
 /build
+/Installers
+/__pycache__
+/UI\AddWindowUi\__pycache__
+/PytrackUtils\__pycache__
+/PytrackUtils\Helpers\__pycache__
+/PytrackUtils\WindowUtils\__pycache__

@@ -1,10 +1,10 @@
-from PySide6.QtCharts import QLineSeries
 import pygetwindow as gw
-import time
 import datetime as dt
-from PytrackUtils import entry, point_tracker, window_type
+from PytrackUtils import point_tracker
 
-from PySide6.QtCore import QObject, Signal
+from PySide6.QtCore import QObject
+
+from PytrackUtils.WindowUtils import window_entry, window_type
 
 
 class PyTrackWorker(QObject):
@@ -23,7 +23,7 @@ class PyTrackWorker(QObject):
         self.time_finished = (0, 0, 0)
         self.point_tracker = point_tracker.PointTracker()
 
-    def run(self):
+    def main_loop(self):
         self.new_active_window = gw.getActiveWindow()
 
         self.dt_now = dt.datetime.now()
@@ -33,18 +33,19 @@ class PyTrackWorker(QObject):
             self.dt_now.second,
         )
 
-        # check app type and change points
+        # check app type
         window = window_type.WindowType()
-        window.window_name = self.new_active_window.title  # type: ignore
-        window.check_app_type()
-        self.point_tracker.change_points(window)
+        window.check_app_type(self.new_active_window.title)
+        # change points
+        self.point_tracker.change_points(window.window_type, window.window_points)
         self.point_tracker.check_point_threshold()
 
         print(f"Active Window: {window}")
         print(self.point_tracker)
         self.main_window.label_points_home.setText(str(self.point_tracker))
 
-        if self.new_active_window != self.last_active_window:
+        is_window_changed = self.new_active_window != self.last_active_window
+        if is_window_changed:
             """checks if window changed if it changes it records the data to the
             database if all prerequisite parameters exists
             time_finished and time_started
@@ -58,7 +59,7 @@ class PyTrackWorker(QObject):
             )
             if is_parameters_complete:
 
-                window_entry = entry.WindowEntryIn(
+                window_entry = window_entry.WindowEntryIn(
                     self.last_active_window.title,  # type: ignore
                     self.get_elapsed_time(),
                 )
@@ -75,7 +76,8 @@ class PyTrackWorker(QObject):
 
         self.check_if_last_window_exists()
 
-        self.printer()
+        elapsed_time = self.get_elapsed_time()
+        print(elapsed_time)
 
     def check_if_last_window_exists(self):
         """checks if last window is none if yes then set it to the new active window"""
@@ -103,11 +105,5 @@ class PyTrackWorker(QObject):
 
         time_elapsed = (hours, minutes, seconds)
         return time_elapsed
-
-    def printer(self):
-        """placeholder function to print some data in the terminal"""
-        if self.time_finished is not None and self.time_started is not None:
-            # app_type = check_app_type(self.last_active_window)
-            elapsed_time = self.get_elapsed_time()
-            print(elapsed_time)
+        
 

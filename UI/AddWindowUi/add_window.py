@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget
-from PytrackUtils.window_type import *
+from PytrackUtils.WindowUtils.window_type import *
 from .ui_add_window import *
 
 
@@ -7,7 +7,7 @@ class UiAddWindow(QWidget, Ui_add_widget):
     def __init__(self, name: str) -> None:
         super().__init__()
         self.setupUi(self)
-        self.window_type = WindowTypeIn()
+        self.window_type = WindowType()
         self.button_confirm.clicked.connect(self.add_window_to_database)  # type:ignore
         self.button_ignore.clicked.connect(lambda delete: self.deleteLater())  # type: ignore
         combo_box_type_items = ["bad", "good"]
@@ -18,7 +18,7 @@ class UiAddWindow(QWidget, Ui_add_widget):
     def add_window_to_database(self):
         self.window_type.window_name = self.comboBox_name.currentText()
         self.window_type.window_type = self.comboBox_type.currentText()
-        self.window_type.window_rating = int(self.lineEdit_points.text())
+        self.window_type.window_points = int(self.lineEdit_points.text())
 
         self.window_type.record_in_database()
 

@@ -10,31 +10,53 @@ from UI.main.ui_main import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
 from UI.AddWindowUi.add_window import UiAddWindow
 
-from PytrackUtils.config_helper import edit_config, read_config
-from PytrackUtils.window_record_reader import *
-from PytrackUtils.window_type import *
-from PytrackUtils.webbrowser_helper import *
-from PytrackUtils.stylesheet_helper import change_stylesheet, get_themes
+from PytrackUtils.WindowUtils.window_record_reader import *
+from PytrackUtils.WindowUtils.window_type import *
+from PytrackUtils.Helpers.webbrowser_helper import *
+from PytrackUtils.Helpers.stylesheet_helper import change_stylesheet, get_themes
+from PytrackUtils.Helpers.config_helper import edit_config, read_config
 
-from PyTrackMain import PyTrackWorker
+from PytrackUtils.PyTrackWorker import PyTrackWorker
 
+import sys
 
 class PytrackMainWindow(QMainWindow, Ui_MainWindow):
+    main_loop_active : bool
+    pytrack_worker : PyTrackWorker
+
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle("Pytrack")
-        self.main_loop_active = False
-
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # type: ignore
 
         self.pytrack_worker = PyTrackWorker(self)
 
+        self.main_loop_active = False
+
+        self.place_holder_text_init()
+        self.combo_box_items_init()
+        self.charts_init()
+        self.timers_init()
+
+        self.buttons_init()
+        self.text_edit_init()
+        self.combo_box_signals_init()
+
+        # set stylesheet as the first one on the list by default
+        change_stylesheet(self, read_config("config.ini", "App", "theme"), app)
+        
+        self.show()
+
+    ###INIT FUNCTIONS ###
+
+    def place_holder_text_init(self):
         # setting text and placeholder texts
         self.button_activate_deactivate_main_loop.setText("Activate")
         self.line_edit_point_threshold_break.setPlaceholderText(str(self.pytrack_worker.point_tracker.threshold_break))
         self.line_edit_point_threshold_warning.setPlaceholderText(str(self.pytrack_worker.point_tracker.threshold_warning))
 
+    def combo_box_items_init(self):
         # set combo box items
         combo_box_date_items = ["today", "yesterday", "this week", "this month", "all"]
         self.comboBox_date.addItems(combo_box_date_items)
@@ -43,9 +65,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.get_records("today", "all")
         combo_box_theme_items = get_themes()
         self.comboBox_theme.addItems(combo_box_theme_items)
-        # set stylesheet as the first one on the list by default
-        change_stylesheet(self, read_config("settingsConfig.ini", "App", "theme"), app)
-
+    
+    def charts_init(self):
         # set Charts
         self.point_line_series = QLineSeries()
         self.point_line_series.append(0, self.pytrack_worker.point_tracker.points / 10)
@@ -57,10 +78,16 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.chart_view.setChart(chart)
         self.point_graph_container_layout.addWidget(self.chart_view)
 
+    def timers_init(self):
         # set timers
         self.main_loop_timer = QTimer()
         self.point_graph_timer = QTimer()
 
+        # set timer signals to slots
+        self.main_loop_timer.timeout.connect(self.pytrack_worker.main_loop)  # type: ignore
+        self.point_graph_timer.timeout.connect(self.add_point_to_point_graph)
+
+    def buttons_init(self):
         # setting the button signals to slots
         self.button_go_to_home.clicked.connect(self.go_to_home_page)  # type: ignore
         self.button_go_to_analytics.clicked.connect(self.go_to_analytics_page)  # type: ignore
@@ -75,21 +102,56 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_link_to_youtube_channel.clicked.connect(go_to_link_youtube_channel)  # type: ignore
         self.button_link_to_github_repository.clicked.connect(go_to_link_github_repository)  # type: ignore
         self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
-        self.button_exit.clicked.connect(lambda q: quit())
+        self.button_exit.clicked.connect(lambda q: sys.exit())
         self.button_minimize.clicked.connect(lambda m: self.showMinimized())
+
+    def text_edit_init(self):
         # setting the text edit signals to slots
         self.line_edit_point_threshold_break.editingFinished.connect(self.edit_point_threshold_break)  # type: ignore
         self.line_edit_point_threshold_warning.editingFinished.connect(self.edit_point_threshold_warning)  # type: ignore
+
+    def combo_box_signals_init(self):
         # set combo box signals to slots
         self.comboBox_date.currentTextChanged.connect(self.combo_box_date_updates)  # type: ignore
         self.comboBox_type.currentTextChanged.connect(self.combo_box_type_updates)  # type: ignore
         self.comboBox_theme.currentTextChanged.connect(self.combo_box_theme_updates) # type: ignore
-        # set timer signals to slots
-        self.main_loop_timer.timeout.connect(self.pytrack_worker.run)  # type: ignore
-        self.point_graph_timer.timeout.connect(self.add_point_to_point_graph)
 
-        # show the window
-        self.show()
+    ### PYTRACK FUNCTIONS ###
+    
+    def activate_deactivate_main_loop(self):
+        if not self.main_loop_active:
+            print("Activated")
+            time_to_loop = 5000  # msec(5 secs)
+            self.main_loop_timer.start(time_to_loop)
+            self.point_graph_timer.start(time_to_loop)
+            self.main_loop_active = True
+            self.button_activate_deactivate_main_loop.setText("Deactivate")
+        elif self.main_loop_active:
+            print("Deactivated")
+            self.main_loop_timer.stop()
+            self.point_graph_timer.stop()
+            self.main_loop_active = False
+            self.button_activate_deactivate_main_loop.setText("Activate")
+
+    def get_records(self, query_date: str, query_type: str):
+        """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
+
+        Parameters:
+            query_date: (string) date to query ex. today, yesterday, etc
+            query_type: (string) type to query ex. good, bad, all"""
+
+        print("getting records")
+        records: list[WindowRecord] = []
+        fetcher = WindowRecordFetcher()
+        dates = fetcher.get_dates(query_date)
+        fetcher.format_records(fetcher.retrieve_all_raw_records_by_many_dates(dates))
+        fetcher.filter_formatted_records_by_type(query_type)
+        records = fetcher.formatted_records
+        records = get_time_of_each_window(records)
+        records = get_percentage_of_time_of_each_window(records)
+        self.update_scroll_area_contents(records)
+
+    ### NAVIGATION FUNCTIONS ###
 
     def go_to_home_page(self):
         print("to home page")
@@ -115,6 +177,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         print("go to about settings")
         self.page_settings_stacked_widget.setCurrentWidget(self.page_settings_stacked_widget_page_about)
 
+    ### CONFIG FUNCTIONS ###
+
     def edit_point_threshold_break(self):
         """edit the point threshold of break"""
 
@@ -125,7 +189,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         if value.isnumeric():
             print(f"changing point threshold for break to {value}")
 
-            edit_config("./settingsConfig.ini", "App", "break_threshold", value)
+            edit_config("./config.ini", "App", "break_threshold", value)
             self.pytrack_worker.point_tracker.read_settings_config_file()
 
             # Set line edit placeholder text.
@@ -148,7 +212,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         if value.isnumeric():
             print(f"changing point threshold for warning to {value}")
 
-            edit_config("./settingsConfig.ini", "App", "warning_threshold", value)
+            edit_config("./config.ini", "App", "warning_threshold", value)
             self.pytrack_worker.point_tracker.read_settings_config_file()
 
             # Set line edit placeholder text.
@@ -161,20 +225,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
             self.line_edit_point_threshold_warning.setPlaceholderText(str(self.pytrack_worker.point_tracker.threshold_warning))
             self.line_edit_point_threshold_warning.clear()
 
-    def activate_deactivate_main_loop(self):
-        if not self.main_loop_active:
-            print("Activated")
-            time_to_loop = 5000  # msec(5 secs)
-            self.main_loop_timer.start(time_to_loop)
-            self.point_graph_timer.start(time_to_loop)
-            self.main_loop_active = True
-            self.button_activate_deactivate_main_loop.setText("Deactivate")
-        elif self.main_loop_active:
-            print("Deactivated")
-            self.main_loop_timer.stop()
-            self.point_graph_timer.stop()
-            self.main_loop_active = False
-            self.button_activate_deactivate_main_loop.setText("Activate")
+    ### UI FUNCTIONS ###
 
     def combo_box_date_updates(self, text):
         print(f"signal: {text}")
@@ -186,7 +237,7 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
     def combo_box_theme_updates(self, text):
         change_stylesheet(self, text, app)
-        edit_config("settingsConfig.ini", "App", "theme", text)
+        edit_config("config.ini", "App", "theme", text)
 
     def add_point_to_point_graph(self):
         count = self.point_line_series.count()
@@ -200,24 +251,6 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         chart.addSeries(self.point_line_series)
         chart.setTitle("Points Over Time")
         self.chart_view.setChart(chart)
-
-    def get_records(self, query_date: str, query_type: str):
-        """Fetches records by query date and type using the window record fetcher class and updates the scroll area contents
-
-        Parameters:
-            query_date: (string) date to query ex. today, yesterday, etc
-            query_type: (string) type to query ex. good, bad, all"""
-
-        print("getting records")
-        records: list[WindowRecord] = []
-        fetcher = WindowRecordFetcher()
-        dates = fetcher.get_dates(query_date)
-        fetcher.format_records(fetcher.retrieve_all_raw_records_by_many_dates(dates))
-        fetcher.filter_formatted_records_by_type(query_type)
-        records = fetcher.formatted_records
-        records = get_time_of_each_window(records)
-        records = get_percentage_of_time_of_each_window(records)
-        self.update_scroll_area_contents(records)
 
     def update_scroll_area_contents(self, records: list[WindowRecord]):
         """Updates the scroll area contents by the list of window records that is passed
@@ -251,6 +284,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         for window in window_filter.windows:
             add_window_ui = UiAddWindow(window.title)
             self.add_window_contents_layout.addWidget(add_window_ui)
+
+    ### WINDOW FUNCTIONS ###
 
     def mousePressEvent(self, event):
         self.start = self.mapToGlobal(event.pos())
