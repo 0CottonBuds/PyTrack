@@ -13,7 +13,7 @@ class WindowType:
         separated_window_title = self.window_name.split("- ")
 
         for part in separated_window_title:
-            window = find_window_on_database_by_name(part)
+            window = self.find_window_on_database_by_name(part)
 
             if window != None:
                 self.window_name = window.window_name
@@ -60,7 +60,7 @@ class WindowFilter:
             splitted_name = window.title.split("- ")
             is_unique = False
             for part in splitted_name:
-                result = find_window_on_database_by_name(part)
+                result = self.find_window_on_database_by_name(part)
                 if result == None:
                     is_unique = True
                     pass
@@ -98,28 +98,30 @@ class WindowFilter:
         self.windows = filtered_windows
         return filtered_windows
 
+    def find_window_on_database_by_name(self, query_name: str) -> WindowType | None:
+        """find window on data base by name returns windowType object"""
+        conn = sqlite3.connect("pyTrack.db")
+        c = conn.cursor()
+        c.execute(
+            """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
+        )
+        c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
+        results = c.fetchall()
+        if results != []:
+            window = WindowType()
+            window.window_name = results[0][0]
+            window.window_type = results[0][1]
+            window.window_points = results[0][2]
+            conn.commit()
+            conn.close()
+            return window
+
+        else:
+            conn.commit()
+            conn.close()
+            return None
+
     def __str__(self) -> str:
         return f"{self.windows}"
 
-def find_window_on_database_by_name(query_name: str) -> WindowType | None:
-    """find window on data base by name returns windowType object"""
-    conn = sqlite3.connect("pyTrack.db")
-    c = conn.cursor()
-    c.execute(
-        """CREATE TABLE IF NOT EXISTS windowTypes(windowName text, windowType text, windowRating integer)"""
-    )
-    c.execute("""SELECT * FROM windowTypes WHERE windowName = ?""", (query_name,))
-    results = c.fetchall()
-    if results != []:
-        window = WindowType()
-        window.window_name = results[0][0]
-        window.window_type = results[0][1]
-        window.window_points = results[0][2]
-        conn.commit()
-        conn.close()
-        return window
 
-    else:
-        conn.commit()
-        conn.close()
-        return None
