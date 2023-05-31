@@ -22,17 +22,7 @@ class WindowType:
                 break
             else:
                 pass
-
-    def __str__(self) -> str:
-        return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_points}"
-
-
-class WindowTypeIn(WindowType):
-    """inherits from class window type have functions to enter data in database"""
-
-    window_type: str
-    window_rating: int
-
+    
     def record_in_database(self):
         """enter the data to data base"""
         conn = sqlite3.connect("pyTrack.db")
@@ -49,6 +39,8 @@ class WindowTypeIn(WindowType):
         conn.close()
         print("successfully added to database")
 
+    def __str__(self) -> str:
+        return f"name: {self.window_name}\ntype: {self.window_type}\nrating: {self.window_points}"
 
 class WindowFilter:
     def __init__(self, windows: list) -> None:
