@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QSystemTrayIcon
 from PySide6.QtCore import QTimer, Qt
 from PySide6 import QtCore
-from PySide6.QtGui import Qt
+from PySide6.QtGui import Qt, QIcon
 from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
 import pygetwindow
@@ -15,6 +15,7 @@ from PytrackUtils.WindowUtils.window_type import *
 from PytrackUtils.Helpers.webbrowser_helper import *
 from PytrackUtils.Helpers.stylesheet_helper import change_stylesheet, get_themes
 from PytrackUtils.Helpers.config_helper import edit_config, read_config
+from PytrackUtils.SystemTray.pytrack_system_tray import PytrackSystemTrayIcon
 
 from PytrackUtils.PyTrackWorker import PyTrackWorker
 
@@ -304,6 +305,12 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication()
+
+    
+    system_tray_icon = QIcon("Icons\icon.ico")
+
+    if QSystemTrayIcon.isSystemTrayAvailable():
+        tray = PytrackSystemTrayIcon(system_tray_icon) 
 
     window = PytrackMainWindow()
     app.exec()
