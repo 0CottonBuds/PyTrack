@@ -47,7 +47,7 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='PyTrack 1.0.1 debug',
+    name='PyTrack 1.0.1',
 )
 
 import shutil

@@ -33,7 +33,7 @@ class WindowType:
         )
         c.execute(
             """INSERT INTO windowTypes(windowName, windowType, windowRating) VALUES(?,?,?)""",
-            (self.window_name, self.window_type, self.window_rating),
+            (self.window_name, self.window_type, self.window_points),
         )
         conn.commit()
         conn.close()
