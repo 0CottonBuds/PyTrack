@@ -28,6 +28,19 @@ QFrame{
     background-color: white;
 }
 
+QMenu{
+    background-color: white;
+}
+
+QMenu::item{
+    color: black;
+}
+
+QMenu::item:selected{
+    background-color: rgb(174, 253, 216);
+    color: black;
+}
+
 /* Button Icons */
 
 QPushButton#button_minimize{

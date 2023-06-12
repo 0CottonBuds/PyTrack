@@ -1,22 +1,35 @@
-from PySide6.QtWidgets import QSystemTrayIcon, QMenu
-from PySide6.QtCore import QObject
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QAction
+from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
+from typing import TYPE_CHECKING
 
-class PytrackSystemTrayIcon(QSystemTrayIcon):
+if TYPE_CHECKING:
+    from main import PytrackMainWindow
 
-    def __init__(self, icon: QIcon, parent: QObject = None):
-        super(PytrackSystemTrayIcon, self).__init__(icon, parent)
+def setup_system_tray(app: QApplication, pytrack_main_window):
 
-        menu = QMenu()
+    if TYPE_CHECKING:
+        assert isinstance(pytrack_main_window, PytrackMainWindow)
 
+    # Create the icon
+    icon = QIcon("Icons\icon.ico")
 
-        self.showMessage("PyTrack", "This is a system tray for pytrack")
-        self.setContextMenu(menu)
-        self.show()
+    # Create the tray
+    tray = QSystemTrayIcon()
+    tray.setIcon(icon)
+    tray.setVisible(True)
 
+    # Create the menu
+    menu = QMenu()
+    activate_deactivate_main_loop_action = QAction(f"{pytrack_main_window.button_activate_deactivate_main_loop.text()} main loop")
+    activate_deactivate_main_loop_action.triggered.connect(pytrack_main_window.activate_deactivate_main_loop)
+    menu.addAction(activate_deactivate_main_loop_action)
 
-if __name__ == "__main__":
-    system_tray_icon = QIcon("Icons\icon.ico")
+    # Add a Quit option to the menu.
+    quit_action = QAction("Quit")
+    quit_action.triggered.connect(app.quit)
+    menu.addAction(quit_action)
 
-    if QSystemTrayIcon.isSystemTrayAvailable():
-        tray = PytrackSystemTrayIcon(system_tray_icon) 
+    # Add the menu to the tray
+    tray.setContextMenu(menu)
+
+    app.exec()

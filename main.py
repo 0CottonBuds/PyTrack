@@ -15,7 +15,7 @@ from PytrackUtils.WindowUtils.window_type import *
 from PytrackUtils.Helpers.webbrowser_helper import *
 from PytrackUtils.Helpers.stylesheet_helper import change_stylesheet, get_themes
 from PytrackUtils.Helpers.config_helper import edit_config, read_config
-from PytrackUtils.SystemTray.pytrack_system_tray import PytrackSystemTrayIcon
+from PytrackUtils.SystemTray.pytrack_system_tray import setup_system_tray
 
 from PytrackUtils.PyTrackWorker import PyTrackWorker
 
@@ -24,6 +24,7 @@ import sys
 class PytrackMainWindow(QMainWindow, Ui_MainWindow):
     main_loop_active : bool
     pytrack_worker : PyTrackWorker
+    main_loop_activated: bool
 
     def __init__(self) -> None:
         super().__init__()
@@ -305,12 +306,13 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     app = QApplication()
+    window = PytrackMainWindow()
 
+    app.setQuitOnLastWindowClosed(False)
     
     system_tray_icon = QIcon("Icons\icon.ico")
 
     if QSystemTrayIcon.isSystemTrayAvailable():
-        tray = PytrackSystemTrayIcon(system_tray_icon) 
+        setup_system_tray(app, window)
 
-    window = PytrackMainWindow()
     app.exec()
