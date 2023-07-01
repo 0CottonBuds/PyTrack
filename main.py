@@ -6,7 +6,7 @@ from PySide6.QtCharts import QChartView, QChart, QLineSeries
 
 import pygetwindow
 
-from UI.main.ui_main import Ui_MainWindow
+from UI.main.main_ui import Ui_MainWindow
 from UI.WindowRecordUi.window_record import Ui_Window_Record
 from UI.AddWindowUi.add_window import UiAddWindow
 
@@ -15,6 +15,7 @@ from PytrackUtils.WindowUtils.window_type import *
 from PytrackUtils.Helpers.webbrowser_helper import *
 from PytrackUtils.Helpers.stylesheet_helper import change_stylesheet, get_themes
 from PytrackUtils.Helpers.config_helper import edit_config, read_config
+from PytrackUtils.Helpers.database_helper import clear_window_history, clear_window_settings
 from PytrackUtils.SystemTray.pytrack_system_tray import setup_system_tray
 
 from PytrackUtils.PyTrackWorker import PyTrackWorker
@@ -106,6 +107,8 @@ class PytrackMainWindow(QMainWindow, Ui_MainWindow):
         self.button_add_windows.clicked.connect(self.add_windows)  # type: ignore
         self.button_exit.clicked.connect(lambda q: sys.exit())
         self.button_minimize.clicked.connect(lambda m: self.showMinimized())
+        self.button_clear_window_history.clicked.connect(clear_window_history)
+        self.button_clear_window_settings.clicked.connect(clear_window_settings)
 
     def text_edit_init(self):
         # setting the text edit signals to slots
