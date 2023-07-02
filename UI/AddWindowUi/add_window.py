@@ -18,7 +18,7 @@ class UiAddWindow(QWidget, Ui_add_widget):
     def add_window_to_database(self):
         self.window_type.window_name = self.comboBox_name.currentText()
         self.window_type.window_type = self.comboBox_type.currentText()
-        self.window_type.window_points = int(self.lineEdit_points.text())
+        self.window_type.window_rating = int(self.lineEdit_points.text())
 
         self.window_type.record_in_database()
 

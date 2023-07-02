@@ -761,7 +761,6 @@
                              <font>
                               <family>MS Sans Serif</family>
                               <pointsize>22</pointsize>
-                              <weight>50</weight>
                               <italic>false</italic>
                               <bold>false</bold>
                              </font>
@@ -928,7 +927,6 @@
                          <font>
                           <family>MS Sans Serif</family>
                           <pointsize>22</pointsize>
-                          <weight>50</weight>
                           <italic>false</italic>
                           <bold>false</bold>
                          </font>
@@ -1178,7 +1176,7 @@
                                <x>50</x>
                                <y>10</y>
                                <width>291</width>
-                               <height>141</height>
+                               <height>191</height>
                               </rect>
                              </property>
                              <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -1199,7 +1197,6 @@
                                 <property name="font">
                                  <font>
                                   <pointsize>10</pointsize>
-                                  <weight>75</weight>
                                   <bold>true</bold>
                                  </font>
                                 </property>
@@ -1285,6 +1282,22 @@
                               </item>
                              </layout>
                             </widget>
+                            <widget class="QPushButton" name="button_clear_window_history">
+                             <property name="geometry">
+                              <rect>
+                               <x>60</x>
+                               <y>210</y>
+                               <width>121</width>
+                               <height>23</height>
+                              </rect>
+                             </property>
+                             <property name="text">
+                              <string>Clear Window History</string>
+                             </property>
+                             <property name="flat">
+                              <bool>true</bool>
+                             </property>
+                            </widget>
                            </widget>
                           </item>
                          </layout>
@@ -1345,6 +1358,22 @@
                                 </property>
                                 <property name="text">
                                  <string>Add Window</string>
+                                </property>
+                                <property name="flat">
+                                 <bool>true</bool>
+                                </property>
+                               </widget>
+                               <widget class="QPushButton" name="button_clear_window_settings">
+                                <property name="geometry">
+                                 <rect>
+                                  <x>110</x>
+                                  <y>20</y>
+                                  <width>131</width>
+                                  <height>23</height>
+                                 </rect>
+                                </property>
+                                <property name="text">
+                                 <string>Clear window Settings</string>
                                 </property>
                                 <property name="flat">
                                  <bool>true</bool>
@@ -1465,7 +1494,6 @@
                              <property name="font">
                               <font>
                                <pointsize>10</pointsize>
-                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
@@ -1536,7 +1564,6 @@
                              <property name="font">
                               <font>
                                <pointsize>10</pointsize>
-                               <weight>75</weight>
                                <bold>true</bold>
                               </font>
                              </property>
