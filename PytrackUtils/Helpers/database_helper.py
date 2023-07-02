@@ -18,7 +18,7 @@ def truncate_table(table:str):
     conn = sqlite3.connect("pyTrack.db")
     c = conn.cursor()
 
-    c.execute(f"TRUNCATE TABLE {table}")
+    c.execute(f"DELETE FROM {table};",)
 
     conn.commit()
     conn.close()
